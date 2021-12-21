@@ -1,0 +1,1025 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7882bd278763c45f49cef7deeae496e5, type: 3}
+  m_Name: Manifest
+  m_EditorClassIdentifier: 
+  activeVariants: []
+  dirs:
+  - Assets/Res/Code
+  - Assets/Res/Config
+  - Assets/Res/FGUI
+  - Assets/Res/Materials/InGame/Effect/Death
+  - Assets/Res/Materials/InGame/Effect/Heal
+  - Assets/Res/Materials/InGame/Effect
+  - Assets/Res/Materials/InGame/Effect/Spwan
+  - Assets/Res/Materials/InGame/Environment&Character
+  - Assets/Res/Materials
+  - Assets/Res/Particle/Mat
+  - Assets/Res/Particle/ParticlePrefabs
+  - Assets/Res/Particle/ParticlePrefabs/Materials
+  - Assets/Res/Scenes
+  - Assets/Res/Shader/InGame
+  - Assets/Res/Shader/OutGame
+  - Assets/Res/Shader
+  - Assets/Res/Sounds
+  - Assets/Res/Unit
+  assets:
+  - name: Hotfix.dll.bytes
+    bundle: 24
+    dir: 0
+  - name: Hotfix.pdb.bytes
+    bundle: 24
+    dir: 0
+  - name: AIConfigCategory.bytes
+    bundle: 29
+    dir: 1
+  - name: AttackConfigCategory.bytes
+    bundle: 11
+    dir: 1
+  - name: BuffConfigCategory.bytes
+    bundle: 37
+    dir: 1
+  - name: DopaConfigCategory.bytes
+    bundle: 54
+    dir: 1
+  - name: EffectConfigCategory.bytes
+    bundle: 61
+    dir: 1
+  - name: GlobalProto.txt
+    bundle: 68
+    dir: 1
+  - name: ParameterConfigCategory.bytes
+    bundle: 64
+    dir: 1
+  - name: SkillConfigCategory.bytes
+    bundle: 9
+    dir: 1
+  - name: SkinsConfigCategory.bytes
+    bundle: 65
+    dir: 1
+  - name: StartMachineConfigCategory.bytes
+    bundle: 40
+    dir: 1
+  - name: StartProcessConfigCategory.bytes
+    bundle: 48
+    dir: 1
+  - name: StartSceneConfigCategory.bytes
+    bundle: 31
+    dir: 1
+  - name: StartZoneConfigCategory.bytes
+    bundle: 35
+    dir: 1
+  - name: UnitConfigCategory.bytes
+    bundle: 30
+    dir: 1
+  - name: Battle_atlas0.png
+    bundle: 32
+    dir: 2
+  - name: Battle_fui.bytes
+    bundle: 32
+    dir: 2
+  - name: DamageUI_atlas0.png
+    bundle: 32
+    dir: 2
+  - name: DamageUI_fui.bytes
+    bundle: 32
+    dir: 2
+  - name: Damage_atlas0.png
+    bundle: 32
+    dir: 2
+  - name: Damage_fui.bytes
+    bundle: 32
+    dir: 2
+  - name: Lobby_atlas0.png
+    bundle: 32
+    dir: 2
+  - name: Lobby_atlas0_1.png
+    bundle: 32
+    dir: 2
+  - name: Lobby_atlas0_2.png
+    bundle: 32
+    dir: 2
+  - name: Lobby_fui.bytes
+    bundle: 32
+    dir: 2
+  - name: Login_atlas0.png
+    bundle: 32
+    dir: 2
+  - name: Login_fui.bytes
+    bundle: 32
+    dir: 2
+  - name: Color.mat
+    bundle: 19
+    dir: 3
+  - name: Sparks.mat
+    bundle: 19
+    dir: 3
+  - name: Star.mat
+    bundle: 19
+    dir: 3
+  - name: Color 1.mat
+    bundle: 5
+    dir: 4
+  - name: Color.mat
+    bundle: 5
+    dir: 4
+  - name: Glow 2.mat
+    bundle: 5
+    dir: 4
+  - name: Glow.mat
+    bundle: 5
+    dir: 4
+  - name: PolyGlow.mat
+    bundle: 49
+    dir: 5
+  - name: PolyProtonGreen.mat
+    bundle: 49
+    dir: 5
+  - name: PolyProtonPink.mat
+    bundle: 49
+    dir: 5
+  - name: PolySpriteLineHighIntensity.mat
+    bundle: 49
+    dir: 5
+  - name: PolySpriteRingGlowSoft.mat
+    bundle: 49
+    dir: 5
+  - name: PolyTransparentGlow.mat
+    bundle: 49
+    dir: 5
+  - name: Particle.mat
+    bundle: 41
+    dir: 6
+  - name: ParticleOut.mat
+    bundle: 41
+    dir: 6
+  - name: RotateRing.mat
+    bundle: 41
+    dir: 6
+  - name: SpawnVerticalGlow.mat
+    bundle: 41
+    dir: 6
+  - name: GrassDefault.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameBall 1.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameBall.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameBall2.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameBuilding1.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameBuilding2.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameBuilding3.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameBuilding4.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameCar 2.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameCar 3.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameChair.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameCharacter.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameDayanguai.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameEnvironment.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameFloor.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameFloorGrass.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameJuese 1.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameJuese.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameKimi.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameMG.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameOutsideEnvironment.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGamePinkCar 1.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGamePinkCar 2.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGamePinkCarWheel.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameQuanquantu.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameSan.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameSan2.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameSpeedUp.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameTree.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameWaterShow.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGameXiaowu.mat
+    bundle: 27
+    dir: 7
+  - name: Render_InGamebianfu.mat
+    bundle: 27
+    dir: 7
+  - name: renwu222.OBJ
+    bundle: 27
+    dir: 7
+  - name: Mat_Bullet.mat
+    bundle: 17
+    dir: 8
+  - name: Mat_HPCap.mat
+    bundle: 17
+    dir: 8
+  - name: ResTest.unity
+    bundle: 17
+    dir: 8
+  - name: bea_tex.mat
+    bundle: 17
+    dir: 8
+  - name: xiaowu_base_roughness.mat
+    bundle: 17
+    dir: 8
+  - name: Color 1.mat
+    bundle: 22
+    dir: 9
+  - name: Color 2.mat
+    bundle: 22
+    dir: 9
+  - name: Color 3.mat
+    bundle: 22
+    dir: 9
+  - name: Color Add 1.mat
+    bundle: 22
+    dir: 9
+  - name: Color Add 2.mat
+    bundle: 22
+    dir: 9
+  - name: Color Add 3.mat
+    bundle: 22
+    dir: 9
+  - name: Color Add.mat
+    bundle: 22
+    dir: 9
+  - name: Color Pink.mat
+    bundle: 22
+    dir: 9
+  - name: Color Yellow.mat
+    bundle: 22
+    dir: 9
+  - name: ColorGlow.mat
+    bundle: 22
+    dir: 9
+  - name: ColorGlowLingxing.mat
+    bundle: 22
+    dir: 9
+  - name: CoreLayer.mat
+    bundle: 22
+    dir: 9
+  - name: ExplosionColor.mat
+    bundle: 22
+    dir: 9
+  - name: HealGlow.mat
+    bundle: 22
+    dir: 9
+  - name: MainStarMat.mat
+    bundle: 22
+    dir: 9
+  - name: PolyGradientMirror.mat
+    bundle: 22
+    dir: 9
+  - name: PolyGradientVertical.mat
+    bundle: 22
+    dir: 9
+  - name: PolySpriteGlow.mat
+    bundle: 22
+    dir: 9
+  - name: PolySpriteGlowDark.mat
+    bundle: 22
+    dir: 9
+  - name: Spark.mat
+    bundle: 22
+    dir: 9
+  - name: StarMat.mat
+    bundle: 22
+    dir: 9
+  - name: Trail.mat
+    bundle: 22
+    dir: 9
+  - name: verticalgradient2.mat
+    bundle: 22
+    dir: 9
+  - name: Bat_Particle_Hit.prefab
+    bundle: 2
+    dir: 10
+  - name: Bat_Particle_SF.prefab
+    bundle: 2
+    dir: 10
+  - name: BoxRabbit_Particle_Hit.prefab
+    bundle: 2
+    dir: 10
+  - name: BulletBackUp.prefab
+    bundle: 2
+    dir: 10
+  - name: Click.prefab
+    bundle: 2
+    dir: 10
+  - name: DeathExplosion.prefab
+    bundle: 2
+    dir: 10
+  - name: Green_Particle_Bullet.prefab
+    bundle: 2
+    dir: 10
+  - name: Heal.prefab
+    bundle: 2
+    dir: 10
+  - name: Kira_Particle_Bullet.prefab
+    bundle: 2
+    dir: 10
+  - name: Luobo.prefab
+    bundle: 2
+    dir: 10
+  - name: Luobo_final.prefab
+    bundle: 2
+    dir: 10
+  - name: No Name.mat
+    bundle: 75
+    dir: 11
+  - name: verticalgradient2.mat
+    bundle: 75
+    dir: 11
+  - name: MouseTrack.prefab
+    bundle: 2
+    dir: 10
+  - name: Nuna_Particle_Bullet.prefab
+    bundle: 2
+    dir: 10
+  - name: Nuna_Particle_Hit.prefab
+    bundle: 2
+    dir: 10
+  - name: Spawn.prefab
+    bundle: 2
+    dir: 10
+  - name: Witch_Particle_Hit.prefab
+    bundle: 2
+    dir: 10
+  - name: Witch_Particle_SF.prefab
+    bundle: 2
+    dir: 10
+  - name: Map.unity
+    bundle: 26
+    dir: 12
+  - name: TempScene.unity
+    bundle: 73
+    dir: 12
+  - name: HPCap.shader
+    bundle: 74
+    dir: 13
+  - name: InGameAlphaBlend.shader
+    bundle: 74
+    dir: 13
+  - name: InGameCharacter 1.shader
+    bundle: 74
+    dir: 13
+  - name: InGameCharacter.shader
+    bundle: 74
+    dir: 13
+  - name: InGameCharacterTransparent.shader
+    bundle: 74
+    dir: 13
+  - name: InGameCore.hlsl
+    bundle: 74
+    dir: 13
+  - name: InGameEnvironment.shader
+    bundle: 74
+    dir: 13
+  - name: InGameFloor.shader
+    bundle: 74
+    dir: 13
+  - name: InGameGrass.shader
+    bundle: 74
+    dir: 13
+  - name: InGameJinLing.shader
+    bundle: 74
+    dir: 13
+  - name: InGameOutsideEnvironment.shader
+    bundle: 74
+    dir: 13
+  - name: InGameSpeedUp.shader
+    bundle: 74
+    dir: 13
+  - name: InGameWaterShow.shader
+    bundle: 74
+    dir: 13
+  - name: Outline.shader
+    bundle: 74
+    dir: 13
+  - name: New Material.mat
+    bundle: 63
+    dir: 14
+  - name: OutGameCharacter.shader
+    bundle: 63
+    dir: 14
+  - name: OutGameCore.hlsl
+    bundle: 63
+    dir: 14
+  - name: Plane.mat
+    bundle: 46
+    dir: 15
+  - name: SH_ParBase_AlphaAdditive.shadergraph
+    bundle: 46
+    dir: 15
+  - name: SH_ParBase_AlphaBlend.shadergraph
+    bundle: 46
+    dir: 15
+  - name: BGM.prefab
+    bundle: 56
+    dir: 16
+  - name: Bat_Sound_Hit.mp3
+    bundle: 56
+    dir: 16
+  - name: Bat_Sound_Hit.prefab
+    bundle: 56
+    dir: 16
+  - name: Bat_Sound_SF.mp3
+    bundle: 56
+    dir: 16
+  - name: Bat_Sound_SF.prefab
+    bundle: 56
+    dir: 16
+  - name: BoxRabbit_Sound_Hit.mp3
+    bundle: 56
+    dir: 16
+  - name: BoxRabbit_Sound_Hit.prefab
+    bundle: 56
+    dir: 16
+  - name: BoxRabbit_Sound_SF.mp3
+    bundle: 56
+    dir: 16
+  - name: BoxRabbit_Sound_SF.prefab
+    bundle: 56
+    dir: 16
+  - name: ColorWorldMixer.mixer
+    bundle: 56
+    dir: 16
+  - name: Green_Sound_SF.mp3
+    bundle: 56
+    dir: 16
+  - name: Green_Sound_SF.prefab
+    bundle: 56
+    dir: 16
+  - name: Kira_Sound.mp3
+    bundle: 56
+    dir: 16
+  - name: Kira_Sound.prefab
+    bundle: 56
+    dir: 16
+  - name: Nuna_Sound_Hit.mp3
+    bundle: 56
+    dir: 16
+  - name: Nuna_Sound_Hit.prefab
+    bundle: 56
+    dir: 16
+  - name: Nuna_Sound_SF.mp3
+    bundle: 56
+    dir: 16
+  - name: Nuna_Sound_SF.prefab
+    bundle: 56
+    dir: 16
+  - name: ROCKSTAR.mp3
+    bundle: 56
+    dir: 16
+  - name: Sima_Sound.mp3
+    bundle: 56
+    dir: 16
+  - name: Sima_Sound.prefab
+    bundle: 56
+    dir: 16
+  - name: Sound_DopaDeath1.prefab
+    bundle: 56
+    dir: 16
+  - name: Sound_DopaDeath1.wav
+    bundle: 56
+    dir: 16
+  - name: Sound_DopaDeath2.prefab
+    bundle: 56
+    dir: 16
+  - name: Sound_DopaDeath2.wav
+    bundle: 56
+    dir: 16
+  - name: Sound_Levelup.mp3
+    bundle: 56
+    dir: 16
+  - name: Sound_Levelup.prefab
+    bundle: 56
+    dir: 16
+  - name: Sound_Spawn.mp3
+    bundle: 56
+    dir: 16
+  - name: Sound_Spawn.prefab
+    bundle: 56
+    dir: 16
+  - name: Sound_TeamDeath.prefab
+    bundle: 56
+    dir: 16
+  - name: Sound_TeamDeath.wav
+    bundle: 56
+    dir: 16
+  - name: Witch_Sound_Hit.mp3
+    bundle: 56
+    dir: 16
+  - name: Witch_Sound_Hit.prefab
+    bundle: 56
+    dir: 16
+  - name: Witch_Sound_SF.mp3
+    bundle: 56
+    dir: 16
+  - name: Witch_Sound_SF.prefab
+    bundle: 56
+    dir: 16
+  - name: amazing.mp3
+    bundle: 56
+    dir: 16
+  - name: amazing.prefab
+    bundle: 56
+    dir: 16
+  - name: excellent.mp3
+    bundle: 56
+    dir: 16
+  - name: excellent.prefab
+    bundle: 56
+    dir: 16
+  - name: great.mp3
+    bundle: 56
+    dir: 16
+  - name: great.prefab
+    bundle: 56
+    dir: 16
+  - name: nice.mp3
+    bundle: 56
+    dir: 16
+  - name: nice.prefab
+    bundle: 56
+    dir: 16
+  - name: Bat.prefab
+    bundle: 51
+    dir: 17
+  - name: Bat_Particle_Bullet.prefab
+    bundle: 50
+    dir: 17
+  - name: BoxRabbit.prefab
+    bundle: 21
+    dir: 17
+  - name: BoxRabbit_Particle_Bullet.prefab
+    bundle: 44
+    dir: 17
+  - name: Bullet.prefab
+    bundle: 1
+    dir: 17
+  - name: FireBall.prefab
+    bundle: 10
+    dir: 17
+  - name: Green.prefab
+    bundle: 42
+    dir: 17
+  - name: Kira.prefab
+    bundle: 57
+    dir: 17
+  - name: Nuna.prefab
+    bundle: 4
+    dir: 17
+  - name: Sima.prefab
+    bundle: 66
+    dir: 17
+  - name: SnowBall.prefab
+    bundle: 3
+    dir: 17
+  - name: Witch.prefab
+    bundle: 47
+    dir: 17
+  - name: Witch_Particle_Bullet.prefab
+    bundle: 14
+    dir: 17
+  bundles:
+  - name: 03300e2583c524bf6b49f2ef422d69e6.unity3d
+    id: 0
+    deps: 
+    len: 9540
+    hash: a3cce21578d4f79fd28819105adbd643
+  - name: 11919dd705d710ff389b1be87fa9919e.unity3d
+    id: 1
+    deps: 1000000016000000260000002d0000003700000045000000480000004a000000
+    len: 28133
+    hash: 08d6b520ad0f310d9a5d89af04d4b46a
+  - name: 131c993ff57732dd1079caedbf5c9add.unity3d
+    id: 2
+    deps: 05000000080000000d00000010000000130000001600000026000000290000002d00000031000000370000003a00000045000000480000004a000000
+    len: 117222
+    hash: d71b46972ef79635e66a24d047e3c09c
+  - name: 142be907cfa8051a9be5e6ab3b433ca5.unity3d
+    id: 3
+    deps: 1000000016000000260000002d0000003700000045000000480000004a000000
+    len: 28186
+    hash: 7c7b8e388e18b98183c34c203846f117
+  - name: 1cdb2b75fe9487277af05731cccd19e7.unity3d
+    id: 4
+    deps: 0000000006000000070000000c00000012000000170000001b000000210000002200000024000000270000002b00000034000000350000003c0000003e00000043000000460000004a000000
+    len: 236963
+    hash: 3b07e9563c394e25437034709ad0fa1c
+  - name: 22dec3328c1098ba9b816b8f50709aa8.unity3d
+    id: 5
+    deps: 4a000000
+    len: 12425
+    hash: 43685218406d161fab3349d3e8f1ac37
+  - name: 2c696f87329ce7f2246202c048d786d8.unity3d
+    id: 6
+    deps: 
+    len: 6162
+    hash: 6f49aa0c87549b06aa91f85fd6aaa1b0
+  - name: 310405ef6d90e217303ee99c2b221d85.unity3d
+    id: 7
+    deps: 
+    len: 66765
+    hash: 7d33454b106e9f65de230fcae450fff4
+  - name: 365deba695d77e998345b43865ba9fce.unity3d
+    id: 8
+    deps: 3a000000
+    len: 9301
+    hash: a523b49edfc6a0fffc5c3c2ba3fe28d7
+  - name: 37f56b2351824cfb752c1cdf81358aa0.unity3d
+    id: 9
+    deps: 
+    len: 1313
+    hash: ec20e9369af889fa99a6a166bb11757c
+  - name: 39e781c57df2dfb592e49c3c4a1f8e4b.unity3d
+    id: 10
+    deps: 1000000016000000260000002d0000003700000045000000480000004a000000
+    len: 28278
+    hash: f98be0e023fb82d93fc7745b7b2bf0e8
+  - name: 3b7875507fdaecc3aea309d97b6084c1.unity3d
+    id: 11
+    deps: 
+    len: 1495
+    hash: 2534bce95f619923f8c62c77c989133f
+  - name: 3f0f1f687fba02931bd3eeba5f3dcd7d.unity3d
+    id: 12
+    deps: 
+    len: 70583
+    hash: d44219dd0f44c5087b7685e594e310ba
+  - name: 45a86ce9b954ef68bdea83915bdea329.unity3d
+    id: 13
+    deps: 
+    len: 14507
+    hash: d809f656c7556b07c3499596be2b2144
+  - name: 4c0be4401e8b35e8b433c268447afbe4.unity3d
+    id: 14
+    deps: 1000000016000000260000002d0000003700000045000000480000004a000000
+    len: 28299
+    hash: 8b804884b10acf4d4c034c27196b1097
+  - name: 4d4abd45f9f927ef3d1c33ad17dd3e54.unity3d
+    id: 15
+    deps: 220000004a000000
+    len: 2479
+    hash: e13880874096e059380d0afbdcf29bc5
+  - name: 4f144e8fdc5de35dfd22f3f1a34285ce.unity3d
+    id: 16
+    deps: 
+    len: 6642
+    hash: dce98dd0accea1c06559591e4ce6b52e
+  - name: 4f91fe56b7b1ec3f04f0f4238fdb55f1.unity3d
+    id: 17
+    deps: 
+    len: 43676
+    hash: ad06eff3be19119fceb5f5cfe652dc4b
+  - name: 4fc71bce5860e7b55377b7d73957eca5.unity3d
+    id: 18
+    deps: 
+    len: 15329
+    hash: c942d4caaf3d377f1799228e5ddd5dbb
+  - name: 50225da6af64ebb2545840eafa52ceb3.unity3d
+    id: 19
+    deps: 100000004a000000
+    len: 5597
+    hash: 1719481bf699a185fa8dd5d008818ee1
+  - name: 539e8d830d526068a04593829d54a4c9.unity3d
+    id: 20
+    deps: 
+    len: 30339
+    hash: 15395e1c25d96286f8451933ca8c9567
+  - name: 55b659acd9547cb9621b627d89826645.unity3d
+    id: 21
+    deps: 070000000c0000001200000017000000190000001b0000001c000000210000002200000024000000270000002b00000034000000350000003b0000003c00000043000000460000004a000000
+    len: 101018
+    hash: c5e1b0d3da7540f993573e5ce2b5af5f
+  - name: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    id: 22
+    deps: 100000002d0000003700000045000000480000004a000000
+    len: 55802
+    hash: ad584c11d8869e261ffa79e9fce419cc
+  - name: 5f9bc4b0d2c1b80ecbcec85e5ad2e29a.unity3d
+    id: 23
+    deps: 
+    len: 69542
+    hash: 68d9fb3e4d2de5d4a04a840c7432f98b
+  - name: 647fd131331f17390d20e9e0c3fb0c2f.unity3d
+    id: 24
+    deps: 
+    len: 255156
+    hash: 4d9c2668486495f93bf666e5a1b5cc65
+  - name: 64ddeacdc3b5e2092adeb4b0d6cb66bf.unity3d
+    id: 25
+    deps: 
+    len: 10451
+    hash: c2e6310084da9d021b37c0eab6fb59b3
+  - name: 65072f691e2032b733bad06645816713.unity3d
+    id: 26
+    deps: 
+    len: 12650981
+    hash: 53732173d772801ccc0d54ce28116a0b
+  - name: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    id: 27
+    deps: 070000000c0000001200000017000000210000002200000024000000270000002b00000034000000350000003c00000043000000460000004a000000
+    len: 28885482
+    hash: c0764e19484dd2e72c42bca391b94061
+  - name: 6c502ed6a0fdc440ebc8ab9d558a5886.unity3d
+    id: 28
+    deps: 190000003b0000004a000000
+    len: 12589
+    hash: 37b980d9bda382a3326ded556c48df8a
+  - name: 6fa5c9cbaf6e745f85177f09a36a1878.unity3d
+    id: 29
+    deps: 
+    len: 1286
+    hash: a57e9fbb009013af5d269a6a58f688d3
+  - name: 753fb261766d8dffa79c45a2851f3e39.unity3d
+    id: 30
+    deps: 
+    len: 1272
+    hash: a673bff4e8044ef15ef95803f692bffe
+  - name: 785e85f738b29045716d824054439cd0.unity3d
+    id: 31
+    deps: 
+    len: 1342
+    hash: 4d3ee11b44dc4d6161f6b6b3e440e3aa
+  - name: 78b54258474c5edcba05a9cc1c34a5fb.unity3d
+    id: 32
+    deps: 
+    len: 393155
+    hash: d81307c0864fa9aa312109663843d433
+  - name: 7b67cb521a3f2359b0da7b183c399576.unity3d
+    id: 33
+    deps: 
+    len: 14913
+    hash: 1060271c9351223e5e960d1c2f0842b8
+  - name: 811269506ba19adc7b8f69256da57be7.unity3d
+    id: 34
+    deps: 
+    len: 11096
+    hash: c2a8f712e1248803bf7f66995a5d38e5
+  - name: 81e762003762bdf49b3fec11f8181aa8.unity3d
+    id: 35
+    deps: 
+    len: 1284
+    hash: 6492672fd11f00d140502e9a334a2184
+  - name: 83a0c6bc5dfbf35c60bb64eb6cffb05b.unity3d
+    id: 36
+    deps: 
+    len: 25069
+    hash: c62f20234b14f0e80667e1efc32f9285
+  - name: 83af947d1300194c9f96375731960320.unity3d
+    id: 37
+    deps: 
+    len: 1464
+    hash: f9b8fd5edc48978cd5f335d8999acb1c
+  - name: 8603eb373cab66d4ef8dcba451558051.unity3d
+    id: 38
+    deps: 
+    len: 9049
+    hash: 03c362f14dfa74834bcf1e336311b54f
+  - name: 860dc4f07438bd9c9c1437b743dd66ad.unity3d
+    id: 39
+    deps: 
+    len: 11880
+    hash: 3c80c3b44e774cdb7e4833270b594350
+  - name: 8a225304448253da03f457a201ab63c0.unity3d
+    id: 40
+    deps: 
+    len: 1308
+    hash: ab9e70bd147aaac9ca899d8828fe1429
+  - name: 8c97c53dacaa064a34adb0b0a375db40.unity3d
+    id: 41
+    deps: 4a000000
+    len: 25365
+    hash: ebe530d7120b857ec4a77fd3dee7aeec
+  - name: 91076995f4e30a044cd0dae22a085eaa.unity3d
+    id: 42
+    deps: 070000000c0000001200000017000000190000001b0000001c000000210000002200000024000000270000002b00000034000000350000003b0000003c00000043000000460000004a000000
+    len: 124395
+    hash: 558f8e2345b42e6b5d1f47820b7db17c
+  - name: 9125f905574336bd4188974987ed8a9f.unity3d
+    id: 43
+    deps: 
+    len: 26961
+    hash: ca4abda375b4edd84e5155c738e17e3d
+  - name: 96063d90f0f38d4efe2466fac2ed9658.unity3d
+    id: 44
+    deps: 080000001000000016000000260000002d000000370000003a00000045000000480000004a000000
+    len: 29021
+    hash: 7905d9ed0f7263c607d1a96557b7ae72
+  - name: a03ff26b608c38f483cdaeaab0f8215e.unity3d
+    id: 45
+    deps: 
+    len: 4861
+    hash: 5343e389d4543467d2a86a7f76fe4b92
+  - name: a1585dfb885c0eaffc99fe67613cafb6.unity3d
+    id: 46
+    deps: 
+    len: 20902
+    hash: f930e2d843496dd13877998a9d8b9220
+  - name: a2c1ff3a6bea0f75b8b377e58e6a54c8.unity3d
+    id: 47
+    deps: 070000000c0000001200000017000000190000001b0000001c000000210000002200000024000000270000002b00000034000000350000003b0000003c00000043000000460000004a000000
+    len: 121203
+    hash: 33eaac69d45d54e2040f78481de9d67f
+  - name: a44dc2362a7f0eac78cd62af7447585d.unity3d
+    id: 48
+    deps: 
+    len: 1257
+    hash: 8ecb04711a64dd24d058216529f97013
+  - name: aeef0d88ee4a71014452e0a33b053e72.unity3d
+    id: 49
+    deps: 4a000000
+    len: 29603
+    hash: d5e69d08468a0b37d1cfc416508bd4cf
+  - name: ba50a15f5883d656a0088bf784bd90d4.unity3d
+    id: 50
+    deps: 0d0000001000000016000000260000002d0000003700000045000000480000004a000000
+    len: 29179
+    hash: bb86768ed270ef9d6c8a832e77c379c6
+  - name: bb9850cbf31443329314abbcab198ee6.unity3d
+    id: 51
+    deps: 070000000c0000001200000017000000190000001b0000001c000000210000002200000024000000270000002b00000034000000350000003b0000003c00000043000000460000004a000000
+    len: 219800
+    hash: 51190f579ffbc0d92ea5d160ee1ac3b9
+  - name: be5dd79e674813aefad410446a42d5fc.unity3d
+    id: 52
+    deps: 
+    len: 19924
+    hash: 11e624197aad7aa801f4c2b1fc061922
+  - name: c3f85b0f8a78d9870cbe06a5e4e8f622.unity3d
+    id: 53
+    deps: 
+    len: 23215
+    hash: b53397e91cafee28b150e17e59a32937
+  - name: c4762cb687cc28f3c9bc01978cf97144.unity3d
+    id: 54
+    deps: 
+    len: 1622
+    hash: f20a0383ea01fa7c43ee96dc766cfa56
+  - name: c71f5e29fdfe801d8c110b3565f3d7c0.unity3d
+    id: 55
+    deps: 
+    len: 36061
+    hash: 8dc608bf12431a19ad0a65c151f3c85b
+  - name: c749579a42d52429bceb20cfa419537d.unity3d
+    id: 56
+    deps: 
+    len: 12427951
+    hash: 455465ef156edca020b6b6cb5d19f8d9
+  - name: cb1e9ac1e6bd426ec34801ce6c044971.unity3d
+    id: 57
+    deps: 0000000006000000070000000c00000012000000170000001b000000210000002200000024000000270000002b00000034000000350000003c0000003e00000043000000460000004a000000
+    len: 301927
+    hash: fc61a0b736a279c3c1eda7550def477e
+  - name: cc21811e556c9bde483d2c66e20342e6.unity3d
+    id: 58
+    deps: 
+    len: 30349
+    hash: b30177ddf50993c91f1336fd5234fdc4
+  - name: cc4cc1710d6f399641112708847b9960.unity3d
+    id: 59
+    deps: 4a000000
+    len: 2694
+    hash: 85cb6a8c131d52f4d828a548c9b7af6c
+  - name: cd2259ee0a1cdad0a0a047e9c880c05e.unity3d
+    id: 60
+    deps: 
+    len: 77279
+    hash: c6e8f0f9ead994a941ebd8c12ead5e98
+  - name: cd51e832b1361d69494cc115adcb9209.unity3d
+    id: 61
+    deps: 
+    len: 1394
+    hash: feb396409021f7e4aa0ca6d6364e3f1a
+  - name: d3e7d5966546db93dec13e82c4b1939b.unity3d
+    id: 62
+    deps: 0000000006000000
+    len: 5914
+    hash: 2a6a4267ed3d6f6b012b927385a04295
+  - name: dba2e0753ac65165a56f706ae7d36ce5.unity3d
+    id: 63
+    deps: 
+    len: 34543
+    hash: 8ced7fffafb59e6d621974865084e5e6
+  - name: dc8e15db3f2dd3c570733567753aaf7f.unity3d
+    id: 64
+    deps: 
+    len: 1299
+    hash: fedaece0c1da45e31ed219cbd6139dfd
+  - name: de6911dfae3e6306a192b1a2b85251bb.unity3d
+    id: 65
+    deps: 
+    len: 1339
+    hash: 12b20a83c2d40372b87866d66a9a1960
+  - name: df94971e83395a6b0e76ddb4605ba5cd.unity3d
+    id: 66
+    deps: 0000000006000000070000000c00000012000000170000001b000000210000002200000024000000270000002b00000034000000350000003c0000003e00000043000000460000004a000000
+    len: 245697
+    hash: e371ac14b31dc8f496b280183ca1cb4b
+  - name: e11c83e41507c420a2626d62cd61cfc4.unity3d
+    id: 67
+    deps: 
+    len: 79233
+    hash: 0fcbc1224dd9037c09b240d01c3add68
+  - name: e28104cdf126ec3fd30b4c345c45fd8d.unity3d
+    id: 68
+    deps: 
+    len: 1277
+    hash: db9588a3634154710bde2c3745f055f3
+  - name: f26c61a05aea764e45612ebf386d2b5c.unity3d
+    id: 69
+    deps: 
+    len: 2611
+    hash: b405f0996159987f3f94d9b0b70759b0
+  - name: f2a50b8874f3ace13e9f88296c2f772c.unity3d
+    id: 70
+    deps: 
+    len: 67185
+    hash: c40b58001887d2fab280d8d56529e9b9
+  - name: f4b66b0ffa44931d734b6555b9cfab4e.unity3d
+    id: 71
+    deps: 
+    len: 19883
+    hash: 194d1b6f88a613379e60915552507e10
+  - name: f6fef2b8ec995d4fd1004df34acfe072.unity3d
+    id: 72
+    deps: 
+    len: 5680
+    hash: e36d16fdcab17a56e7d5a3f134cea708
+  - name: fd700b081a688306efe3a1344934a7e6.unity3d
+    id: 73
+    deps: 
+    len: 485019
+    hash: 8bb601067cd7f47a8edfca784927011f
+  - name: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    id: 74
+    deps: 
+    len: 38504
+    hash: 741c881ee20ee32d4ccd541543a36fc0
+  - name: ff4a7be450beefd93bd7a53f46cc8201.unity3d
+    id: 75
+    deps: 
+    len: 30618
+    hash: f2d1187d2a1439793b5a6cc50b2745b8

@@ -1,0 +1,863 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03142c330ced64e0ab46cddcd0484ab7, type: 3}
+  m_Name: Rules
+  m_EditorClassIdentifier: 
+  searchPatternAsset: '*.asset'
+  searchPatternController: '*.controller'
+  searchPatternDir: '*'
+  searchPatternMaterial: '*.mat'
+  searchPatternPng: '*.png'
+  searchPatternPrefab: '*.prefab'
+  searchPatternScene: '*.unity'
+  searchPatternText: '*.txt,*.bytes,*.json,*.csv,*.xml,*htm,*.html,*.yaml,*.fnt'
+  version: 43
+  scenesInBuild:
+  - {fileID: 102900000, guid: e0d691ac8c1d0454ba07089ea820e18a, type: 3}
+  rules:
+  - searchPath: Assets/Res/Code
+    searchPattern: '*'
+    nameBy: 2
+    assetBundleName: 
+  - searchPath: Assets/Res/Unit
+    searchPattern: '*.prefab'
+    nameBy: 1
+    assetBundleName: 
+  - searchPath: Assets/Res/Scenes
+    searchPattern: '*.unity'
+    nameBy: 1
+    assetBundleName: 
+  - searchPath: Assets/Res/FGUI
+    searchPattern: '*'
+    nameBy: 2
+    assetBundleName: 
+  - searchPath: Assets/Res/Config
+    searchPattern: '*.txt,*.bytes,*.json,*.csv,*.xml,*htm,*.html,*.yaml,*.fnt'
+    nameBy: 1
+    assetBundleName: 
+  - searchPath: Assets/Res/Sounds
+    searchPattern: '*'
+    nameBy: 2
+    assetBundleName: 
+  - searchPath: Assets/Res/Particle/ParticlePrefabs
+    searchPattern: '*'
+    nameBy: 2
+    assetBundleName: 
+  - searchPath: Assets/Res/Shader
+    searchPattern: '*'
+    nameBy: 2
+    assetBundleName: 
+  - searchPath: Assets/Res/Particle/Mat
+    searchPattern: '*'
+    nameBy: 2
+    assetBundleName: 
+  - searchPath: Assets/Res/Shader
+    searchPattern: '*'
+    nameBy: 2
+    assetBundleName: 
+  - searchPath: Assets/Res/Materials
+    searchPattern: '*'
+    nameBy: 2
+    assetBundleName: 
+  ruleAssets:
+  - bundle: 647fd131331f17390d20e9e0c3fb0c2f.unity3d
+    path: Assets/Res/Code/Hotfix.dll.bytes
+  - bundle: 647fd131331f17390d20e9e0c3fb0c2f.unity3d
+    path: Assets/Res/Code/Hotfix.pdb.bytes
+  - bundle: 6fa5c9cbaf6e745f85177f09a36a1878.unity3d
+    path: Assets/Res/Config/AIConfigCategory.bytes
+  - bundle: 3b7875507fdaecc3aea309d97b6084c1.unity3d
+    path: Assets/Res/Config/AttackConfigCategory.bytes
+  - bundle: 83af947d1300194c9f96375731960320.unity3d
+    path: Assets/Res/Config/BuffConfigCategory.bytes
+  - bundle: c4762cb687cc28f3c9bc01978cf97144.unity3d
+    path: Assets/Res/Config/DopaConfigCategory.bytes
+  - bundle: cd51e832b1361d69494cc115adcb9209.unity3d
+    path: Assets/Res/Config/EffectConfigCategory.bytes
+  - bundle: e28104cdf126ec3fd30b4c345c45fd8d.unity3d
+    path: Assets/Res/Config/GlobalProto.txt
+  - bundle: dc8e15db3f2dd3c570733567753aaf7f.unity3d
+    path: Assets/Res/Config/ParameterConfigCategory.bytes
+  - bundle: 37f56b2351824cfb752c1cdf81358aa0.unity3d
+    path: Assets/Res/Config/SkillConfigCategory.bytes
+  - bundle: de6911dfae3e6306a192b1a2b85251bb.unity3d
+    path: Assets/Res/Config/SkinsConfigCategory.bytes
+  - bundle: 8a225304448253da03f457a201ab63c0.unity3d
+    path: Assets/Res/Config/StartMachineConfigCategory.bytes
+  - bundle: a44dc2362a7f0eac78cd62af7447585d.unity3d
+    path: Assets/Res/Config/StartProcessConfigCategory.bytes
+  - bundle: 785e85f738b29045716d824054439cd0.unity3d
+    path: Assets/Res/Config/StartSceneConfigCategory.bytes
+  - bundle: 81e762003762bdf49b3fec11f8181aa8.unity3d
+    path: Assets/Res/Config/StartZoneConfigCategory.bytes
+  - bundle: 753fb261766d8dffa79c45a2851f3e39.unity3d
+    path: Assets/Res/Config/UnitConfigCategory.bytes
+  - bundle: 78b54258474c5edcba05a9cc1c34a5fb.unity3d
+    path: Assets/Res/FGUI/Battle_atlas0.png
+  - bundle: 78b54258474c5edcba05a9cc1c34a5fb.unity3d
+    path: Assets/Res/FGUI/Battle_fui.bytes
+  - bundle: 78b54258474c5edcba05a9cc1c34a5fb.unity3d
+    path: Assets/Res/FGUI/DamageUI_atlas0.png
+  - bundle: 78b54258474c5edcba05a9cc1c34a5fb.unity3d
+    path: Assets/Res/FGUI/DamageUI_fui.bytes
+  - bundle: 78b54258474c5edcba05a9cc1c34a5fb.unity3d
+    path: Assets/Res/FGUI/Damage_atlas0.png
+  - bundle: 78b54258474c5edcba05a9cc1c34a5fb.unity3d
+    path: Assets/Res/FGUI/Damage_fui.bytes
+  - bundle: 78b54258474c5edcba05a9cc1c34a5fb.unity3d
+    path: Assets/Res/FGUI/Lobby_atlas0.png
+  - bundle: 78b54258474c5edcba05a9cc1c34a5fb.unity3d
+    path: Assets/Res/FGUI/Lobby_atlas0_1.png
+  - bundle: 78b54258474c5edcba05a9cc1c34a5fb.unity3d
+    path: Assets/Res/FGUI/Lobby_atlas0_2.png
+  - bundle: 78b54258474c5edcba05a9cc1c34a5fb.unity3d
+    path: Assets/Res/FGUI/Lobby_fui.bytes
+  - bundle: 78b54258474c5edcba05a9cc1c34a5fb.unity3d
+    path: Assets/Res/FGUI/Login_atlas0.png
+  - bundle: 78b54258474c5edcba05a9cc1c34a5fb.unity3d
+    path: Assets/Res/FGUI/Login_fui.bytes
+  - bundle: 50225da6af64ebb2545840eafa52ceb3.unity3d
+    path: Assets/Res/Materials/InGame/Effect/Death/Color.mat
+  - bundle: 50225da6af64ebb2545840eafa52ceb3.unity3d
+    path: Assets/Res/Materials/InGame/Effect/Death/Sparks.mat
+  - bundle: 50225da6af64ebb2545840eafa52ceb3.unity3d
+    path: Assets/Res/Materials/InGame/Effect/Death/Star.mat
+  - bundle: 22dec3328c1098ba9b816b8f50709aa8.unity3d
+    path: Assets/Res/Materials/InGame/Effect/Heal/Color 1.mat
+  - bundle: 22dec3328c1098ba9b816b8f50709aa8.unity3d
+    path: Assets/Res/Materials/InGame/Effect/Heal/Color.mat
+  - bundle: 22dec3328c1098ba9b816b8f50709aa8.unity3d
+    path: Assets/Res/Materials/InGame/Effect/Heal/Glow 2.mat
+  - bundle: 22dec3328c1098ba9b816b8f50709aa8.unity3d
+    path: Assets/Res/Materials/InGame/Effect/Heal/Glow.mat
+  - bundle: aeef0d88ee4a71014452e0a33b053e72.unity3d
+    path: Assets/Res/Materials/InGame/Effect/PolyGlow.mat
+  - bundle: aeef0d88ee4a71014452e0a33b053e72.unity3d
+    path: Assets/Res/Materials/InGame/Effect/PolyProtonGreen.mat
+  - bundle: aeef0d88ee4a71014452e0a33b053e72.unity3d
+    path: Assets/Res/Materials/InGame/Effect/PolyProtonPink.mat
+  - bundle: aeef0d88ee4a71014452e0a33b053e72.unity3d
+    path: Assets/Res/Materials/InGame/Effect/PolySpriteLineHighIntensity.mat
+  - bundle: aeef0d88ee4a71014452e0a33b053e72.unity3d
+    path: Assets/Res/Materials/InGame/Effect/PolySpriteRingGlowSoft.mat
+  - bundle: aeef0d88ee4a71014452e0a33b053e72.unity3d
+    path: Assets/Res/Materials/InGame/Effect/PolyTransparentGlow.mat
+  - bundle: 8c97c53dacaa064a34adb0b0a375db40.unity3d
+    path: Assets/Res/Materials/InGame/Effect/Spwan/Particle.mat
+  - bundle: 8c97c53dacaa064a34adb0b0a375db40.unity3d
+    path: Assets/Res/Materials/InGame/Effect/Spwan/ParticleOut.mat
+  - bundle: 8c97c53dacaa064a34adb0b0a375db40.unity3d
+    path: Assets/Res/Materials/InGame/Effect/Spwan/RotateRing.mat
+  - bundle: 8c97c53dacaa064a34adb0b0a375db40.unity3d
+    path: Assets/Res/Materials/InGame/Effect/Spwan/SpawnVerticalGlow.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/GrassDefault.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameBall 1.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameBall.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameBall2.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameBuilding1.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameBuilding2.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameBuilding3.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameBuilding4.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameCar 2.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameCar 3.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameChair.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameCharacter.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameDayanguai.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameEnvironment.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameFloor.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameFloorGrass.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameJuese 1.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameJuese.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameKimi.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameMG.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameOutsideEnvironment.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGamePinkCar
+      1.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGamePinkCar
+      2.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGamePinkCarWheel.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameQuanquantu.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameSan.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameSan2.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameSpeedUp.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameTree.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameWaterShow.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGameXiaowu.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/Render_InGamebianfu.mat
+  - bundle: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    path: Assets/Res/Materials/InGame/Environment&Character/renwu222.OBJ
+  - bundle: 4f91fe56b7b1ec3f04f0f4238fdb55f1.unity3d
+    path: Assets/Res/Materials/Mat_Bullet.mat
+  - bundle: 4f91fe56b7b1ec3f04f0f4238fdb55f1.unity3d
+    path: Assets/Res/Materials/Mat_HPCap.mat
+  - bundle: 4f91fe56b7b1ec3f04f0f4238fdb55f1.unity3d
+    path: Assets/Res/Materials/ResTest.unity
+  - bundle: 4f91fe56b7b1ec3f04f0f4238fdb55f1.unity3d
+    path: Assets/Res/Materials/bea_tex.mat
+  - bundle: 4f91fe56b7b1ec3f04f0f4238fdb55f1.unity3d
+    path: Assets/Res/Materials/xiaowu_base_roughness.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/Color 1.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/Color 2.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/Color 3.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/Color Add 1.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/Color Add 2.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/Color Add 3.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/Color Add.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/Color Pink.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/Color Yellow.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/ColorGlow.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/ColorGlowLingxing.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/CoreLayer.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/ExplosionColor.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/HealGlow.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/MainStarMat.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/PolyGradientMirror.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/PolyGradientVertical.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/PolySpriteGlow.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/PolySpriteGlowDark.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/Spark.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/StarMat.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/Trail.mat
+  - bundle: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    path: Assets/Res/Particle/Mat/verticalgradient2.mat
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Bat_Particle_Hit.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Bat_Particle_SF.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/BoxRabbit_Particle_Hit.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/BulletBackUp.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Click.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/DeathExplosion.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Green_Particle_Bullet.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Heal.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Kira_Particle_Bullet.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Luobo.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Luobo_final.prefab
+  - bundle: ff4a7be450beefd93bd7a53f46cc8201.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Materials/No Name.mat
+  - bundle: ff4a7be450beefd93bd7a53f46cc8201.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Materials/verticalgradient2.mat
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/MouseTrack.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Nuna_Particle_Bullet.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Nuna_Particle_Hit.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Spawn.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Witch_Particle_Hit.prefab
+  - bundle: 131c993ff57732dd1079caedbf5c9add.unity3d
+    path: Assets/Res/Particle/ParticlePrefabs/Witch_Particle_SF.prefab
+  - bundle: 65072f691e2032b733bad06645816713.unity3d
+    path: Assets/Res/Scenes/Map.unity
+  - bundle: fd700b081a688306efe3a1344934a7e6.unity3d
+    path: Assets/Res/Scenes/TempScene.unity
+  - bundle: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    path: Assets/Res/Shader/InGame/HPCap.shader
+  - bundle: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    path: Assets/Res/Shader/InGame/InGameAlphaBlend.shader
+  - bundle: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    path: Assets/Res/Shader/InGame/InGameCharacter 1.shader
+  - bundle: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    path: Assets/Res/Shader/InGame/InGameCharacter.shader
+  - bundle: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    path: Assets/Res/Shader/InGame/InGameCharacterTransparent.shader
+  - bundle: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    path: Assets/Res/Shader/InGame/InGameCore.hlsl
+  - bundle: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    path: Assets/Res/Shader/InGame/InGameEnvironment.shader
+  - bundle: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    path: Assets/Res/Shader/InGame/InGameFloor.shader
+  - bundle: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    path: Assets/Res/Shader/InGame/InGameGrass.shader
+  - bundle: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    path: Assets/Res/Shader/InGame/InGameJinLing.shader
+  - bundle: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    path: Assets/Res/Shader/InGame/InGameOutsideEnvironment.shader
+  - bundle: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    path: Assets/Res/Shader/InGame/InGameSpeedUp.shader
+  - bundle: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    path: Assets/Res/Shader/InGame/InGameWaterShow.shader
+  - bundle: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    path: Assets/Res/Shader/InGame/Outline.shader
+  - bundle: dba2e0753ac65165a56f706ae7d36ce5.unity3d
+    path: Assets/Res/Shader/OutGame/New Material.mat
+  - bundle: dba2e0753ac65165a56f706ae7d36ce5.unity3d
+    path: Assets/Res/Shader/OutGame/OutGameCharacter.shader
+  - bundle: dba2e0753ac65165a56f706ae7d36ce5.unity3d
+    path: Assets/Res/Shader/OutGame/OutGameCore.hlsl
+  - bundle: a1585dfb885c0eaffc99fe67613cafb6.unity3d
+    path: Assets/Res/Shader/Plane.mat
+  - bundle: a1585dfb885c0eaffc99fe67613cafb6.unity3d
+    path: Assets/Res/Shader/SH_ParBase_AlphaAdditive.shadergraph
+  - bundle: a1585dfb885c0eaffc99fe67613cafb6.unity3d
+    path: Assets/Res/Shader/SH_ParBase_AlphaBlend.shadergraph
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/BGM.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Bat_Sound_Hit.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Bat_Sound_Hit.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Bat_Sound_SF.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Bat_Sound_SF.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/BoxRabbit_Sound_Hit.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/BoxRabbit_Sound_Hit.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/BoxRabbit_Sound_SF.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/BoxRabbit_Sound_SF.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/ColorWorldMixer.mixer
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Green_Sound_SF.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Green_Sound_SF.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Kira_Sound.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Kira_Sound.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Nuna_Sound_Hit.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Nuna_Sound_Hit.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Nuna_Sound_SF.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Nuna_Sound_SF.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/ROCKSTAR.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Sima_Sound.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Sima_Sound.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Sound_DopaDeath1.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Sound_DopaDeath1.wav
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Sound_DopaDeath2.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Sound_DopaDeath2.wav
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Sound_Levelup.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Sound_Levelup.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Sound_Spawn.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Sound_Spawn.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Sound_TeamDeath.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Sound_TeamDeath.wav
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Witch_Sound_Hit.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Witch_Sound_Hit.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Witch_Sound_SF.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/Witch_Sound_SF.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/amazing.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/amazing.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/excellent.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/excellent.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/great.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/great.prefab
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/nice.mp3
+  - bundle: c749579a42d52429bceb20cfa419537d.unity3d
+    path: Assets/Res/Sounds/nice.prefab
+  - bundle: bb9850cbf31443329314abbcab198ee6.unity3d
+    path: Assets/Res/Unit/Bat.prefab
+  - bundle: ba50a15f5883d656a0088bf784bd90d4.unity3d
+    path: Assets/Res/Unit/Bat_Particle_Bullet.prefab
+  - bundle: 55b659acd9547cb9621b627d89826645.unity3d
+    path: Assets/Res/Unit/BoxRabbit.prefab
+  - bundle: 96063d90f0f38d4efe2466fac2ed9658.unity3d
+    path: Assets/Res/Unit/BoxRabbit_Particle_Bullet.prefab
+  - bundle: 11919dd705d710ff389b1be87fa9919e.unity3d
+    path: Assets/Res/Unit/Bullet.prefab
+  - bundle: 39e781c57df2dfb592e49c3c4a1f8e4b.unity3d
+    path: Assets/Res/Unit/FireBall.prefab
+  - bundle: 91076995f4e30a044cd0dae22a085eaa.unity3d
+    path: Assets/Res/Unit/Green.prefab
+  - bundle: cb1e9ac1e6bd426ec34801ce6c044971.unity3d
+    path: Assets/Res/Unit/Kira.prefab
+  - bundle: 1cdb2b75fe9487277af05731cccd19e7.unity3d
+    path: Assets/Res/Unit/Nuna.prefab
+  - bundle: df94971e83395a6b0e76ddb4605ba5cd.unity3d
+    path: Assets/Res/Unit/Sima.prefab
+  - bundle: 142be907cfa8051a9be5e6ab3b433ca5.unity3d
+    path: Assets/Res/Unit/SnowBall.prefab
+  - bundle: a2c1ff3a6bea0f75b8b377e58e6a54c8.unity3d
+    path: Assets/Res/Unit/Witch.prefab
+  - bundle: 4c0be4401e8b35e8b433c268447afbe4.unity3d
+    path: Assets/Res/Unit/Witch_Particle_Bullet.prefab
+  ruleBundles:
+  - name: 647fd131331f17390d20e9e0c3fb0c2f.unity3d
+    assets:
+    - Assets/Res/Code/Hotfix.dll.bytes
+    - Assets/Res/Code/Hotfix.pdb.bytes
+  - name: bb9850cbf31443329314abbcab198ee6.unity3d
+    assets:
+    - Assets/Res/Unit/Bat.prefab
+  - name: ba50a15f5883d656a0088bf784bd90d4.unity3d
+    assets:
+    - Assets/Res/Unit/Bat_Particle_Bullet.prefab
+  - name: 55b659acd9547cb9621b627d89826645.unity3d
+    assets:
+    - Assets/Res/Unit/BoxRabbit.prefab
+  - name: 96063d90f0f38d4efe2466fac2ed9658.unity3d
+    assets:
+    - Assets/Res/Unit/BoxRabbit_Particle_Bullet.prefab
+  - name: 11919dd705d710ff389b1be87fa9919e.unity3d
+    assets:
+    - Assets/Res/Unit/Bullet.prefab
+  - name: 39e781c57df2dfb592e49c3c4a1f8e4b.unity3d
+    assets:
+    - Assets/Res/Unit/FireBall.prefab
+  - name: 91076995f4e30a044cd0dae22a085eaa.unity3d
+    assets:
+    - Assets/Res/Unit/Green.prefab
+  - name: cb1e9ac1e6bd426ec34801ce6c044971.unity3d
+    assets:
+    - Assets/Res/Unit/Kira.prefab
+  - name: 1cdb2b75fe9487277af05731cccd19e7.unity3d
+    assets:
+    - Assets/Res/Unit/Nuna.prefab
+  - name: df94971e83395a6b0e76ddb4605ba5cd.unity3d
+    assets:
+    - Assets/Res/Unit/Sima.prefab
+  - name: 142be907cfa8051a9be5e6ab3b433ca5.unity3d
+    assets:
+    - Assets/Res/Unit/SnowBall.prefab
+  - name: a2c1ff3a6bea0f75b8b377e58e6a54c8.unity3d
+    assets:
+    - Assets/Res/Unit/Witch.prefab
+  - name: 4c0be4401e8b35e8b433c268447afbe4.unity3d
+    assets:
+    - Assets/Res/Unit/Witch_Particle_Bullet.prefab
+  - name: 65072f691e2032b733bad06645816713.unity3d
+    assets:
+    - Assets/Res/Scenes/Map.unity
+  - name: fd700b081a688306efe3a1344934a7e6.unity3d
+    assets:
+    - Assets/Res/Scenes/TempScene.unity
+  - name: 78b54258474c5edcba05a9cc1c34a5fb.unity3d
+    assets:
+    - Assets/Res/FGUI/Battle_atlas0.png
+    - Assets/Res/FGUI/Battle_fui.bytes
+    - Assets/Res/FGUI/DamageUI_atlas0.png
+    - Assets/Res/FGUI/DamageUI_fui.bytes
+    - Assets/Res/FGUI/Damage_atlas0.png
+    - Assets/Res/FGUI/Damage_fui.bytes
+    - Assets/Res/FGUI/Lobby_atlas0.png
+    - Assets/Res/FGUI/Lobby_atlas0_1.png
+    - Assets/Res/FGUI/Lobby_atlas0_2.png
+    - Assets/Res/FGUI/Lobby_fui.bytes
+    - Assets/Res/FGUI/Login_atlas0.png
+    - Assets/Res/FGUI/Login_fui.bytes
+  - name: e28104cdf126ec3fd30b4c345c45fd8d.unity3d
+    assets:
+    - Assets/Res/Config/GlobalProto.txt
+  - name: 6fa5c9cbaf6e745f85177f09a36a1878.unity3d
+    assets:
+    - Assets/Res/Config/AIConfigCategory.bytes
+  - name: 3b7875507fdaecc3aea309d97b6084c1.unity3d
+    assets:
+    - Assets/Res/Config/AttackConfigCategory.bytes
+  - name: 83af947d1300194c9f96375731960320.unity3d
+    assets:
+    - Assets/Res/Config/BuffConfigCategory.bytes
+  - name: c4762cb687cc28f3c9bc01978cf97144.unity3d
+    assets:
+    - Assets/Res/Config/DopaConfigCategory.bytes
+  - name: cd51e832b1361d69494cc115adcb9209.unity3d
+    assets:
+    - Assets/Res/Config/EffectConfigCategory.bytes
+  - name: dc8e15db3f2dd3c570733567753aaf7f.unity3d
+    assets:
+    - Assets/Res/Config/ParameterConfigCategory.bytes
+  - name: 37f56b2351824cfb752c1cdf81358aa0.unity3d
+    assets:
+    - Assets/Res/Config/SkillConfigCategory.bytes
+  - name: de6911dfae3e6306a192b1a2b85251bb.unity3d
+    assets:
+    - Assets/Res/Config/SkinsConfigCategory.bytes
+  - name: 8a225304448253da03f457a201ab63c0.unity3d
+    assets:
+    - Assets/Res/Config/StartMachineConfigCategory.bytes
+  - name: a44dc2362a7f0eac78cd62af7447585d.unity3d
+    assets:
+    - Assets/Res/Config/StartProcessConfigCategory.bytes
+  - name: 785e85f738b29045716d824054439cd0.unity3d
+    assets:
+    - Assets/Res/Config/StartSceneConfigCategory.bytes
+  - name: 81e762003762bdf49b3fec11f8181aa8.unity3d
+    assets:
+    - Assets/Res/Config/StartZoneConfigCategory.bytes
+  - name: 753fb261766d8dffa79c45a2851f3e39.unity3d
+    assets:
+    - Assets/Res/Config/UnitConfigCategory.bytes
+  - name: c749579a42d52429bceb20cfa419537d.unity3d
+    assets:
+    - Assets/Res/Sounds/amazing.mp3
+    - Assets/Res/Sounds/amazing.prefab
+    - Assets/Res/Sounds/Bat_Sound_Hit.mp3
+    - Assets/Res/Sounds/Bat_Sound_Hit.prefab
+    - Assets/Res/Sounds/Bat_Sound_SF.mp3
+    - Assets/Res/Sounds/Bat_Sound_SF.prefab
+    - Assets/Res/Sounds/BGM.prefab
+    - Assets/Res/Sounds/BoxRabbit_Sound_Hit.mp3
+    - Assets/Res/Sounds/BoxRabbit_Sound_Hit.prefab
+    - Assets/Res/Sounds/BoxRabbit_Sound_SF.mp3
+    - Assets/Res/Sounds/BoxRabbit_Sound_SF.prefab
+    - Assets/Res/Sounds/ColorWorldMixer.mixer
+    - Assets/Res/Sounds/excellent.mp3
+    - Assets/Res/Sounds/excellent.prefab
+    - Assets/Res/Sounds/great.mp3
+    - Assets/Res/Sounds/great.prefab
+    - Assets/Res/Sounds/Green_Sound_SF.mp3
+    - Assets/Res/Sounds/Green_Sound_SF.prefab
+    - Assets/Res/Sounds/Kira_Sound.mp3
+    - Assets/Res/Sounds/Kira_Sound.prefab
+    - Assets/Res/Sounds/nice.mp3
+    - Assets/Res/Sounds/nice.prefab
+    - Assets/Res/Sounds/Nuna_Sound_Hit.mp3
+    - Assets/Res/Sounds/Nuna_Sound_Hit.prefab
+    - Assets/Res/Sounds/Nuna_Sound_SF.mp3
+    - Assets/Res/Sounds/Nuna_Sound_SF.prefab
+    - Assets/Res/Sounds/ROCKSTAR.mp3
+    - Assets/Res/Sounds/Sima_Sound.mp3
+    - Assets/Res/Sounds/Sima_Sound.prefab
+    - Assets/Res/Sounds/Sound_DopaDeath1.prefab
+    - Assets/Res/Sounds/Sound_DopaDeath1.wav
+    - Assets/Res/Sounds/Sound_DopaDeath2.prefab
+    - Assets/Res/Sounds/Sound_DopaDeath2.wav
+    - Assets/Res/Sounds/Sound_Levelup.mp3
+    - Assets/Res/Sounds/Sound_Levelup.prefab
+    - Assets/Res/Sounds/Sound_Spawn.mp3
+    - Assets/Res/Sounds/Sound_Spawn.prefab
+    - Assets/Res/Sounds/Sound_TeamDeath.prefab
+    - Assets/Res/Sounds/Sound_TeamDeath.wav
+    - Assets/Res/Sounds/Witch_Sound_Hit.mp3
+    - Assets/Res/Sounds/Witch_Sound_Hit.prefab
+    - Assets/Res/Sounds/Witch_Sound_SF.mp3
+    - Assets/Res/Sounds/Witch_Sound_SF.prefab
+  - name: 131c993ff57732dd1079caedbf5c9add.unity3d
+    assets:
+    - Assets/Res/Particle/ParticlePrefabs/Bat_Particle_Hit.prefab
+    - Assets/Res/Particle/ParticlePrefabs/Bat_Particle_SF.prefab
+    - Assets/Res/Particle/ParticlePrefabs/BoxRabbit_Particle_Hit.prefab
+    - Assets/Res/Particle/ParticlePrefabs/BulletBackUp.prefab
+    - Assets/Res/Particle/ParticlePrefabs/Click.prefab
+    - Assets/Res/Particle/ParticlePrefabs/DeathExplosion.prefab
+    - Assets/Res/Particle/ParticlePrefabs/Green_Particle_Bullet.prefab
+    - Assets/Res/Particle/ParticlePrefabs/Heal.prefab
+    - Assets/Res/Particle/ParticlePrefabs/Kira_Particle_Bullet.prefab
+    - Assets/Res/Particle/ParticlePrefabs/Luobo.prefab
+    - Assets/Res/Particle/ParticlePrefabs/Luobo_final.prefab
+    - Assets/Res/Particle/ParticlePrefabs/MouseTrack.prefab
+    - Assets/Res/Particle/ParticlePrefabs/Nuna_Particle_Bullet.prefab
+    - Assets/Res/Particle/ParticlePrefabs/Nuna_Particle_Hit.prefab
+    - Assets/Res/Particle/ParticlePrefabs/Spawn.prefab
+    - Assets/Res/Particle/ParticlePrefabs/Witch_Particle_Hit.prefab
+    - Assets/Res/Particle/ParticlePrefabs/Witch_Particle_SF.prefab
+  - name: ff4a7be450beefd93bd7a53f46cc8201.unity3d
+    assets:
+    - Assets/Res/Particle/ParticlePrefabs/Materials/No Name.mat
+    - Assets/Res/Particle/ParticlePrefabs/Materials/verticalgradient2.mat
+  - name: a1585dfb885c0eaffc99fe67613cafb6.unity3d
+    assets:
+    - Assets/Res/Shader/Plane.mat
+    - Assets/Res/Shader/SH_ParBase_AlphaAdditive.shadergraph
+    - Assets/Res/Shader/SH_ParBase_AlphaBlend.shadergraph
+  - name: fd743a5c6a13626f209b1bbb8297a598.unity3d
+    assets:
+    - Assets/Res/Shader/InGame/HPCap.shader
+    - Assets/Res/Shader/InGame/InGameAlphaBlend.shader
+    - Assets/Res/Shader/InGame/InGameCharacter 1.shader
+    - Assets/Res/Shader/InGame/InGameCharacter.shader
+    - Assets/Res/Shader/InGame/InGameCharacterTransparent.shader
+    - Assets/Res/Shader/InGame/InGameCore.hlsl
+    - Assets/Res/Shader/InGame/InGameEnvironment.shader
+    - Assets/Res/Shader/InGame/InGameFloor.shader
+    - Assets/Res/Shader/InGame/InGameGrass.shader
+    - Assets/Res/Shader/InGame/InGameJinLing.shader
+    - Assets/Res/Shader/InGame/InGameOutsideEnvironment.shader
+    - Assets/Res/Shader/InGame/InGameSpeedUp.shader
+    - Assets/Res/Shader/InGame/InGameWaterShow.shader
+    - Assets/Res/Shader/InGame/Outline.shader
+  - name: dba2e0753ac65165a56f706ae7d36ce5.unity3d
+    assets:
+    - Assets/Res/Shader/OutGame/New Material.mat
+    - Assets/Res/Shader/OutGame/OutGameCharacter.shader
+    - Assets/Res/Shader/OutGame/OutGameCore.hlsl
+  - name: 583dbb3b5eab5970c79d9335eea7e18a.unity3d
+    assets:
+    - Assets/Res/Particle/Mat/Color 1.mat
+    - Assets/Res/Particle/Mat/Color 2.mat
+    - Assets/Res/Particle/Mat/Color 3.mat
+    - Assets/Res/Particle/Mat/Color Add 1.mat
+    - Assets/Res/Particle/Mat/Color Add 2.mat
+    - Assets/Res/Particle/Mat/Color Add 3.mat
+    - Assets/Res/Particle/Mat/Color Add.mat
+    - Assets/Res/Particle/Mat/Color Pink.mat
+    - Assets/Res/Particle/Mat/Color Yellow.mat
+    - Assets/Res/Particle/Mat/ColorGlow.mat
+    - Assets/Res/Particle/Mat/ColorGlowLingxing.mat
+    - Assets/Res/Particle/Mat/CoreLayer.mat
+    - Assets/Res/Particle/Mat/ExplosionColor.mat
+    - Assets/Res/Particle/Mat/HealGlow.mat
+    - Assets/Res/Particle/Mat/MainStarMat.mat
+    - Assets/Res/Particle/Mat/PolyGradientMirror.mat
+    - Assets/Res/Particle/Mat/PolyGradientVertical.mat
+    - Assets/Res/Particle/Mat/PolySpriteGlow.mat
+    - Assets/Res/Particle/Mat/PolySpriteGlowDark.mat
+    - Assets/Res/Particle/Mat/Spark.mat
+    - Assets/Res/Particle/Mat/StarMat.mat
+    - Assets/Res/Particle/Mat/Trail.mat
+    - Assets/Res/Particle/Mat/verticalgradient2.mat
+  - name: 539e8d830d526068a04593829d54a4c9.unity3d
+    assets:
+    - Assets/Res/Materials/bea_tex.mat
+  - name: f4b66b0ffa44931d734b6555b9cfab4e.unity3d
+    assets:
+    - Assets/Res/Materials/Mat_Bullet.mat
+  - name: cc4cc1710d6f399641112708847b9960.unity3d
+    assets:
+    - Assets/Res/Materials/Mat_HPCap.mat
+  - name: 4f91fe56b7b1ec3f04f0f4238fdb55f1.unity3d
+    assets:
+    - Assets/Res/Materials/ResTest.unity
+  - name: 4d4abd45f9f927ef3d1c33ad17dd3e54.unity3d
+    assets:
+    - Assets/Res/Materials/xiaowu_base_roughness.mat
+  - name: aeef0d88ee4a71014452e0a33b053e72.unity3d
+    assets:
+    - Assets/Res/Materials/InGame/Effect/PolyGlow.mat
+    - Assets/Res/Materials/InGame/Effect/PolyProtonGreen.mat
+    - Assets/Res/Materials/InGame/Effect/PolyProtonPink.mat
+    - Assets/Res/Materials/InGame/Effect/PolySpriteLineHighIntensity.mat
+    - Assets/Res/Materials/InGame/Effect/PolySpriteRingGlowSoft.mat
+    - Assets/Res/Materials/InGame/Effect/PolyTransparentGlow.mat
+  - name: 50225da6af64ebb2545840eafa52ceb3.unity3d
+    assets:
+    - Assets/Res/Materials/InGame/Effect/Death/Color.mat
+    - Assets/Res/Materials/InGame/Effect/Death/Sparks.mat
+    - Assets/Res/Materials/InGame/Effect/Death/Star.mat
+  - name: 22dec3328c1098ba9b816b8f50709aa8.unity3d
+    assets:
+    - Assets/Res/Materials/InGame/Effect/Heal/Color 1.mat
+    - Assets/Res/Materials/InGame/Effect/Heal/Color.mat
+    - Assets/Res/Materials/InGame/Effect/Heal/Glow 2.mat
+    - Assets/Res/Materials/InGame/Effect/Heal/Glow.mat
+  - name: 8c97c53dacaa064a34adb0b0a375db40.unity3d
+    assets:
+    - Assets/Res/Materials/InGame/Effect/Spwan/Particle.mat
+    - Assets/Res/Materials/InGame/Effect/Spwan/ParticleOut.mat
+    - Assets/Res/Materials/InGame/Effect/Spwan/RotateRing.mat
+    - Assets/Res/Materials/InGame/Effect/Spwan/SpawnVerticalGlow.mat
+  - name: 67ffaf5dfea35c168b232f2bb76916c4.unity3d
+    assets:
+    - Assets/Res/Materials/InGame/Environment&Character/GrassDefault.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameBall 1.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameBall.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameBall2.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGamebianfu.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameBuilding1.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameBuilding2.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameBuilding3.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameBuilding4.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameCar 2.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameCar 3.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameChair.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameCharacter.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameDayanguai.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameEnvironment.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameFloor.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameFloorGrass.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameJuese 1.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameJuese.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameKimi.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameMG.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameOutsideEnvironment.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGamePinkCar 1.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGamePinkCar 2.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGamePinkCarWheel.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameQuanquantu.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameSan.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameSan2.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameSpeedUp.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameTree.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameWaterShow.mat
+    - Assets/Res/Materials/InGame/Environment&Character/Render_InGameXiaowu.mat
+    - Assets/Res/Materials/InGame/Environment&Character/renwu222.OBJ
+  - name: 6c502ed6a0fdc440ebc8ab9d558a5886.unity3d
+    assets:
+    - Assets/Res/UI/Dopa_Canvas.prefab
+  - name: 64ddeacdc3b5e2092adeb4b0d6cb66bf.unity3d
+    assets:
+    - Assets/Res/UI/AttackCountBar.prefab
+  - name: 8603eb373cab66d4ef8dcba451558051.unity3d
+    assets:
+    - Assets/Res/Particle/Mesh/PolyDiamond.FBX
+  - name: f26c61a05aea764e45612ebf386d2b5c.unity3d
+    assets:
+    - Assets/Res/Textures/Effect_LingXing.tga
+  - name: d3e7d5966546db93dec13e82c4b1939b.unity3d
+    assets:
+    - Assets/Res/UI/Player_InGameScore.prefab
+  - name: 2c696f87329ce7f2246202c048d786d8.unity3d
+    assets:
+    - Assets/TopDownEngine/ThirdParty/MoreMountains/MMInterface/Styles/Mini/Sprites/CheckboxesRadio.png
+  - name: 03300e2583c524bf6b49f2ef422d69e6.unity3d
+    assets:
+    - Assets/Res/UI/Star - Round.png
+  - name: 45a86ce9b954ef68bdea83915bdea329.unity3d
+    assets:
+    - Assets/Res/Particle/Mesh/PolySphereMega.FBX
+  - name: 4f144e8fdc5de35dfd22f3f1a34285ce.unity3d
+    assets:
+    - Assets/Res/Particle/Tex/star.png
+  - name: cc21811e556c9bde483d2c66e20342e6.unity3d
+    assets:
+    - Assets/Res/Particle/Mesh/Materials/No Name.mat
+  - name: 365deba695d77e998345b43865ba9fce.unity3d
+    assets:
+    - Assets/Res/Particle/Mesh/PolySpikeSimple.FBX
+  - name: f6fef2b8ec995d4fd1004df34acfe072.unity3d
+    assets:
+    - Assets/Res/Particle/Tex/PolyGradientVertical.png
+  - name: a03ff26b608c38f483cdaeaab0f8215e.unity3d
+    assets:
+    - Assets/Res/Particle/Tex/PolyGradientMirrored.png
+  - name: c71f5e29fdfe801d8c110b3565f3d7c0.unity3d
+    assets:
+    - Assets/Res/Particle/Tex/PolySpriteGlow.png
+  - name: 811269506ba19adc7b8f69256da57be7.unity3d
+    assets:
+    - Assets/Res/Textures/xiaowu_base_roughness.tga
+  - name: f2a50b8874f3ace13e9f88296c2f772c.unity3d
+    assets:
+    - Assets/Res/Textures/juese_base_roughness.tga
+  - name: c3f85b0f8a78d9870cbe06a5e4e8f622.unity3d
+    assets:
+    - Assets/Res/Textures/quanquantu_inter_specular.tga
+  - name: 3f0f1f687fba02931bd3eeba5f3dcd7d.unity3d
+    assets:
+    - Assets/Res/Textures/juese_Inter_Specular.tga
+  - name: 7b67cb521a3f2359b0da7b183c399576.unity3d
+    assets:
+    - Assets/Res/Textures/dayanguai_base_roughness.tga
+  - name: e11c83e41507c420a2626d62cd61cfc4.unity3d
+    assets:
+    - Assets/Res/Textures/miki_inter_specular.tga
+  - name: 860dc4f07438bd9c9c1437b743dd66ad.unity3d
+    assets:
+    - Assets/Res/Textures/xiaowu_inter_specular.tga
+  - name: be5dd79e674813aefad410446a42d5fc.unity3d
+    assets:
+    - Assets/Res/Textures/dayanguai_inter_specular.tga
+  - name: 5f9bc4b0d2c1b80ecbcec85e5ad2e29a.unity3d
+    assets:
+    - Assets/Res/Textures/mogu_inter_specular.tga
+  - name: 310405ef6d90e217303ee99c2b221d85.unity3d
+    assets:
+    - Assets/Res/Textures/miki_base_roughness.tga
+  - name: cd2259ee0a1cdad0a0a047e9c880c05e.unity3d
+    assets:
+    - Assets/Res/Textures/mogu_base_roughness.tga
+  - name: 9125f905574336bd4188974987ed8a9f.unity3d
+    assets:
+    - Assets/Res/Textures/bianfu_Base_Roughness.tga
+  - name: 4fc71bce5860e7b55377b7d73957eca5.unity3d
+    assets:
+    - Assets/Res/Textures/quanquantu_base_roughness.tga
+  - name: 83a0c6bc5dfbf35c60bb64eb6cffb05b.unity3d
+    assets:
+    - Assets/Res/Textures/bianfu_Inter_Specular.tga

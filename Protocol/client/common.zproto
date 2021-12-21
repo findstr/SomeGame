@@ -1,0 +1,5 @@
+error_a 0x10000 {
+	.cmd:integer 1
+	.errno:integer 2
+}
+

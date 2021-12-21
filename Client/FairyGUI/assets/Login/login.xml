@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1379,867">
+  <controller name="c1" pages="" selected="-1"/>
+  <displayList>
+    <image id="n0_ri35" name="n0" src="ri353" fileName="Images/Login.png" xy="0,0" size="1380,869">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <image id="n3_ri35" name="n3" src="ri352" fileName="Images/banzi_da.png" xy="1477,248" size="611,400" group="n25_ri35" aspect="true"/>
+    <text id="n24_ri35" name="n24" xy="1494,265" size="578,29" group="n25_ri35" aspect="true" fontSize="20" color="#00ffff" align="center" autoSize="none" text="NKG MOBA"/>
+    <image id="n9_ri35" name="n9" src="ri356" fileName="Images/UI_LoginInput.PNG" xy="1494,415" size="577,58" group="n25_ri35" aspect="true"/>
+    <image id="n4_ri35" name="n4" src="ri356" fileName="Images/UI_LoginInput.PNG" xy="1494,338" size="577,52" group="n25_ri35" aspect="true"/>
+    <text id="n18_ri35" name="login_tips" xy="1505,506" size="557,42" group="n25_ri35" aspect="true" fontSize="20" color="#ff0000" align="center" vAlign="middle" autoSize="none" text="账号不能为空"/>
+    <text id="n5_ri35" name="account_input" xy="1563,341" size="440,46" group="n25_ri35" aspect="true" fontSize="20" color="#00ffff" align="center" vAlign="middle" autoSize="none" bold="true" italic="true" text="" input="true" prompt="请输入账号"/>
+    <text id="n10_ri35" name="password_input" xy="1563,420" size="440,50" group="n25_ri35" aspect="true" fontSize="20" color="#00ffff" align="center" vAlign="middle" autoSize="none" bold="true" italic="true" text="" input="true" prompt="请输入密码"/>
+    <component id="n22_ri35" name="login_button" src="ri35f" fileName="Login.button.xml" xy="1878,568" size="163,54" group="n25_ri35" aspect="true"/>
+    <component id="n23_ri35" name="register_button" src="ri35g" fileName="Register.button.xml" xy="1563,568" size="163,54" group="n25_ri35" aspect="true"/>
+    <group id="n25_ri35" name="n25" xy="1477,248" size="611,400" advanced="true"/>
+  </displayList>
+  <transition name="t0" autoPlay="true" frameRate="30">
+    <item time="0" type="XY" target="n25_ri35" tween="true" startValue="1678.133,237" endValue="454,240" duration="18"/>
+    <item time="18" type="XY" target="n25_ri35" tween="true" startValue="454,240" endValue="690,240" duration="12"/>
+  </transition>
+</component>

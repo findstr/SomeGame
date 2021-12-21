@@ -1,0 +1,11 @@
+{
+  "name": "MVVM-Export",
+  "displayName": "",
+  "description": "",
+  "version": "1.0",
+  "author": {
+    "name": "zhoupy"
+  },
+  "icon": "",
+  "main": "main.lua"
+}
