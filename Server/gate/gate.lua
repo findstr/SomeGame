@@ -70,6 +70,7 @@ local function login_r(fd, req)
 	local uid = req.uid
 	local token = uid_token[uid]
 	if token and token == req.token then
+		uid_token[uid] = token + 1
 		gate_server:send(fd, "login_a", req)
 		lprint("[gate] login_r", fd, uid, "ok")
 	else
