@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="x7pd9cll">
+  <resources>
+    <component id="dwmx0" name="list.xml" path="/" exported="true"/>
+    <component id="dwmx1" name="create.xml" path="/"/>
+    <component id="dwmx3" name="back.xml" path="/Images/" exported="true"/>
+    <image id="dwmx4" name="bg.jpg" path="/Images/" exported="true"/>
+    <image id="dwmx5" name="Dungeon.PNG" path="/Images/" exported="true"/>
+    <image id="dwmx7" name="PerksAtlas_14.PNG" path="/Images/" exported="true"/>
+    <image id="dwmx8" name="PerksAtlas_27.PNG" path="/Images/" exported="true"/>
+    <image id="dwmx9" name="UI_LoginBtn.PNG" path="/Images/" exported="true"/>
+    <image id="dwmxa" name="UI_LoginBtn_ONpressed.png" path="/Images/" exported="true"/>
+    <component id="dwmxb" name="refresh.xml" path="/"/>
+    <component id="dwmxc" name="back.xml" path="/"/>
+    <component id="dwmxd" name="info.xml" path="/" exported="true"/>
+    <component id="dwmxe" name="join.xml" path="/"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

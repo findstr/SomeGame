@@ -14,8 +14,12 @@ function M:start(view)
 	view:MakeFullScreen()
 	GRoot.inst:AddChild(view)	
 	local login_finish = function(uid, status)
-		print("++++loin_finish", uid, status)
-		ui.close(vm)
+		if uid then
+			ui.open("lobby.lobby")
+			ui.close(vm)
+		else
+			vm.login_tips.text = "密码错误(" .. status .. ")"
+		end
 	end
 	local login = function()
 		local user = vm.account_input.text

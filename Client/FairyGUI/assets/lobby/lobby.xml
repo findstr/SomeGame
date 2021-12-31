@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <image id="n0_dwmx" name="n0" src="dwmx9" fileName="Images/LobbyBck.png" xy="0,0"/>
+    <image id="n1_dwmx" name="n1" src="dwmx2" fileName="Images/Bottom.PNG" xy="-1,644" size="1282,80" group="n14_dwmx"/>
+    <component id="n5_dwmx" name="shop" src="dwmxl" fileName="BottomButton.xml" xy="49,650" group="n14_dwmx">
+      <Button title="商城" titleColor="#5db9be" titleFontSize="30"/>
+    </component>
+    <component id="n7_dwmx" name="social" src="dwmxl" fileName="BottomButton.xml" xy="199,650" size="130,67" group="n14_dwmx">
+      <Button title="社交" titleColor="#5bb5bb" titleFontSize="30"/>
+    </component>
+    <component id="n8_dwmx" name="prebattle" src="dwmxl" fileName="BottomButton.xml" xy="349,650" size="130,67" group="n14_dwmx">
+      <Button title="备战" titleColor="#5bb5bb" titleFontSize="30"/>
+    </component>
+    <component id="n9_dwmx" name="hero" src="dwmxl" fileName="BottomButton.xml" xy="499,650" size="130,67" group="n14_dwmx">
+      <Button title="英雄" titleColor="#5bb5bb" titleFontSize="30"/>
+    </component>
+    <component id="n10_dwmx" name="achievement" src="dwmxl" fileName="BottomButton.xml" xy="649,650" size="130,67" group="n14_dwmx">
+      <Button title="成就" titleColor="#5bb5bb" titleFontSize="30"/>
+    </component>
+    <component id="n11_dwmx" name="bag" src="dwmxl" fileName="BottomButton.xml" xy="799,650" size="130,67" group="n14_dwmx">
+      <Button title="背包" titleColor="#5bb5bb" titleFontSize="30"/>
+    </component>
+    <component id="n12_dwmx" name="team" src="dwmxl" fileName="BottomButton.xml" xy="949,650" size="130,67" group="n14_dwmx">
+      <Button title="战队" titleColor="#5bb5bb" titleFontSize="30"/>
+    </component>
+    <component id="n13_dwmx" name="watch" src="dwmxl" fileName="BottomButton.xml" xy="1099,650" size="130,67" group="n14_dwmx">
+      <Button title="观战" titleColor="#5bb5bb" titleFontSize="30"/>
+    </component>
+    <group id="n14_dwmx" name="Bottom" xy="-1,644" size="1282,80" advanced="true">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
+    </group>
+    <image id="n16_dwmx" name="n16" src="dwmxj" fileName="Images/UIPublic_61.PNG" xy="1006,164" group="n19_dwmx"/>
+    <image id="n18_dwmx" name="n18" src="dwmxb" fileName="Images/NomalPVP.PNG" xy="1171,170" group="n19_dwmx"/>
+    <text id="n17_dwmx" name="n17" xy="1026,200" size="148,56" group="n19_dwmx" fontSize="30" color="#5bb5bb" autoSize="none" text="匹配模式"/>
+    <component id="n15_dwmx" name="normalpvp" src="dwmxn" fileName="BattleButton.xml" xy="1026,200" size="148,56" group="n19_dwmx" alpha="0">
+      <Button title="匹配模式"/>
+    </component>
+    <group id="n19_dwmx" name="normalpvp" xy="1006,164" size="279,120" advanced="true"/>
+    <image id="n20_dwmx" name="n20" src="dwmxj" fileName="Images/UIPublic_61.PNG" xy="1006,282" group="n24_dwmx"/>
+    <image id="n21_dwmx" name="n21" src="dwmxb" fileName="Images/NomalPVP.PNG" xy="1171,288" group="n24_dwmx"/>
+    <text id="n22_dwmx" name="n22" xy="1026,318" size="148,56" group="n24_dwmx" fontSize="30" color="#5bb5bb" autoSize="none" text="房间模式"/>
+    <component id="n23_dwmx" name="roompvp" src="dwmxn" fileName="BattleButton.xml" xy="1026,318" size="148,56" group="n24_dwmx" alpha="0">
+      <Button title="匹配模式"/>
+    </component>
+    <group id="n24_dwmx" name="pve" xy="1006,282" size="279,120" advanced="true"/>
+    <image id="n25_dwmx" name="n25" src="dwmxj" fileName="Images/UIPublic_61.PNG" xy="1006,402" group="n29_dwmx"/>
+    <image id="n26_dwmx" name="n26" src="dwmxb" fileName="Images/NomalPVP.PNG" xy="1171,408" group="n29_dwmx"/>
+    <text id="n27_dwmx" name="n27" xy="1026,438" size="148,56" group="n29_dwmx" fontSize="30" color="#5bb5bb" autoSize="none" text="地牢模式"/>
+    <component id="n28_dwmx" name="hellpvp" src="dwmxn" fileName="BattleButton.xml" xy="1026,438" size="148,56" group="n29_dwmx" alpha="0">
+      <Button title="匹配模式"/>
+    </component>
+    <group id="n29_dwmx" name="hellpvp" xy="1006,402" size="279,120" advanced="true"/>
+  </displayList>
+</component>

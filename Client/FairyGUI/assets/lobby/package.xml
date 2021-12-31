@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="p9z5ak9h">
+  <resources>
+    <component id="x1n30" name="lobby.xml" path="/"/>
+    <image id="dwmx1" name="activity.PNG" path="/Images/"/>
+    <image id="dwmx2" name="Bottom.PNG" path="/Images/"/>
+    <image id="dwmx3" name="BottomNormal.PNG" path="/Images/"/>
+    <image id="dwmx4" name="BottomPressed.png" path="/Images/"/>
+    <image id="dwmx5" name="Dungeon.PNG" path="/Images/"/>
+    <image id="dwmx6" name="gem.PNG" path="/Images/"/>
+    <image id="dwmx7" name="gemself.PNG" path="/Images/"/>
+    <image id="dwmx8" name="golden.PNG" path="/Images/"/>
+    <image id="dwmx9" name="LobbyBck.png" path="/Images/"/>
+    <image id="dwmxa" name="mail.PNG" path="/Images/"/>
+    <image id="dwmxb" name="NomalPVP.PNG" path="/Images/"/>
+    <image id="dwmxc" name="pointback.PNG" path="/Images/"/>
+    <image id="dwmxd" name="pointhead.PNG" path="/Images/"/>
+    <image id="dwmxe" name="SeriousPVP.PNG" path="/Images/"/>
+    <image id="dwmxf" name="setting.png" path="/Images/"/>
+    <image id="dwmxg" name="TopRight.PNG" path="/Images/"/>
+    <image id="dwmxh" name="UIHeroHead_1.PNG" path="/Images/"/>
+    <image id="dwmxi" name="UIMajorCity_12.PNG" path="/Images/"/>
+    <image id="dwmxj" name="UIPublic_61.PNG" path="/Images/"/>
+    <component id="dwmxl" name="BottomButton.xml" path="/"/>
+    <component id="dwmxn" name="BattleButton.xml" path="/"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>
