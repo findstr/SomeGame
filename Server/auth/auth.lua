@@ -95,6 +95,10 @@ local function auth_r(fd, cmd, req)
 			return
 		end
 		uid = tonumber(id)
+	else
+		log("[auth] auth_r password error", usr)
+		error_a(fd, "auth_a", errno.PASSWD)
+		return
 	end
 	local ok = gate.kick(uid)
 	if not ok then
