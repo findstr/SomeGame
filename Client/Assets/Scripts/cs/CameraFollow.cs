@@ -6,12 +6,6 @@ public class CameraFollow : MonoBehaviour
 {
     public GameObject target;
     public Vector3 offset;
-    private Camera camera;
-    private void Awake()
-    {
-        camera = GetComponent<Camera>();
-    }
-
     // Update is called once per frame
     void LateUpdate()
     {

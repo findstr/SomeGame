@@ -15,14 +15,11 @@ core.start(function()
 		master = master,
 		proto = proto,
 		agents = {
-			["room"] = gate.room_join
+			["room"] = gate.room_join,
+			["battle"] = gate.battle_join,
 		},
 	}
-	worker.run(router, function(tbl, k)
-		print("=====")
-		tbl[k] = forward
-		return forward
-	end)
+	worker.run(router)
 	gate.start(slot)
 	core.log("[main] run ok")
 end)

@@ -6,12 +6,14 @@ local pairs = pairs
 local ipairs = ipairs
 local match = string.match
 local tonumber = tonumber
+local concat = table.concat
 local maxinteger = math.maxinteger
 local lprint = core.log
 local M = {}
 
 local gate_rpc = {}
 local uid_slot = {}
+local slot_buf = {}
 local worker_type
 local worker_handler
 
@@ -19,6 +21,9 @@ local TAG = ""
 
 local function gate_join(slotid, rpc)
 	gate_rpc[slotid] = rpc
+	if not slot_buf[slotid] then
+		slot_buf[slotid] = {}
+	end
 	if worker_type then
 		local req = {
 			type = worker_type,
@@ -48,7 +53,7 @@ function M.join(conns, count)
 	end
 end
 
-function M.restore_online()
+function M.restore_online(filter)
 	local tmp = {}
 	for i = 1, M.count do
 		while not gate_rpc[i] do
@@ -59,11 +64,14 @@ function M.restore_online()
 			local ack, err = rpc:call("gateonline_c")
 			if ack then
 				for _, uid in pairs(ack.uids) do
-					uid_slot[uid] = i
+					if not filter or filter(uid) then
+						uid_slot[uid] = i
+					end
 				end
 				break
 			else
 				lprint(TAG, "restore_online", i, "error", err)
+				core.sleep(500)
 			end
 		end
 	end
@@ -90,21 +98,22 @@ function M.handle(typ, router)
 			if not ack then
 				lprint(TAG, "gate", i, "handle fail", err)
 			else
-				lprint(TAG, "gate", slotid, "handle ok")
+				lprint(TAG, "gate", i, "handle ok")
 				break
 			end
-			core.sleep(100)
+			core.sleep(500)
 		until ack
 	end
 end
 
 function M.online(uid, slot)
+	assert(slot)
 	uid_slot[uid] = slot
 end
 
 function M.offline(uid, slot)
 	local n = uid_slot[uid]
-	assert(n == slot)
+	assert(not slot or not n or n == slot, slot)
 	uid_slot[uid] = nil
 end
 
@@ -156,8 +165,54 @@ function M.send(uid, cmd, obj)
 		lprint(TAG, "send", uid, cmd, "gate", slot, "missing")
 		return
 	end
-	obj.uid_ = uid
-	rpc:send(cmd, obj)
+	local dat, sz = proto:encode(cmd, obj, true)
+	dat = proto:pack(dat, sz)
+	rpc:send("forward_n", {uid = uid, cmd = proto:tag(cmd), dat = dat})
+end
+
+local cache = {}
+
+function M.multicast(uids, cmd, obj)
+	local dat, sz = proto:encode(cmd, obj, true)
+	dat = proto:pack(dat, sz)
+	local req = {
+		uids = uids,
+		cmd = proto:tag(cmd),
+		dat = dat
+	}
+	for _, uid in ipairs(uids) do
+		local slot = uid_slot[uid]
+		if slot then
+			cache[slot] = true
+		end
+	end
+	for slot, _ in pairs(cache) do
+		cache[slot] = nil
+		local rpc = gate_rpc[slot]
+		if rpc then
+			rpc:send("multicast_n", req)
+		end
+	end
+end
+
+function M.battleready(uids, battle)
+	local req = {
+		battle = battle,
+		uids = uids,
+	}
+	for _, uid in ipairs(uids) do
+		local slot = uid_slot[uid]
+		if not cache[slot] then
+			cache[slot] = true
+			local rpc = gate_rpc[slot]
+			if rpc then
+				rpc:call("battleready_c", req)
+			end
+		end
+	end
+	for k, _ in pairs(cache) do
+		cache[k] = nil
+	end
 end
 
 return M

@@ -4,9 +4,10 @@ local proto = require "proto.cluster"
 local E = require "E"
 local router = require "router"
 local gate = require "agent.gate"
+local battle = require "agent.battle"
 require "room"
 
-
+local log = core.log
 local pairs = pairs
 
 core.start(function()
@@ -19,10 +20,14 @@ core.start(function()
 		proto = proto,
 		agents = {
 			gate = gate.join,
+			battle = battle.join,
 		}
 	}
 	gate.restore_online()
 	gate.handle("room", E)
+	for k, v in pairs(E) do
+		router[k] = v
+	end
 	worker.run(router)
 	print("[room] run ok")
 end)

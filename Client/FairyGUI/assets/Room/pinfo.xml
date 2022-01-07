@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="500,80">
+  <displayList>
+    <text id="n0_dwmx" name="n0" xy="224,11" size="69,54" fontSize="18" color="#ffffff" vAlign="middle" autoSize="none" text="名字:"/>
+    <text id="n1_dwmx" name="name" xy="308,11" size="162,54" fontSize="18" color="#ffffff" vAlign="middle" autoSize="none" text=""/>
+    <text id="n4_dwmx" name="n4" xy="36,11" size="81,54" fontSize="18" color="#ffffff" vAlign="middle" autoSize="none" text="等级:"/>
+    <text id="n5_dwmx" name="level" xy="132,11" size="77,54" fontSize="18" color="#ffffff" vAlign="middle" autoSize="none" text=""/>
+  </displayList>
+</component>

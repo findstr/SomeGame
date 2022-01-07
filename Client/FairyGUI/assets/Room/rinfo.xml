@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="800,80">
+  <displayList>
+    <text id="n0_dwmx" name="n0" xy="229,11" size="69,54" fontSize="18" color="#ffffff" vAlign="middle" autoSize="none" text="名字:"/>
+    <text id="n1_dwmx" name="room_name" xy="313,11" size="162,54" fontSize="18" color="#ffffff" vAlign="middle" autoSize="none" text=""/>
+    <text id="n2_dwmx" name="n2" xy="490,11" size="65,54" fontSize="18" color="#ffffff" vAlign="middle" autoSize="none" text="人数"/>
+    <text id="n3_dwmx" name="player_count" xy="570,11" size="77,54" fontSize="18" color="#ffffff" vAlign="middle" autoSize="none" text=""/>
+    <text id="n4_dwmx" name="n4" xy="41,10" size="81,54" fontSize="18" color="#ffffff" vAlign="middle" autoSize="none" text="房间号:"/>
+    <text id="n5_dwmx" name="room_id" xy="137,10" size="77,54" fontSize="18" color="#ffffff" vAlign="middle" autoSize="none" text=""/>
+    <component id="n6_dwmx" name="join" src="dwmxe" fileName="join.xml" xy="670,11" size="62,54">
+      <relation target="" sidePair=""/>
+    </component>
+  </displayList>
+</component>

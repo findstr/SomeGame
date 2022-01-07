@@ -53,3 +53,14 @@ logingate_a 0x100c {
 
 }
 
+forward_n 0x100d {
+	.uid:integer 1
+	.cmd:integer 2
+	.dat:string 3
+}
+
+multicast_n 0x100e {
+	.uids:integer[] 1
+	.cmd:integer 2
+	.dat:string 3
+}

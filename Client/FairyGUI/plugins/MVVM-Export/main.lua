@@ -17,13 +17,14 @@ local function genCode(handler)
 
     local classCnt = classes.Count
     local writer = CodeWriter.new()
-
+	
+    writer:reset()
+	writer:writeln('local M = {}')
     for i=0,classCnt-1 do
         local classInfo = classes[i]
         local members = classInfo.members
-        writer:reset()
 		writer.lines[1] = "--This is an automatically generated class by FairyGUI. Please do not modify it."
-		writer:writeln('local function binder(vm, view)')
+		writer:writeln(string.format('function M.%s(vm, view)', classInfo.className))
 		writer:incIndent()
 			local memberCnt = members.Count
 			for j=0,memberCnt-1 do
@@ -50,9 +51,9 @@ local function genCode(handler)
 			end
 		writer:decIndent()
 		writer:writeln('end')
-		writer:writeln('return binder')
-        writer:save(exportCodePath..'/'..classInfo.className..'.lua')
     end
+	writer:writeln('return M')
+	writer:save(exportCodePath..'/'..namespaceName..'.lua')
 end
 
 function onPublish(handler)

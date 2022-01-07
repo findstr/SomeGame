@@ -27,33 +27,37 @@ namespace XLua.LuaDLL
     }
 }
 
-
-namespace ZX { 
-
 public class ZXMain : MonoBehaviour {
 
     [System.Serializable]
     public struct Conf {
-        public string bootstrap; //Scripts/lua/main.lua
     #if UNITY_EDITOR
-        public string lua_path; //Scripts/lua/?.lua;zx/lua/?.lua;ZX/deps/tolua/ToLua/Lua/?.lua
+        public string lua_path; //Assets/Scripts/Lua/?.lua;Assets/ZX/Lua/?.lua
     #else
         public string lua_bundle; 
     #endif
     }
 
     public Conf conf;
+    public int LogicHZ{ get { return (int)(1.0f / logic_delta); } set {logic_delta = 1000.0f / value; } }
     private LuaEnv L;
+    private float logic_delta = 0;
+    private float logic_elapse = 0.0f;
 
 	[CSharpCallLua]
     private delegate LuaTable require_t(string name);
     [CSharpCallLua]
     private delegate void update_t();
+    private delegate void expire_t(LuaTable t);
 
 	private update_t core_fixedupdate;
     private update_t core_update;
     private update_t core_lateupdate;
+    private update_t core_logicupdate;
+    private expire_t core_timerexire;
 
+    private LuaTable expire_array;
+    private List<long>  expire_list = new List<long>();
 
     void Awake()
     {
@@ -68,11 +72,21 @@ public class ZXMain : MonoBehaviour {
         core_fixedupdate = core.Get<update_t>("_fixedupdate");
         core_update = core.Get<update_t>("_update");
         core_lateupdate = core.Get<update_t>("_lateupdate");
+        core_logicupdate = core.Get<update_t>("_logicupdate");
+        core_timerexire = core.Get<expire_t>("_timerexpire");
+        expire_array = L.NewTable();
     }
 
     public void Start()
     {
+        ZX.RL.Start(ZX.RL.Mode.RM);
 	    L.DoString("require 'main'");
+    }
+
+    public void Restart()
+    {
+        Awake();
+        Start();
     }
 
     public void FixedUpdate()
@@ -83,12 +97,25 @@ public class ZXMain : MonoBehaviour {
     public void Update()
     {
         core_update();
+        expire_list.Clear();
+        ZX.Timer.update((int)(Time.deltaTime * 1000f), expire_list);
+        if (expire_list.Count > 0) {
+            for (int i = 0; i < expire_list.Count; i++)
+                expire_array.Set(i, expire_list[i]);
+            core_timerexire(expire_array);
+        }
+        logic_elapse += Time.deltaTime;
+        for (int i = 0; i < 10 && logic_elapse >= logic_delta; i++) {
+            core_logicupdate();
+            logic_elapse -= logic_delta;
+        }
+
     }
 
     public void LateUpdate()
     {
-        core_lateupdate();
+        core_lateupdate(); 
     }
     
-}}
+}
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720" anchor="true" overflow="hidden" designImageLayer="1" bgColor="#000000">
+  <displayList>
+    <graph id="n1_sspb" name="n1" xy="417,320" size="442,80" group="n2_sspb" touchable="false" type="rect" lineSize="0" fillColor="#ff000000" corner="10">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <text id="n0_sspb" name="text" xy="418,318" size="442,80" group="n2_sspb" fontSize="20" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="密码错误">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </text>
+    <group id="n2_sspb" name="n2" xy="417,318" size="443,82" advanced="true">
+      <relation target="" sidePair="center-center,middle-middle"/>
+    </group>
+  </displayList>
+  <transition name="ctrl">
+    <item time="0" type="Alpha" target="n2_sspb" tween="true" startValue="0" endValue="1" duration="6" ease="Quad.In"/>
+    <item time="24" type="Alpha" target="n2_sspb" tween="true" startValue="1" endValue="0" duration="6"/>
+  </transition>
+</component>

@@ -104,6 +104,7 @@ local function auth_r(fd, cmd, req)
 	if not ok then
 		log("[auth] auth_r kick", uid, "fail")
 		error_a(fd, "auth_a", errno.SYSTEM)
+		return
 	end
 	local slot = round_robin % gate.count + 1
 	round_robin = slot

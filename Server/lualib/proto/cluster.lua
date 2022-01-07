@@ -25,6 +25,10 @@ login_a 0x1103 {
 	
 	.uid_:uinteger 1
 }
+kick_n 0x1104 {
+	.errno:integer 1
+	.uid_:uinteger 2
+}
 ########################
 roomlist_r 0x1201 {
 	.uid_:uinteger 1
@@ -33,17 +37,116 @@ roomlist_a 0x1202 {
 	room {
 		.id:integer 1
 		.name:string 2
+		.owner:uinteger 3
 	}
-	.list:room[] 1
+	.list:room[id] 1
 	.uid_:uinteger 2
 }
-roomcreate_r 0x1203 {
+roomcreate_c 0x1203 {
+	.name:string 1
+	.uid:uinteger 2
+	.gate:integer 3
+	.uid_:uinteger 4
+}
+roomcreate_r 0x1204 {
 	.name:string 1
 	.uid_:uinteger 2
 }
-roomcreate_a 0x1204 {
-	
+roomcreate_a 0x1205 {
+	.id:integer 1
+	.name:string 2
+	.uid:uinteger 3
+	.uid_:uinteger 4
+}
+roomenter_c 0x1206 {
+	.id:integer 1
+	.uid:uinteger 2
+	.gate:integer 3
+	.uid_:uinteger 4
+}
+roomenter_r 0x1207 {
+	.id:integer 1
+	.uid_:uinteger 2
+}
+roomenter_a 0x1208 {
+	.id:integer 1
+	.name:string 2
+	.list:uinteger[] 3
+	.uid_:uinteger 4
+}
+roomleave_r 0x120a {
 	.uid_:uinteger 1
+}
+roomleave_a 0x120b {
+	.id:integer 1
+	.uid:uinteger 2
+	.owner:uinteger 3
+	.uid_:uinteger 4
+}
+roomplay_r 0x120d {
+	.uid_:uinteger 1
+}
+roomplay_a 0x120e {
+	.uid_:uinteger 1
+}
+roomplay_n 0x120f {
+	.uids:uinteger[] 1
+	.uid_:uinteger 2
+}
+battlenew_c 0x1300 {
+	.uids:uinteger[] 1
+	.uid_:uinteger 2
+}
+battlenew_a 0x1301 {
+	.uid_:uinteger 1
+}
+battleready_c 0x1302 {
+	.battle:integer 1
+	.uids:integer[] 2
+	.uid_:uinteger 3
+}
+battleready_a 0x1303 {
+	.uid_:uinteger 1
+}
+battleenter_c 0x1304 {
+	.uid:uinteger 1
+	.gate:integer 2
+	.uid_:uinteger 3
+}
+battleenter_a 0x1305 {
+	.uid:uinteger 1
+	.uid_:uinteger 2
+}
+battleleave_r 0x1308 {
+	.uid_:uinteger 1
+}
+battleleave_a 0x1309 {
+	.uid:integer 1
+	.uid_:uinteger 2
+}
+vec3 {
+	.x:float 1
+	.y:float 2
+	.z:float 3
+	.uid_:uinteger 4
+}
+battlemove_r 0x130a {
+	.pos:vec3 1
+	.uid_:uinteger 2
+}
+battlemove_a 0x130b {
+	.uid:integer 1
+	.pos:vec3 2
+	.uid_:uinteger 3
+}
+battleskill_r 0x130c {
+	.skill:integer 1
+	.uid_:uinteger 2
+}
+battleskill_a 0x130d {
+	.uid:uinteger 1
+	.skill:integer 2
+	.uid_:uinteger 3
 }
 #----------cluster protocol----------
 
@@ -102,6 +205,17 @@ logingate_a 0x100c {
 
 }
 
+forward_n 0x100d {
+	.uid:integer 1
+	.cmd:integer 2
+	.dat:string 3
+}
+
+multicast_n 0x100e {
+	.uids:integer[] 1
+	.cmd:integer 2
+	.dat:string 3
+}
 
 ]]
 return M

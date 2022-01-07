@@ -36,7 +36,7 @@
     <component id="n15_dwmx" name="normalpvp" src="dwmxn" fileName="BattleButton.xml" xy="1026,200" size="148,56" group="n19_dwmx" alpha="0">
       <Button title="匹配模式"/>
     </component>
-    <group id="n19_dwmx" name="normalpvp" xy="1006,164" size="279,120" advanced="true"/>
+    <group id="n19_dwmx" name="normal" xy="1006,164" size="279,120" advanced="true"/>
     <image id="n20_dwmx" name="n20" src="dwmxj" fileName="Images/UIPublic_61.PNG" xy="1006,282" group="n24_dwmx"/>
     <image id="n21_dwmx" name="n21" src="dwmxb" fileName="Images/NomalPVP.PNG" xy="1171,288" group="n24_dwmx"/>
     <text id="n22_dwmx" name="n22" xy="1026,318" size="148,56" group="n24_dwmx" fontSize="30" color="#5bb5bb" autoSize="none" text="房间模式"/>
@@ -50,6 +50,6 @@
     <component id="n28_dwmx" name="hellpvp" src="dwmxn" fileName="BattleButton.xml" xy="1026,438" size="148,56" group="n29_dwmx" alpha="0">
       <Button title="匹配模式"/>
     </component>
-    <group id="n29_dwmx" name="hellpvp" xy="1006,402" size="279,120" advanced="true"/>
+    <group id="n29_dwmx" name="hell" xy="1006,402" size="279,120" advanced="true"/>
   </displayList>
 </component>

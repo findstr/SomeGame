@@ -34,7 +34,7 @@ public class Character : MonoBehaviour
         animator.SetInteger("Run", 1);
     }
 
-    public void PlaySkill(SKILL s)
+    public void FireSkill(SKILL s)
     {
         switch (s) {
         case SKILL.ATK1:

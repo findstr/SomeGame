@@ -12,9 +12,10 @@ local close = c.close
 local nodelay = c.nodelay
 local pcall = core.pcall
 local format = string.format
+
 local function socket_poll(s)
 	local fd = s.fd
-	for i = 1, 100 do
+	for i = 1, 1 do
 		local cmd, dat = recv(fd)
 		if not cmd then
 			if dat then
@@ -54,22 +55,14 @@ function M:connect(conf)
 	end
 	nodelay(fd)
 	local proto = conf.proto
-	local router = {}
-	local src = conf.router
-	for k, v in pairs(src) do
-		if type(k) == "string" then
-			k = assert(proto:tag(k), k)
-		end
-		src[k] = nil
-		router[k] = v
-	end
-	for k, v in pairs(router) do
-		src[k] = v
+	local buf = {}
+	for k, v in pairs(conf.router) do
+		buf[#buf + 1] = string.format("%s", k)
 	end
 	local s = setmetatable({
 		fd = fd,
 		proto = proto,
-		router = src,
+		router = conf.router,
 		__close = conf.close,
 	}, mt)
 	core.lateupdate(s, socket_poll)
@@ -86,11 +79,11 @@ function M:close()
 	core.lateupdate(self, nil)
 	close(fd)
 end
-
+local NIL = {}
 function M:send(cmd, obj)
 	local proto = self.proto
 	cmd = proto:tag(cmd)
-	local dat, sz = proto:encode(cmd, obj, true)
+	local dat, sz = proto:encode(cmd, obj or NIL, true)
 	dat= proto:pack(dat, sz)
 	send(self.fd, cmd, dat)
 end

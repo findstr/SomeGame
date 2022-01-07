@@ -1,46 +1,49 @@
 local ui = require "zx.ui"
-local bind = require "binder.login"
+local bind = require "binder.login".login
 local server = require "server"
+local log = print
 
 local M = {}
 local mt = {__index = M}
 local setmetatable = setmetatable
 
+local function login_finish(uid, status)
+	if uid then
+		ui.inplace("lobby.lobby")
+	else
+		M.login_tips.text = "密码错误(" .. status .. ")"
+	end
+end
+
+
+local function login()
+	local user = M.account_input.text
+	local passwd = M.password_input.text
+	if #user == 0 or #passwd == 0 then
+		print(M.login_tips)
+		M.login_tips.text = "账号或密码不能为空"
+		return
+	end
+	M.login_tips.text = ""
+	server.login(user, passwd, login_finish)
+end
+
 function M:start(view)
-	local vm = {
-		view = view,
-	}
-	bind(vm, view)
+	bind(M, view)
 	view:MakeFullScreen()
 	GRoot.inst:AddChild(view)	
-	local login_finish = function(uid, status)
-		if uid then
-			ui.open("lobby.lobby")
-			ui.close(vm)
-		else
-			vm.login_tips.text = "密码错误(" .. status .. ")"
-		end
-	end
-	local login = function()
-		local user = vm.account_input.text
-		local passwd = vm.password_input.text
-		if #user == 0 or #passwd == 0 then
-			print(vm.login_tips)
-			vm.login_tips.text = "账号或密码不能为空"
-			return
-		end
-		vm.login_tips.text = ""
-		server.login(user, passwd, login_finish)
-	end
-	vm.account_input.text = "333"
-	vm.password_input.text = "333"
-	vm.login_button.onClick:Add(login)
-	vm.register_button.onClick:Add(login)
-	return vm
+
+	M.account_input.text = "333"
+	M.password_input.text = "333"
+	M.login_button.onClick:Add(login)
+	M.register_button.onClick:Add(login)
+	
+	log("[login] start")
+	return 
 end
 
 function M:stop()
-	print("close")
+	log("[login] stop")
 end
 
 return M

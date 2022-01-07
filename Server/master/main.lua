@@ -8,6 +8,7 @@ core.start(function()
 		['auth'] = 1,
 		['gate'] = 1,
 		['room'] = 1,
+		['battle'] = 1,
 	}
 	for k, v in pairs(capacity) do
 		if v == false then

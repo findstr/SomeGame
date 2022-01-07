@@ -7,9 +7,9 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.D541639A" = "dll"
+	"last_search.D541639A" = ""
 	"OpenInspectorPreview.D541639A" = "0"
-	"currentGroup.D541639A" = "_group_provider_Files"
+	"currentGroup.D541639A" = "asset"
 }
 providers = {
 	adb = {

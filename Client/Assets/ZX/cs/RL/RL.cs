@@ -1,5 +1,7 @@
+using XLua;
 namespace ZX { 
 
+[LuaCallCSharp]
 public class RL {
 	public enum Mode {
 		RM = 1,

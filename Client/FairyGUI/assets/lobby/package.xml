@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <packageDescription id="p9z5ak9h">
   <resources>
-    <component id="x1n30" name="lobby.xml" path="/"/>
+    <component id="x1n30" name="lobby.xml" path="/" exported="true"/>
     <image id="dwmx1" name="activity.PNG" path="/Images/"/>
     <image id="dwmx2" name="Bottom.PNG" path="/Images/"/>
     <image id="dwmx3" name="BottomNormal.PNG" path="/Images/"/>

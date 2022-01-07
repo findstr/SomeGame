@@ -1,17 +1,19 @@
 local socket = require "zx.socket"
 local proto = require "proto"
 local router = require "router"
+local tips = require "tips"
 local tonumber = tonumber
 local auth_server
 local gate_server
 local login_cb
 local auth = {}
-local uid = nil
 local log = print
 local tostring = tostring
 
+local M = {}
+
 local function login_fail(reason)
-		uid = nil
+		M.uid = nil
 		if login_cb then
 			login_cb(nil, reason)
 			login_cb = nil
@@ -29,11 +31,14 @@ end
 local function gate_close(fd)
 	log("[server] gate_close", fd)
 	gate_server = nil
-	login_fail("gate close")
+	tips.show("hello", function()
+		CS.UnityEngine.GameObject.Find("ZXMain"):GetComponent(typeof(CS.ZXMain)):Restart()
+	end)
 end
 
 function router.error_a(obj, _)
 	local cmd = obj.cmd
+	tips.show("error:" .. obj.errno)
 	log("[server] error cmd:", obj.cmd, "errno:", obj.errno)
 	local cb = router[obj.cmd]
 	if cb then
@@ -42,10 +47,10 @@ function router.error_a(obj, _)
 end
 
 function router.login_a(obj, errno)
-	log("[server] login_a", uid, errno)
+	log("[server] login_a", M.uid, errno)
 	if login_cb then
 		if obj then
-			login_cb(uid, nil)
+			login_cb(M.uid, nil)
 		else
 			login_fail(errno)
 		end
@@ -56,8 +61,15 @@ function router.roomlist_a(obj, errno)
 	log("roomlist_a", obj and require "zx.json".encode(obj) or errno)
 end
 
-function auth.error_a(obj, _)
+function router.kick_n(obj)
+	tips.show("账号在其他地方登录", function()
+		CS.UnityEngine.GameObject.Find("ZXMain"):GetComponent(typeof(CS.ZXMain)):Restart()
+	end)
+end
+
+auth[proto:tag("error_a")] = function(obj, _)
 	log("[server] error cmd:", obj.cmd, "errno:", obj.errno)
+	tips.show("error:" .. obj.errno)
 	if login_cb then
 		login_cb(nil, tostring(obj.errno))
 	end
@@ -66,7 +78,7 @@ function auth.error_a(obj, _)
 	auth_server = nil
 end
 
-function auth.auth_a(obj, _)
+auth[proto:tag("auth_a")] = function(obj, _)
 	log("[server] auth_a uid:", obj.uid, obj.gate, obj.token)
 	auth_server:close()
 	auth_server = nil
@@ -84,7 +96,7 @@ function auth.auth_a(obj, _)
 		cb(nil, "connect auth fail")
 		return
 	end
-	uid = obj.uid
+	M.uid = obj.uid
 	log("[server] connect gate", ip, port)
 	gate_server:send("login_r", {
 		uid = obj.uid,
@@ -92,8 +104,6 @@ function auth.auth_a(obj, _)
 	})
 end
 
-
-local M = {}
 
 function M.login(user, pwd, cb)
 	if auth_server then
