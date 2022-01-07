@@ -731,7 +731,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 96
   scriptingDefineSymbols:
-    Standalone: 
+    Standalone: ZX_DEBUG
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

@@ -12,6 +12,23 @@ local close = c.close
 local nodelay = c.nodelay
 local pcall = core.pcall
 local format = string.format
+print("ZX_DEBUG", ZX_DEBUG)
+if ZX_DEBUG then
+	local xsend, xrecv = send, recv
+	M.sendsize = 0
+	M.recvsize = 0
+	send = function(fd, cmd, dat)
+		M.sendsize = M.sendsize + #dat
+		return xsend(fd, cmd, dat)
+	end
+	recv = function(fd)
+		local cmd, dat = xrecv(fd)
+		if cmd and dat then
+			M.recvsize = M.recvsize + #dat
+		end
+		return cmd, dat
+	end
+end
 
 local function socket_poll(s)
 	local fd = s.fd

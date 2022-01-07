@@ -624,4 +624,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conf:
     lua_path: Assets/Scripts/Lua/?.lua;Assets/ZX/Lua/?.lua
-  logic_hz: 30
+  LogicHZ: 15
