@@ -40,8 +40,8 @@ local function refresh_list()
 end
 
 function router.roomleave_a(ack)
-	print("roomleave_a", ack.id, roomid)
-	if roomid == ack.id then
+	print("roomleave_a", ack.roomid, roomid)
+	if roomid == ack.roomid then
 		local uid = ack.uid
 		for i = 1, #room_list do
 			if room_list[i] == uid then
@@ -53,8 +53,24 @@ function router.roomleave_a(ack)
 	end
 end
 
-function router.roomplay_n(ack)
-	print("roomplay_a")
+function router.roomenter_n(ack)
+	print("roomenter_n", ack.roomid, roomid)
+	if roomid == ack.roomid then
+		local has = false
+		local uid = ack.uid
+		for i = 1, #room_list do
+			if room_list[i] == uid then
+				has = true
+				break
+			end
+		end
+		room_list[#room_list + 1] = uid
+		refresh_list()
+	end
+end
+
+function router.roombattle_n(ack)
+	print("roombattle_n")
 	ui.clear()
 	battle.start(ack.uids)
 end

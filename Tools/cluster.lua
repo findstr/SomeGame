@@ -5,10 +5,18 @@ local open = io.open
 local prefix= "Protocol/client/"
 
 local function extend(strc)
+	local tag
+	local req = {}
 	for l in string.gmatch(strc, "([^\n]+)\n") do
 		if l:find("{%s*$") then
+			local name = l:match("^%s*([^%s]+)")
+			if name:match("_r$") then
+				req[#req + 1] = true
+			else
+				req[#req + 1] = false
+			end
 			buf[#buf + 1] = l
-		elseif l:find("^}") then
+		elseif l:find("^}") and table.remove(req) then
 			buf[#buf + 1] = "\t.uid_:uinteger " .. (tag + 1)
 			buf[#buf + 1] = l
 			tag = 0

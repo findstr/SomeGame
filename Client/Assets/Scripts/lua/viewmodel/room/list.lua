@@ -19,19 +19,19 @@ function router.roomlist_a(ack)
 		local obj = list:AddItemFromPool("ui://room/rinfo");
 		rinfo(x, obj)
 		x.room_name.text = v.name
-		x.room_id.text = v.id
-		item_ud[obj] = v.id
+		x.room_id.text = v.roomid
+		item_ud[obj] = v
 	end
 end
 
 function router.roomcreate_a(ack)
 	print("roomcreate_a")
-	ui.inplace("room.room", ack.id, ack.name, {ack.uid})
+	ui.inplace("room.room", ack.roomid, ack.name, {ack.uid})
 end
 
 function router.roomenter_a(ack)
 	print("roomenter_a")
-	ui.inplace("room.room", ack.id, ack.name, ack.list)
+	ui.inplace("room.room", ack.roomid, ack.name, ack.list)
 end
 
 local function normal_mode()
@@ -48,11 +48,12 @@ local function hell_mode()
 end
 
 local function click_item(ctx)
-	local id = item_ud[ctx.data]
+	local r = item_ud[ctx.data]
+	local id = r.roomid
 	if id then
-		server.send("roomenter_r", {id = id})
+		server.send("roomenter_r", {roomid = id, battle = r.battle, side = true})
 	end
-	print("click_item", item_ud[ctx.data])
+	print("click_item", id)
 end
 
 local function click_back()
@@ -66,7 +67,7 @@ end
 
 local function click_create()
 	print("click_create")
-	server.send("roomcreate_r", {name = "房间号"})
+	server.send("roomcreate_r", {name = "xxx"})
 end
 
 function M:start(view)

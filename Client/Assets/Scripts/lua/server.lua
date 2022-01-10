@@ -47,10 +47,10 @@ function router.error_a(obj, _)
 end
 
 function router.login_a(obj, errno)
-	log("[server] login_a", M.uid, errno)
+	log("[server] login_a", M.uid, obj.members, obj.members and table.concat(obj.members) or "")
 	if login_cb then
 		if obj then
-			login_cb(M.uid, nil)
+			login_cb(obj, nil)
 		else
 			login_fail(errno)
 		end

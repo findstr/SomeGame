@@ -5,7 +5,7 @@ local E = require "E"
 local router = require "router"
 local gate = require "agent.gate"
 local battle = require "agent.battle"
-require "room"
+local start = require "room"
 
 local log = core.log
 local pairs = pairs
@@ -24,6 +24,7 @@ core.start(function()
 		}
 	}
 	gate.restore_online()
+	start()
 	gate.handle("room", E)
 	for k, v in pairs(E) do
 		router[k] = v

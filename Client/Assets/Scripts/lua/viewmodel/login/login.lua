@@ -1,5 +1,6 @@
 local ui = require "zx.ui"
 local bind = require "binder.login".login
+local battle = require "model.battle"
 local server = require "server"
 local tips = require "tips"
 local log = print
@@ -8,9 +9,20 @@ local M = {}
 local mt = {__index = M}
 local setmetatable = setmetatable
 
-local function login_finish(uid, status)
-	if uid then
-		ui.inplace("lobby.lobby")
+local ROOM_IDLE<const> = 1   
+local ROOM_BATTLE<const> = 2 
+
+local function login_finish(ack, status)
+	if ack then
+		print("login_finish", ack.roomstate)
+		if ack.roomstate == ROOM_IDLE then
+			ui.inplace("room.room", ack.roomid, "", ack.members)
+		elseif ack.roomstate == ROOM_BATTLE then
+			ui.clear()
+			battle.start(ack.members)
+		else
+			ui.inplace("lobby.lobby")
+		end
 	else
 		tips.show("密码错误(" .. status .. ")")
 	end

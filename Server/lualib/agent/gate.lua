@@ -54,7 +54,6 @@ function M.join(conns, count)
 end
 
 function M.restore_online(filter)
-	local tmp = {}
 	for i = 1, M.count do
 		while not gate_rpc[i] do
 			core.sleep(100)
@@ -192,26 +191,6 @@ function M.multicast(uids, cmd, obj)
 		if rpc then
 			rpc:send("multicast_n", req)
 		end
-	end
-end
-
-function M.battleready(uids, battle)
-	local req = {
-		battle = battle,
-		uids = uids,
-	}
-	for _, uid in ipairs(uids) do
-		local slot = uid_slot[uid]
-		if not cache[slot] then
-			cache[slot] = true
-			local rpc = gate_rpc[slot]
-			if rpc then
-				rpc:call("battleready_c", req)
-			end
-		end
-	end
-	for k, _ in pairs(cache) do
-		cache[k] = nil
 	end
 end
 

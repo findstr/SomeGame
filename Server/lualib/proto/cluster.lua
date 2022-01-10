@@ -2,7 +2,6 @@ local M = [[
 error_a 0x10000 {
 	.cmd:integer 1
 	.errno:integer 2
-	.uid_:uinteger 3
 }
 auth_r 0x11000 {
 	.account:string 1
@@ -14,7 +13,6 @@ auth_a 0x11001 {
 	.uid:uinteger 1
 	.gate:string 2
 	.token:integer 3
-	.uid_:uinteger 4
 }
 login_r 0x1102 {
 	.uid:uinteger 1
@@ -22,131 +20,138 @@ login_r 0x1102 {
 	.uid_:uinteger 3
 }
 login_a 0x1103 {
-	
-	.uid_:uinteger 1
+	.roomid:integer 1
+	.roomstate:integer 2
+	.members:uinteger[] 3
 }
 kick_n 0x1104 {
 	.errno:integer 1
-	.uid_:uinteger 2
 }
 ########################
 roomlist_r 0x1201 {
-	.uid_:uinteger 1
+	.uid_:uinteger 2
 }
 roomlist_a 0x1202 {
 	room {
-		.id:integer 1
-		.name:string 2
-		.owner:uinteger 3
+		.battle:integer 1
+		.roomid:integer 2
+		.name:string 3
+		.owner:uinteger 4
 	}
-	.list:room[id] 1
-	.uid_:uinteger 2
+	.list:room[] 1
 }
 roomcreate_c 0x1203 {
 	.name:string 1
 	.uid:uinteger 2
 	.gate:integer 3
-	.uid_:uinteger 4
 }
 roomcreate_r 0x1204 {
 	.name:string 1
 	.uid_:uinteger 2
 }
 roomcreate_a 0x1205 {
-	.id:integer 1
+	.roomid:integer 1
 	.name:string 2
-	.uid:uinteger 3
-	.uid_:uinteger 4
 }
 roomenter_c 0x1206 {
-	.id:integer 1
+	.roomid:integer 1
 	.uid:uinteger 2
 	.gate:integer 3
-	.uid_:uinteger 4
 }
 roomenter_r 0x1207 {
-	.id:integer 1
-	.uid_:uinteger 2
+	.roomid:integer 1
+	.battle:integer 2
+	.side:boolean 3 #false -> red, true ->blue
+	.uid_:uinteger 4
 }
 roomenter_a 0x1208 {
-	.id:integer 1
+	.roomid:integer 1
 	.name:string 2
 	.list:uinteger[] 3
-	.uid_:uinteger 4
+}
+roomenter_n 0x1209 {
+	.roomid:integer 1
+	.uid:integer 2
 }
 roomleave_r 0x120a {
-	.uid_:uinteger 1
+	.uid_:uinteger 3
 }
 roomleave_a 0x120b {
-	.id:integer 1
+	.roomid:integer 1
 	.uid:uinteger 2
-	.owner:uinteger 3
-	.uid_:uinteger 4
 }
-roomplay_r 0x120d {
-	.uid_:uinteger 1
+roomplay_r 0x120c {
+	.uid_:uinteger 3
 }
-roomplay_a 0x120e {
-	.uid_:uinteger 1
+roomplay_a 0x120d {
 }
-roomplay_n 0x120f {
+roombattle_n 0x120e {
 	.uids:uinteger[] 1
-	.uid_:uinteger 2
 }
-battlenew_c 0x1300 {
-	.uids:uinteger[] 1
-	.uid_:uinteger 2
-}
-battlenew_a 0x1301 {
-	.uid_:uinteger 1
-}
-battleready_c 0x1302 {
+roomshow_c 0x120f {
 	.battle:integer 1
-	.uids:integer[] 2
-	.uid_:uinteger 3
+	.roomid:integer 2
+	.name:string 3
+	.owner:uinteger 4
 }
-battleready_a 0x1303 {
-	.uid_:uinteger 1
+roomshow_a 0x1210 {
 }
-battleenter_c 0x1304 {
+roomhide_c 0x1211 {
+	.battle:integer 1
+	.roomid:integer 2
+}
+roomhide_a 0x1212 {
+}
+battlejoin_c 0x1213 {
+	.battle:integer 1
+	.uid:uinteger 2
+}
+battlejoin_a 0x1214 {
+}
+battleleave_c 0x1215 {
 	.uid:uinteger 1
-	.gate:integer 2
-	.uid_:uinteger 3
 }
-battleenter_a 0x1305 {
+battleleave_a 0x1216 {
+}
+whichbattle_c 0x1217 {
 	.uid:uinteger 1
-	.uid_:uinteger 2
 }
-battleleave_r 0x1308 {
-	.uid_:uinteger 1
+whichbattle_a 0x1218 {
+	.battle:integer 1
 }
-battleleave_a 0x1309 {
+roomrestore_c 0x1219 {
 	.uid:integer 1
-	.uid_:uinteger 2
+}
+roomrestore_a 0x121a {
+	.roomid:integer 1
+	.roomstate:integer 2
+	.members:uinteger[] 3
+}
+battleplayers_c 0x121b {
+}
+battleplayers_a 0x121c {
+	.uids:integer[] 1
 }
 vec3 {
 	.x:float 1
 	.y:float 2
 	.z:float 3
-	.uid_:uinteger 4
 }
-battlemove_r 0x130a {
+battlemove_r 0x1301 {
 	.pos:vec3 1
 	.uid_:uinteger 2
 }
-battlemove_a 0x130b {
+battlemove_a 0x1302 {
 	.uid:integer 1
 	.pos:vec3 2
-	.uid_:uinteger 3
 }
-battleskill_r 0x130c {
+battleskill_r 0x1304 {
 	.skill:integer 1
 	.uid_:uinteger 2
 }
-battleskill_a 0x130d {
+battleskill_a 0x1305 {
 	.uid:uinteger 1
 	.skill:integer 2
-	.uid_:uinteger 3
 }
 #----------cluster protocol----------
 
@@ -184,7 +189,6 @@ gatekick_c 0x1007 {
 }
 
 gatekick_a 0x1008 {
-	.result:integer 1
 }
 
 gatetoken_c 0x1009 {

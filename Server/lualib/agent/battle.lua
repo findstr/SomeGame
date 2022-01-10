@@ -11,8 +11,10 @@ local lprint = core.log
 local M = {}
 
 local battle_rpc = {}
+local battle_epoch = {}
 local battle_count
 local round_robin = 0
+local join_cb
 
 function M.join(conns, count)
 	if not battle_count then
@@ -23,25 +25,13 @@ function M.join(conns, count)
 	for i = 1, count do
 		local w = conns[i]
 		if w then
+			if join_cb and w.epoch > battle_epoch[i] then
+				join_cb(i)
+			end
+			battle_epoch[i] = w.epoch
 			battle_rpc[i] = w.rpc
 		end
 	end
-end
-
-function M.new(uids)
-	local slot = round_robin % battle_count + 1
-	round_robin = slot
-	local rpc = battle_rpc[slot]
-	if not rpc then
-		core.log("[agent.battle] new slot", slot, "is empty")
-		return nil
-	end
-	local ack, cmd = rpc:call("battlenew_c", { uids = uids })
-	if not ack then
-		core.log("[agent.battle] new slot", slot, " error", cmd)
-		return nil
-	end
-	return slot
 end
 
 function M.call(slot, cmd, obj)
@@ -51,6 +41,33 @@ function M.call(slot, cmd, obj)
 	end
 	local ack, cmd = rpc:call(cmd, obj)
 	return ack, cmd
+end
+
+function M.restore(cb)
+	local buf = {}
+	join_cb = cb
+	while not battle_count do
+		core.sleep(100)
+	end
+	for i = 1, battle_count do
+		while not battle_rpc[i] do
+			core.sleep(100)
+		end
+		while true do
+			local rpc = battle_rpc[i]
+			local ack, err = rpc:call("battleplayers_c")
+			if ack then
+				for _, uid in pairs(ack.uids) do
+					buf[uid] = i
+				end
+				break
+			else
+				lprint(TAG, "restore_online", i, "error", err)
+				core.sleep(500)
+			end
+		end
+	end
+	return buf
 end
 
 return M
