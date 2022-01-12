@@ -106,4 +106,8 @@ end
 
 M.clear = closeall
 
+function M.lan(lan)
+	ZX_LAN = lan
+end
+
 return M

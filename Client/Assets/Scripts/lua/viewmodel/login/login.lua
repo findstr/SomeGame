@@ -23,8 +23,6 @@ local function login_finish(ack, status)
 		else
 			ui.inplace("lobby.lobby")
 		end
-	else
-		tips.show("密码错误(" .. status .. ")")
 	end
 end
 

@@ -1,6 +1,7 @@
 local socket = require "zx.socket"
 local proto = require "proto"
 local router = require "router"
+local errno = require "conf.Errno"
 local tips = require "tips"
 local tonumber = tonumber
 local auth_server
@@ -31,15 +32,21 @@ end
 local function gate_close(fd)
 	log("[server] gate_close", fd)
 	gate_server = nil
-	tips.show("hello", function()
+	tips.show("GateClose", function()
 		CS.UnityEngine.GameObject.Find("ZXMain"):GetComponent(typeof(CS.ZXMain)):Restart()
 	end)
 end
 
 function router.error_a(obj, _)
-	local cmd = obj.cmd
-	tips.show("error:" .. obj.errno)
-	log("[server] error cmd:", obj.cmd, "errno:", obj.errno)
+	local cmd, err = obj.cmd, obj.errno
+	local s = errno[err]
+	if s then
+		s = s.Value
+	else
+		s = "error:" + err
+	end
+	tips.show(s)
+	log("[server] error cmd:", obj.cmd, "errno:", sting.format("%02x", obj.errno))
 	local cb = router[obj.cmd]
 	if cb then
 		cb(nil, obj.errno)
@@ -69,7 +76,14 @@ end
 
 auth[proto:tag("error_a")] = function(obj, _)
 	log("[server] error cmd:", obj.cmd, "errno:", obj.errno)
-	tips.show("error:" .. obj.errno)
+	local cmd, err = obj.cmd, obj.errno
+	local s = errno[err]
+	if s then
+		s = s.Value
+	else
+		s = "error:" + err
+	end
+	tips.show(s)
 	if login_cb then
 		login_cb(nil, tostring(obj.errno))
 	end

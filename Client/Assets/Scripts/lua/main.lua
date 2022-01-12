@@ -5,6 +5,8 @@ local core = require "zx.core"
 local proto = require "proto"
 local ui = require "zx.ui"
 
+ui.lan("conf.CN")
+
 local gprint = print
 xprint = function(...)
 	gprint(..., "\n", debug.traceback())
