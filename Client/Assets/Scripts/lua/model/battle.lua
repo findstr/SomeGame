@@ -61,7 +61,7 @@ end
 function M.start(uids)
 	move.uid = server.uid
 	CS.ZX.RL.Instance:load_scene_async("resource/scenes/map.unity", CS.UnityEngine.SceneManagement.LoadSceneMode.Additive);
-	local ar = CS.ZX.RL.Instance:load_asset("assets/resource/character/darius/darius.prefab")
+	local ar = CS.ZX.RL.Instance:load_asset("Character/Darius/Darius.prefab")
 	for _, uid in pairs(uids) do
 		local go = CS.UnityEngine.Object.Instantiate(ar.asset, {x = -10, y = 0, z = -10}, CS.Quaternion.identity, root.transform)
 		local c = go:GetComponent(typeof(CS.Character))

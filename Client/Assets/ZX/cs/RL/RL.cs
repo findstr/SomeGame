@@ -1,7 +1,4 @@
-using XLua;
-namespace ZX { 
-
-[LuaCallCSharp]
+namespace ZX {
 public class RL {
 	public enum Mode {
 		RM = 1,
@@ -15,11 +12,11 @@ public class RL {
 			_instance = new RM();
 		else
 			_instance = new ABM();
+		_instance.start();
 		return ;
 	}
 	public static IRL Instance { get {
 		return _instance;
 	}}
 };
-
 }

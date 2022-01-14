@@ -14,17 +14,19 @@ local pcall = core.pcall
 local format = string.format
 print("ZX_DEBUG", ZX_DEBUG)
 if ZX_DEBUG then
+	local debug = CS.ZX.Core.debug
 	local xsend, xrecv = send, recv
-	M.sendsize = 0
-	M.recvsize = 0
+	debug.send_size = 0
+	debug.recv_size = 0
 	send = function(fd, cmd, dat)
-		M.sendsize = M.sendsize + #dat
+		debug.send_size = debug.send_size + #dat
+		print("=====", debug.send_size)
 		return xsend(fd, cmd, dat)
 	end
 	recv = function(fd)
 		local cmd, dat = xrecv(fd)
 		if cmd and dat then
-			M.recvsize = M.recvsize + #dat
+			debug.recv_size = debug.recv_size + #dat
 		end
 		return cmd, dat
 	end

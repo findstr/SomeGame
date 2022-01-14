@@ -1,26 +1,38 @@
+local strings = require "zx.strings"
 local M = {}
-local conf = require "zx.conf"
+local ui_stack = {}
+local packages = {}
+local package_ref = {}
+local AddPackage = CS.ZX.Core.AddPackage
+local RemovePackage = CS.ZX.Core.RemovePackage
+local CreateObject = CS.ZX.Core.CreateObject
+
 local match = string.match
 local remove = table.remove
-local ui_stack = {}
-local package_ref = {}
+local pairs = pairs
 
-local function ref_pkg(pkg)
-	local n = package_ref[pkg] or 0
-	if n == 0 then
-		UIPackage.AddPackage(conf.fgui_path .. pkg)
+local function ref_pkg(name)
+	local pkg = packages[name]
+	if pkg then
+		package_ref[name] = package_ref[name] + 1
+		return pkg
 	end
-	package_ref[pkg] = n + 1
+	pkg = AddPackage(strings[name])
+	package_ref[name] = 1
+	packages[name] = pkg
+	return pkg
 end
 
-local function unref_pkg(pkg)
-	local n = package_ref[pkg] or 0
+local function unref_pkg(name)
+	local n = package_ref[name] or 0
 	if n <= 1 then
-		UIPackage.RemovePackage(conf.fgui_path .. pkg)
-		package_ref[pkg] = nil
+		local id = packages[name]
+		RemovePackage(id)
+		package_ref[name] = nil
+		packages[name] = nil
 		return
 	end
-	package_ref[pkg] = n - 1
+	package_ref[name] = n - 1
 end
 
 local function close(tag)
@@ -45,16 +57,17 @@ local function closeall()
 		ui.view:Dispose()
 		ui_stack[i] = nil
 	end
-	for pkg, _ in pairs(package_ref) do
-		package_ref[pkg] = nil
-		UIPackage.RemovePackage(conf.fgui_path .. pkg)
+	for name, pkg in pairs(packages) do
+		packages[name] = nil
+		package_ref[name] = nil
+		RemovePackage(pkg)
 	end
 end
 
 local function new(fullname)
 	local pkg, name = match(fullname, "([^%.]+).([^%.]+)")
-	ref_pkg(pkg)
-	return UIPackage.CreateObject(pkg, name)
+	pkg = ref_pkg(pkg)
+	return CreateObject(pkg, name)
 end
 
 local function open(fullname, ...)
@@ -109,5 +122,7 @@ M.clear = closeall
 function M.lan(lan)
 	ZX_LAN = lan
 end
+
+M.assetdir = CS.ZX.Core.SetPathPrefix
 
 return M

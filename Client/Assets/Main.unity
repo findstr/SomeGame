@@ -622,6 +622,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425eb3825ad89ad4bae4a7f528bee013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conf:
-    lua_path: Assets/Scripts/Lua/?.lua;Assets/ZX/Lua/?.lua
+  UseAB: 0
   LogicHZ: 15

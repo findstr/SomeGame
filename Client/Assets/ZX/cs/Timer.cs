@@ -11,10 +11,10 @@ namespace ZX
             public long time;
             public long session;
         };
-        static private long clock = 0;
-        static private long session = 0;
-        static private List<Event> events = new List<Event>();
-        static public long timeout(int ms) {
+        private long clock = 0;
+        private long session = 0;
+        private List<Event> events = new List<Event>();
+        public long TimeOut(int ms) {
             long s = session + 1;
             long t = ms + clock;
             session = s;
@@ -22,7 +22,7 @@ namespace ZX
             return s;
         }
 
-        static public void update(int delta, List<long> expire) {
+        public void Update(int delta, List<long> expire) {
             clock += delta;
             for (int i = events.Count - 1; i >= 0; i--) {
                 Event e = events[i];
