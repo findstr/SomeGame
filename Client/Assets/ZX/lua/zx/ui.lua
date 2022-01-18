@@ -67,7 +67,7 @@ end
 local function new(fullname)
 	local pkg, name = match(fullname, "([^%.]+).([^%.]+)")
 	pkg = ref_pkg(pkg)
-	return CreateObject(pkg, name)
+	return CreateObject(pkg, strings[name])
 end
 
 local function open(fullname, ...)

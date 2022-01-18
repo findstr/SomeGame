@@ -38,7 +38,7 @@ namespace XLua.LuaDLL
 
 namespace ZX{
 [LuaCallCSharp]
-public static class Core {   
+public static partial class Core {   
 #if ZX_DEBUG
 	public class DebugInfo {
 		public float frame_time = 0;
@@ -55,12 +55,11 @@ public static class Core {
 	private delegate LuaTable require_t(string name);
 	[CSharpCallLua]
 	private delegate void update_t();
+	[CSharpCallLua]
 	private delegate void expire_t(LuaTable t);
 
 	static private LuaEnv L = null;
-	static private UI UI = null;
 	static private Timer Timer = null;
-	static private Strings Strings = null;
 
 	static private float logic_delta = 0;
 	static private float logic_elapse = 0.0f;
@@ -73,41 +72,12 @@ public static class Core {
 	static private update_t core_logicupdate;
 	static private expire_t core_timerexire;
 
-	static byte[] LuaLoader(ref string name) {
-		var abr = RL.Instance.load_asset(name, typeof(TextAsset));
-		if (abr == null)
-		    return null;
-		var ta = abr.asset as TextAsset;
-		var bytes = ta.bytes;
-		RL.Instance.unload_asset(name);
-		return bytes;	
-	}
 
-	static void InitRL(bool useAB) {
-#if UNITY_EDITOR
-		if (useAB)
-			RL.Start(RL.Mode.ABM);
-		else
-			RL.Start(RL.Mode.RM);
-#else
-		RL.Start(RL.Mode.ABM);
-#endif
-	}
-	static void InitStrings() {
-		Strings = new Strings();
-	}
 	static void InitTimer() {
 		Timer = new Timer();
 	}
-	static void InitUI() {
-		if (UI != null)
-			UI.RemoveAllPackages();
-		UI = new UI();
-	}
 
 	static void InitLua() {
-		L = new LuaEnv();
-		L.AddLoader(LuaLoader);
 #if ZX_DEBUG
 		L.DoString("ZX_DEBUG = true");
 #endif
@@ -130,6 +100,7 @@ public static class Core {
 #if ZX_DEBUG
 		debug = new DebugInfo();
 #endif
+		L = new LuaEnv();
 		InitStrings();
 		InitTimer();
 		InitRL(UseAB);
@@ -140,30 +111,6 @@ public static class Core {
 
 	static public void Start() {
 		L.DoString("require 'main'");
-	}
-	////////////////Strings Module
-	static public int StringNew(string s) {
-		return Strings.New(s);
-	}
-	////////////////UI Module
-        static public void SetPathPrefix(string s) {
-		UI.SetPathPrefix(s);
-        }
-        static public int AddPackage(int id) {
-		return UI.AddPackage(Strings.Get(id));
-	}
-        static public void RemovePackage(int id) {
-		UI.RemovePackage(id);
-        }
-	static public GObject CreateObject(int id, string resName) {
-		return UI.CreateObject(id, resName);
-        }
-        static public void CreateObjectAsync(int id, string resName, CreateObjectCallback callback) {
-		UI.CreateObjectAsync(id, resName, callback);
-	}
-	///////////////RM Module
-	static public IRL.AssetRequest LoadAsset(int id, Type T = null) {
-		return RL.Instance.load_asset(Strings.Get(id), T);
 	}
 	///////////////Update Function
 	static public void FixedUpdate() {

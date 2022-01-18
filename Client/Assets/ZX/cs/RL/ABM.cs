@@ -196,6 +196,7 @@ namespace ZX
 
 		public override void start()
 		{
+			result_pool = new ObjectPool<LoadResult>(LoadResult.Create);
 			build_bundleinfo();
 		}
 		public override void stop()
@@ -291,6 +292,8 @@ namespace ZX
 				Debug.LogWarningFormat("ABM: load_asset unknown resource of '{0}'", name);
 				return null;
 			}
+			if (T == null)
+				T = typeof(UnityEngine.Object);
 			depend(asset);
 			if (asset.request == null) {
 				DBGPRINT("DEBUG:load_asset:" + asset.name + ":" + asset.refn);
@@ -349,20 +352,19 @@ namespace ZX
 		}
 		public override void unload_asset(string name)
 		{
-			if (!name_to_id.TryGetValue(name, out int id)) {
+			if (!all_assets.TryGetValue(name, out Asset asset)) {
 				UnityEngine.Debug.LogWarningFormat("ABM: unload_asset unknown resource of '{0}'", name);
 				return;
 			}
-			unload_asset(all_assets[id]);
+			unload_asset(asset);
 		}
 
 		public override void load_scene(string name, LoadSceneMode mode)
 		{
-			if (!name_to_id.TryGetValue(name, out int id)) {
+			if (!all_assets.TryGetValue(name, out Asset asset)) {
 				UnityEngine.Debug.LogWarningFormat("ABM: load_scene unknown resource of '{0}'", name);
 				return;
 			}
-			var asset = all_assets[id];
 			depend(asset);
 			load_bundle_(asset.inbundle);
 			var scenename = Path.GetFileNameWithoutExtension(name);
@@ -373,11 +375,10 @@ namespace ZX
 
 		public override AsyncOperation load_scene_async(string name, LoadSceneMode mode)
 		{
-			if (!name_to_id.TryGetValue(name, out int id)) {
+			if (!all_assets.TryGetValue(name, out Asset asset)) {
 				UnityEngine.Debug.LogWarningFormat("ABM: load_scene_async unknown resource of '{0}'", name);
 				return null;
 			}
-			var asset = all_assets[id];
 			depend(asset);
 			load_bundle_(asset.inbundle);
 			var scenename = Path.ChangeExtension(name, null);
@@ -385,22 +386,16 @@ namespace ZX
 		}
 		public override AsyncOperation unload_scene_async(string name)
 		{
-			if (!name_to_id.TryGetValue(name, out int id)) {
+			if (!all_assets.TryGetValue(name, out Asset asset)) {
 				UnityEngine.Debug.LogWarningFormat("ABM: unload_scene_async unknown resource of '{0}'", name);
 				return null;
 			}
-			var asset = all_assets[id];
 			undepend(asset);
 			unload_bundle_(asset.inbundle);
 			var scenename = Path.GetFileNameWithoutExtension(name);
 			return SceneManager.UnloadSceneAsync(scenename);
 		}
-		public override void set_active_scene(string scenepath)
-		{
-			var scenename = Path.GetFileNameWithoutExtension(scenepath);
-			scene_activing.Add(scenename);
-			DBGPRINT("set_active_scene:" + scenename);
-		}
+
 		private void update_operation()
 		{
 			var iter = scene_activing.GetEnumerator();
@@ -411,25 +406,23 @@ namespace ZX
 			}
 			scene_activing.Clear();
 		}
-		private void update_load_pending()
+		private void update_loading()
 		{
-			var cb = load_cb[load_cb_ping];
-			if (cb.Count == 0)
-				return;
-			load_cb_ping = (load_cb_ping + 1) % 2;
-			var iter = cb.GetEnumerator();
-			while (iter.MoveNext()) {
-				var id = iter.Current.Key;
-				var cblist = iter.Current.Value;
-				var cbiter = cblist.GetEnumerator();
-				var abr = all_assets[id];
-				var res = abr.asset;
-				if (res != null)
-					object_to_asset[res] = abr;
-				while (cbiter.MoveNext())
-					cbiter.Current.execute(res);
+			for (int i = loading.Count - 1; i >= 0; i--) {
+				var result = loading[i];
+				loading.RemoveAt(i);
+				for (int j = 0; j < result.assets.Count; j++) {
+					var asset = result.assets[j];
+					if (asset != null) {
+						var res = asset.asset;
+						if (res != null)
+							object_to_asset[res] = asset;
+					}
+					result.callback(result);
+				}
+				result.assets = null;
+				result_pool.Release(result);
 			}
-			cb.Clear();
 		}
 		private void update_unload_pending()
 		{
@@ -442,7 +435,7 @@ namespace ZX
 		public override void update()
 		{
 			update_operation();
-			update_load_pending();
+			update_loading();
 			update_unload_pending();
 		}	
 	}

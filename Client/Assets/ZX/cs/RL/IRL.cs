@@ -16,6 +16,10 @@ public abstract class IRL {
 		public load_cb_t callback;
 		public List<string> names = null;
 		public List<AssetRequest> assets = null;
+		public static LoadResult Create() {
+			return new LoadResult();
+		}
+
 	};
 	public abstract class BundleRequest {
 		abstract public AssetBundle assetBundle { get; }
@@ -29,8 +33,6 @@ public abstract class IRL {
 	public abstract void start();
 	public abstract void stop();
 
-	public abstract AssetRequest load_asset(int id, System.Type T = null);
-
 	public abstract AssetRequest load_asset(string name, System.Type T = null);
 	public abstract void load_asset_async(string name, System.Type T, load_cb_t cb, int ud);
 	public abstract void load_asset_async(List<string> names, System.Type T, load_cb_t cb, int ud);
@@ -43,7 +45,6 @@ public abstract class IRL {
 	public abstract AsyncOperation load_scene_async(string name, LoadSceneMode mode);
 	public abstract AsyncOperation unload_scene_async(string name);
 
-	public abstract void set_active_scene(string scenepath);
 	public abstract void update();
 };
 

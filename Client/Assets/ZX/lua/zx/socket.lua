@@ -20,7 +20,6 @@ if ZX_DEBUG then
 	debug.recv_size = 0
 	send = function(fd, cmd, dat)
 		debug.send_size = debug.send_size + #dat
-		print("=====", debug.send_size)
 		return xsend(fd, cmd, dat)
 	end
 	recv = function(fd)
