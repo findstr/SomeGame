@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FairyGUI.Utils;
+using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.InputSystem;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 #if UNITY_5_3_OR_NEWER
 using UnityEngine.SceneManagement;
@@ -155,7 +160,7 @@ namespace FairyGUI
         {
             get; set;
         }
-
+        public string compositionString { get; private set; }
         /// <summary>
         /// 
         /// </summary>
@@ -179,7 +184,7 @@ namespace FairyGUI
                 || isOSX)
                 touchScreen = false;
             else
-                touchScreen = Input.touchSupported && SystemInfo.deviceType != DeviceType.Desktop;
+                touchScreen = (Touchscreen.current != null) && SystemInfo.deviceType != DeviceType.Desktop;
             //在PC上，是否retina屏对输入法位置，鼠标滚轮速度都有影响，但现在没发现Unity有获得的方式。仅判断是否Mac可能不够（外接显示器的情况）。所以最好自行设置。
             devicePixelRatio = (isOSX && Screen.dpi > 96) ? 2 : 1;
 
@@ -211,6 +216,11 @@ namespace FairyGUI
 #if UNITY_5_4_OR_NEWER
             SceneManager.sceneLoaded += SceneManager_sceneLoaded;
 #endif
+            compositionString = "";
+            Keyboard.current.onIMECompositionChange += composition => {
+                    compositionString = composition.ToString();
+            };
+	    EnhancedTouchSupport.Enable();
         }
 
 #if UNITY_5_4_OR_NEWER
@@ -801,18 +811,19 @@ namespace FairyGUI
             else if (touchScreen)
             {
                 _touchTarget = null;
-                for (int i = 0; i < Input.touchCount; ++i)
+                int touchCount = EnhancedTouch.Touch.activeTouches.Count;
+                for (int i = 0; i < touchCount; ++i)
                 {
-                    Touch uTouch = Input.GetTouch(i);
+                    EnhancedTouch.Touch uTouch = EnhancedTouch.Touch.activeTouches[i];
 
-                    Vector2 pos = uTouch.position;
+                    Vector2 pos = uTouch.screenPosition;
                     pos.y = _contentRect.height - pos.y;
 
                     TouchInfo touch = null;
                     TouchInfo free = null;
                     for (int j = 0; j < 5; j++)
                     {
-                        if (_touches[j].touchId == uTouch.fingerId)
+                        if (_touches[j].touchId == uTouch.touchId)
                         {
                             touch = _touches[j];
                             break;
@@ -827,7 +838,7 @@ namespace FairyGUI
                         if (touch == null || uTouch.phase != TouchPhase.Began)
                             continue;
 
-                        touch.touchId = uTouch.fingerId;
+                        touch.touchId = uTouch.touchId;
                     }
 
                     if (uTouch.phase == TouchPhase.Stationary)
@@ -841,7 +852,7 @@ namespace FairyGUI
             }
             else
             {
-                Vector2 pos = Input.mousePosition;
+                Vector2 pos = Mouse.current.position.ReadValue();
                 pos.y = Screen.height - pos.y;
                 TouchInfo touch = _touches[0];
                 if (pos.x < 0 || pos.y < 0) //outside of the window
@@ -871,7 +882,7 @@ namespace FairyGUI
         {
             if (evt.rawType == EventType.KeyDown)
             {
-                if (_IMEComposite && Input.compositionString.Length == 0)
+                if (_IMEComposite && compositionString.Length == 0)
                 {
                     _IMEComposite = false;
                     //eat one key on IME closing
@@ -954,16 +965,16 @@ namespace FairyGUI
                 }
                 else if (touchScreen)
                 {
-                    for (int i = 0; i < Input.touchCount; ++i)
+                    for (int i = 0; i < Touch.activeTouches.Count; ++i)
                     {
-                        Touch uTouch = Input.GetTouch(i);
-                        _touchPosition = uTouch.position;
+                        Touch uTouch = Touch.activeTouches[i];
+                        _touchPosition = uTouch.screenPosition;
                         _touchPosition.y = _contentRect.height - _touchPosition.y;
                     }
                 }
                 else
                 {
-                    Vector2 pos = Input.mousePosition;
+                    Vector2 pos = Mouse.current.position.ReadValue();
                     if (pos.x >= 0 && pos.y >= 0) //编辑器环境下坐标有时是负
                     {
                         pos.y = _contentRect.height - pos.y;
@@ -975,7 +986,7 @@ namespace FairyGUI
 
         void HandleTextInput()
         {
-            _IMEComposite = Input.compositionString.Length > 0;
+            _IMEComposite = compositionString.Length > 0;
 
             InputTextField textField = (InputTextField)_focused;
             if (!textField.editable)
@@ -1060,20 +1071,20 @@ namespace FairyGUI
             if (touch.lastRollOver != touch.target)
                 HandleRollOver(touch);
 
-            if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
+            if (Mouse.current.leftButton.wasPressedThisFrame || Mouse.current.rightButton.wasPressedThisFrame || Mouse.current.middleButton.wasPressedThisFrame)
             {
                 if (!touch.began)
                 {
                     _touchCount = 1;
                     touch.Begin();
-                    touch.button = Input.GetMouseButtonDown(2) ? 2 : (Input.GetMouseButtonDown(1) ? 1 : 0);
+                    touch.button = Mouse.current.middleButton.wasPressedThisFrame ? 2 : (Mouse.current.rightButton.wasPressedThisFrame ? 1 : 0);
                     SetFocus(touch.target);
 
                     touch.UpdateEvent();
                     touch.target.BubbleEvent("onTouchBegin", touch.evt);
                 }
             }
-            if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1) || Input.GetMouseButtonUp(2))
+            if (Mouse.current.leftButton.wasReleasedThisFrame || Mouse.current.rightButton.wasReleasedThisFrame || Mouse.current.middleButton.wasReleasedThisFrame)
             {
                 if (touch.began)
                 {
@@ -1085,7 +1096,7 @@ namespace FairyGUI
                     {
                         touch.UpdateEvent();
 
-                        if (Input.GetMouseButtonUp(1) || Input.GetMouseButtonUp(2))
+                        if (Mouse.current.rightButton.wasReleasedThisFrame || Mouse.current.middleButton.wasReleasedThisFrame)
                             clickTarget.BubbleEvent("onRightClick", touch.evt);
                         else
                             clickTarget.BubbleEvent("onClick", touch.evt);
@@ -1096,27 +1107,27 @@ namespace FairyGUI
             }
 
             //We have to do this, coz the cursor will auto change back after a click or dragging
-            if (Input.GetMouseButtonUp(0) && _currentCursor != null)
+            if (Mouse.current.leftButton.wasReleasedThisFrame && _currentCursor != null)
                 _ChangeCursor(_currentCursor);
         }
 
         void HandleTouchEvents()
         {
-            int tc = Input.touchCount;
+            int tc = EnhancedTouch.Touch.activeTouches.Count;
             for (int i = 0; i < tc; ++i)
             {
-                Touch uTouch = Input.GetTouch(i);
+                Touch uTouch = EnhancedTouch.Touch.activeTouches[i];
 
                 if (uTouch.phase == TouchPhase.Stationary)
                     continue;
 
-                Vector2 pos = uTouch.position;
+                Vector2 pos = uTouch.screenPosition;
                 pos.y = _contentRect.height - pos.y;
 
                 TouchInfo touch = null;
                 for (int j = 0; j < 5; j++)
                 {
-                    if (_touches[j].touchId == uTouch.fingerId)
+                    if (_touches[j].touchId == uTouch.touchId)
                     {
                         touch = _touches[j];
                         break;

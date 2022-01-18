@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace FairyGUI
 {
@@ -105,7 +106,7 @@ namespace FairyGUI
         {
             get
             {
-                return Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
+                return Keyboard.current.leftCtrlKey.isPressed || Keyboard.current.rightCtrlKey.isPressed;
             }
         }
 
@@ -116,7 +117,7 @@ namespace FairyGUI
         {
             get
             {
-                return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+                return Keyboard.current.leftShiftKey.isPressed || Keyboard.current.rightShiftKey.isPressed;
             }
         }
 
@@ -127,7 +128,7 @@ namespace FairyGUI
         {
             get
             {
-                return Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
+                return Keyboard.current.leftAltKey.isPressed || Keyboard.current.rightAltKey.isPressed;
             }
         }
 
@@ -140,7 +141,7 @@ namespace FairyGUI
             {
                 //In win, as long as the win key and other keys are pressed at the same time, the getKey will continue to return true. So it can only be shielded.
                 if (Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor)
-                    return Input.GetKey(KeyCode.LeftCommand) || Input.GetKey(KeyCode.RightCommand);
+                    return Keyboard.current.leftCommandKey.isPressed || Keyboard.current.rightCommandKey.isPressed;
                 else
                     return false;
             }

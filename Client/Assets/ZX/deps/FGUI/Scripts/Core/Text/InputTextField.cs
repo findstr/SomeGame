@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using FairyGUI.Utils;
+using UnityEngine.InputSystem;
 
 namespace FairyGUI
 {
@@ -557,12 +558,12 @@ namespace FairyGUI
             else
                 textField.text = _text;
 
-            _composing = Input.compositionString.Length;
+            _composing = Stage.inst.compositionString.Length;
             if (_composing > 0)
             {
                 StringBuilder buffer = new StringBuilder();
                 GetPartialText(0, _caretPosition, buffer);
-                buffer.Append(Input.compositionString);
+                buffer.Append(Stage.inst.compositionString);
                 GetPartialText(_caretPosition, -1, buffer);
 
                 textField.text = buffer.ToString();
@@ -637,7 +638,7 @@ namespace FairyGUI
         {
             TextField.CharPosition cp;
             if (_editing)
-                cp = GetCharPosition(_caretPosition + Input.compositionString.Length);
+                cp = GetCharPosition(_caretPosition + Stage.inst.compositionString.Length);
             else
                 cp = GetCharPosition(_caretPosition);
 
@@ -677,11 +678,11 @@ namespace FairyGUI
 #endif
                         cursorPos.y = Screen.height - cursorPos.y;
                         cursorPos = cursorPos / Stage.devicePixelRatio;
-                        Input.compositionCursorPos = cursorPos + new Vector2(0, 20);
+                        Keyboard.current.SetIMECursorPosition(cursorPos + new Vector2(0, 20));
 #if !UNITY_2019_OR_NEWER
                     }
                     else
-                        Input.compositionCursorPos = cursorPos - new Vector2(0, 20);
+                        Keyboard.current.SetIMECursorPosition(cursorPos - new Vector2(0, 20));
 #endif
                 }
 
@@ -739,7 +740,7 @@ namespace FairyGUI
             }
 
             TextField.CharPosition start;
-            if (_editing && Input.compositionString.Length > 0)
+            if (_editing && Stage.inst.compositionString.Length > 0)
             {
                 if (_selectionStart < _caretPosition)
                 {
@@ -747,7 +748,7 @@ namespace FairyGUI
                     start = GetCharPosition(_selectionStart);
                 }
                 else
-                    start = GetCharPosition(_selectionStart + Input.compositionString.Length);
+                    start = GetCharPosition(_selectionStart + Stage.inst.compositionString.Length);
             }
             else
                 start = GetCharPosition(_selectionStart);
@@ -1076,10 +1077,12 @@ namespace FairyGUI
             }
             else
             {
+                /*
                 if (!disableIME && !_displayAsPassword)
                     Input.imeCompositionMode = IMECompositionMode.On;
                 else
                     Input.imeCompositionMode = IMECompositionMode.Off;
+                */
                 _composing = 0;
 
                 if ((string)context.data == "key") //select all if got focus by tab key
@@ -1403,14 +1406,14 @@ namespace FairyGUI
             }
             else
             {
-                if (Input.compositionString.Length > 0 && _editable)
+                if (Stage.inst.compositionString.Length > 0 && _editable)
                 {
                     int composing = _composing;
-                    _composing = Input.compositionString.Length;
+                    _composing = Stage.inst.compositionString.Length;
 
                     StringBuilder buffer = new StringBuilder();
                     GetPartialText(0, _caretPosition, buffer);
-                    buffer.Append(Input.compositionString);
+                    buffer.Append(Stage.inst.compositionString);
                     GetPartialText(_caretPosition + composing, -1, buffer);
 
                     textField.text = buffer.ToString();
@@ -1422,7 +1425,7 @@ namespace FairyGUI
 
         internal void CheckComposition()
         {
-            if (_composing != 0 && Input.compositionString.Length == 0)
+            if (_composing != 0 && Stage.inst.compositionString.Length == 0)
                 UpdateText();
         }
 
