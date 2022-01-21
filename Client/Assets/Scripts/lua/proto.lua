@@ -170,19 +170,20 @@ battleplayers_a 0x121c {
 }
 
 
-vec3 {
+vec2 {
 	.x:float 1
 	.y:float 2
-	.z:float 3
 }
 
 battlemove_r 0x1301 {
-	.pos:vec3 1
+	.position:vec2 1
+	.velocity:vec2 2
 }
 
 battlemove_a 0x1302 {
 	.uid:integer 1
-	.pos:vec3 2
+	.position:vec2 2
+	.velocity:vec2 3
 }
 
 battleskill_r 0x1304 {

@@ -52,15 +52,16 @@ public static partial class Core {
 	public static DebugInfo debug = null;
 #endif
 	[CSharpCallLua]
-	private delegate LuaTable require_t(string name);
+	public delegate LuaTable require_t(string name);
 	[CSharpCallLua]
-	private delegate void update_t();
+	public delegate void update_t(float deltaTime);
 	[CSharpCallLua]
-	private delegate void expire_t(LuaTable t);
+	public delegate void expire_t(LuaTable t);
 
 	static private LuaEnv L = null;
 	static private Timer Timer = null;
 
+	static private float logic_last_frame = 0;
 	static private float logic_delta = 0;
 	static private float logic_elapse = 0.0f;
 	static private LuaTable expire_array;
@@ -110,14 +111,15 @@ public static partial class Core {
 	}
 
 	static public void Start() {
+		logic_last_frame = Time.realtimeSinceStartup;
 		L.DoString("require 'main'");
 	}
 	///////////////Update Function
 	static public void FixedUpdate() {
-		core_fixedupdate();
+		core_fixedupdate(Time.fixedDeltaTime);
 	}
 	static public void Update() {
-		core_update();
+		core_update(Time.deltaTime);
 		expire_list.Clear();
 		Timer.Update((int)(Time.deltaTime * 1000f), expire_list);
 		if (expire_list.Count > 0) {
@@ -131,23 +133,25 @@ public static partial class Core {
 		debug.render_frame_count++;
 #endif
 		for (int i = 0; i < 10 && logic_elapse >= logic_delta; i++) {
-		    core_logicupdate();
-		    logic_elapse -= logic_delta;
+			float t = Time.realtimeSinceStartup;
+			core_logicupdate(t - logic_last_frame);
+			logic_last_frame = t;
+			logic_elapse -= logic_delta;
 	#if ZX_DEBUG
-		    debug.logic_frame_count++;
-		    debug.render_fps = (int)(debug.render_frame_count / debug.frame_time);
-		    debug.logic_fps = (int)(debug.logic_frame_count / debug.frame_time);
-		    if (debug.frame_time > 1.0f) {
-			debug.frame_time = 0.0f;
-			debug.render_frame_count = 0;
-			debug.logic_frame_count = 0;
-		    }
+			debug.logic_frame_count++;
+			debug.render_fps = (int)(debug.render_frame_count / debug.frame_time);
+			debug.logic_fps = (int)(debug.logic_frame_count / debug.frame_time);
+			if (debug.frame_time > 1.0f) {
+				debug.frame_time = 0.0f;
+				debug.render_frame_count = 0;
+				debug.logic_frame_count = 0;
+			}
 #endif
 		}
 	}
 	static public void LateUpdate() {
 		ZX.RL.Instance.update();
-		core_lateupdate(); 
+		core_lateupdate(Time.deltaTime); 
 	}
 
 	}

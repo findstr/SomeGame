@@ -46,7 +46,7 @@ function router.error_a(obj, _)
 		s = "error:" + err
 	end
 	tips.show(s)
-	log("[server] error cmd:", obj.cmd, "errno:", sting.format("%02x", obj.errno))
+	log("[server] error cmd:", obj.cmd, "errno:", string.format("%02x", obj.errno))
 	local cb = router[obj.cmd]
 	if cb then
 		cb(nil, obj.errno)

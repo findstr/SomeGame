@@ -6,7 +6,6 @@ public class CameraFollow : MonoBehaviour
 {
     public GameObject target;
     public Vector3 offset;
-    // Update is called once per frame
     void LateUpdate()
     {
         if (target != null) {

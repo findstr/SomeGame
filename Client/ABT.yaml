@@ -1,8 +1,13 @@
 ABT:
+    Scenes/$:
+        root: Assets/Resource/Scenes/
+        match:
+            - '$.unity'
     Lua:
         root: Assets/Scripts/Lua;Assets/ZX/Lua/;Assets/ZX/Deps/zproto/Lua/;Assets/ZX/Deps/FGUI/Lua/
         include:
             - '*.lua'
+
     FGUI/$_desc:
         root: Assets/Resource
         match: 
@@ -15,11 +20,6 @@ ABT:
         root: Assets/Res/
         match:
             - Effect/effect/materials/m_$/*.mat
-
-    Audio/Sound:
-        root: Assets/Res/Audio/Sound
-        include:
-            - "*.mp3"
     Character/$:
         root: Assets/Resource
         match:

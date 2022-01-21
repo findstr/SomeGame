@@ -205,14 +205,14 @@ M._fixedupdate = update_wrap(fixed_queue_, fixed_queue)
 M._update = update_wrap(update_queue_, update_queue)
 M._lateupdate = update_wrap(late_queue_, late_queue)
 
-M._logicupdate = function()
+M._logicupdate = function(delta)
 	local pcall = core_pcall
 	for t, func in pairs(logic_queue_) do
 		logic_queue_[t] = nil
 		logic_queue[t] = func
 	end
 	for t, func in pairs(logic_queue) do
-		local ok, err = pcall(func, t)
+		local ok, err = pcall(func, t, delta)
 		if not ok then
 			print("xx:", err)
 		end

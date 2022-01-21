@@ -38,6 +38,21 @@ EditorUserSettings:
     vcSharedLogLevel:
       value: 0d5e400f0650
       flags: 0
+    zx.buidlab.output:
+      value: 270b1b350a580c7c0c03096d332f56151803570b3f3b23243e662e27f0e53535ebe931c8f4293a282a
+      flags: 0
+    zx.buildab.compression:
+      value: 51
+      flags: 0
+    zx.buildab.config:
+      value: 270b1b350a580c7c0c03096d332f56151803570b0e1c68292c2411
+      flags: 0
+    zx.buildab.group:
+      value: 54
+      flags: 0
+    zx.buildab.target:
+      value: 5202
+      flags: 0
     zx.buildconf.client:
       value: 270b1b350a580c7c0c03096d332f56151803570b3f3b23243e662e30f0e9242cf1a81afce6753c333704
       flags: 0
