@@ -15,5 +15,4 @@ end
 ui.assetdir("FGUI")
 ui.open "login.login"
 
-resources.load_async({"Character/125001.prefab"}, function(ud) print("hello", ud) end, 100)
 

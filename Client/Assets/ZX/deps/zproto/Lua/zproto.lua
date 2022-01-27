@@ -54,7 +54,7 @@ local function query(self, typ)
 		itype = false
 		proto = self.ncache[typ]
 	else
-		assert(false, "typ must be 'number' or 'string'")
+		error("typ must be 'number' or 'string'")
 	end
 	if proto then
 		return proto

@@ -3,12 +3,12 @@
   <resources>
     <component id="dwmx0" name="list.xml" path="/" exported="true"/>
     <component id="dwmx1" name="create.xml" path="/"/>
-    <image id="dwmx4" name="bg.jpg" path="/Images/" exported="true"/>
-    <image id="dwmx5" name="Dungeon.PNG" path="/Images/" exported="true"/>
-    <image id="dwmx7" name="PerksAtlas_14.PNG" path="/Images/" exported="true"/>
-    <image id="dwmx8" name="PerksAtlas_27.PNG" path="/Images/" exported="true"/>
-    <image id="dwmx9" name="UI_LoginBtn.PNG" path="/Images/" exported="true"/>
-    <image id="dwmxa" name="UI_LoginBtn_ONpressed.png" path="/Images/" exported="true"/>
+    <image id="dwmx4" name="bg.jpg" path="/Images/"/>
+    <image id="dwmx5" name="Dungeon.PNG" path="/Images/"/>
+    <image id="dwmx7" name="PerksAtlas_14.PNG" path="/Images/"/>
+    <image id="dwmx8" name="PerksAtlas_27.PNG" path="/Images/"/>
+    <image id="dwmx9" name="UI_LoginBtn.PNG" path="/Images/"/>
+    <image id="dwmxa" name="UI_LoginBtn_ONpressed.png" path="/Images/"/>
     <component id="dwmxb" name="refresh.xml" path="/"/>
     <component id="dwmxc" name="back.xml" path="/"/>
     <component id="dwmxd" name="rinfo.xml" path="/" exported="true"/>
