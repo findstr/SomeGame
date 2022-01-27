@@ -14,6 +14,7 @@ local function core_pcall(f, ...)
 end
 
 M.pcall = core_pcall
+M.result = {}
 -------------timer
 
 -------------coroutines

@@ -24,9 +24,6 @@ login_r 0x1102 {
 }
 
 login_a 0x1103 {
-	.roomid:integer 1
-	.roomstate:integer 2
-	.members:uinteger[] 3
 }
 
 kick_n 0x1104 {
@@ -44,156 +41,106 @@ roomlist_a 0x1202 {
 		.battle:integer 1
 		.roomid:integer 2
 		.name:string 3
-		.owner:uinteger 4
+		.red:integer 4
+		.blue:integer 5
 	}
 	.list:room[] 1
 }
 
-roomcreate_c 0x1203 {
-	.name:string 1
-	.uid:uinteger 2
-	.gate:integer 3
-}
-
-roomcreate_r 0x1204 {
+battlecreate_r 0x1204 {
 	.name:string 1
 }
 
-roomcreate_a 0x1205 {
+battlecreate_a 0x1205 {
 	.roomid:integer 1
 	.name:string 2
 }
 
-roomenter_c 0x1206 {
+battleenter_c 0x1206 {
 	.roomid:integer 1
 	.uid:uinteger 2
 	.gate:integer 3
+	.side:byte 4
 }
 
-roomenter_r 0x1207 {
+battleenter_r 0x1207 {
 	.roomid:integer 1
 	.battle:integer 2
-	.side:boolean 3 #false -> red, true ->blue
+	.side:byte 3 #0 -> left, 1 -> right
 }
 
-roomenter_a 0x1208 {
+battleenter_a 0x1208 {
 	.roomid:integer 1
 	.name:string 2
-	.list:uinteger[] 3
+	.redcount:byte 3
+	.uidlist:integer[] 4
 }
 
-roomenter_n 0x1209 {
+battleenter_n 0x1209 {
 	.roomid:integer 1
 	.uid:integer 2
+	.side:byte 3
 }
 
-roomleave_r 0x120a {
+battleleave_r 0x120a {
 
 }
 
-roomleave_a 0x120b {
+battleleave_a 0x120b {
 	.roomid:integer 1
 	.uid:uinteger 2
 }
 
-roomplay_r 0x120c {
+battleready_r 0x120c {
 
 }
 
-roomplay_a 0x120d {
-
+battleready_a 0x120d {
+	.current:integer 1
+	.total:integer 2
 }
 
-roombattle_n 0x120e {
-	.uids:uinteger[] 1
-}
-
-roomshow_c 0x120f {
-	.battle:integer 1
-	.roomid:integer 2
-	.name:string 3
-	.owner:uinteger 4
-}
-
-roomshow_a 0x1210 {
-}
-
-roomhide_c 0x1211 {
-	.battle:integer 1
-	.roomid:integer 2
-}
-
-roomhide_a 0x1212 {
-
-}
-
-battlejoin_c 0x1213 {
-	.battle:integer 1
-	.uid:uinteger 2
-}
-
-battlejoin_a 0x1214 {
-
-}
-
-battleleave_c 0x1215 {
-	.uid:uinteger 1
-}
-
-battleleave_a 0x1216 {
-
-}
-
-whichbattle_c 0x1217 {
-	.uid:uinteger 1
-}
-
-whichbattle_a 0x1218 {
-	.battle:integer 1
-}
-
-roomrestore_c 0x1219 {
-	.uid:integer 1
-}
-
-roomrestore_a 0x121a {
-	.roomid:integer 1
-	.roomstate:integer 2
-	.members:uinteger[] 3
-}
-
-battleplayers_c 0x121b {
-}
-
-battleplayers_a 0x121c {
-	.uids:integer[] 1
-}
-
-
-vec2 {
-	.x:float 1
-	.y:float 2
+battlestart_n 0x120e {
+	player {
+		.uid:uinteger 1
+		.hero:integer 2
+		.hp:integer 3
+		.mp:integer 4
+		.side:byte 5	#1 -> red 2 -> blue
+		.px:float 6
+		.pz:float 7
+	}
+	.players:player[uid] 1
 }
 
 battlemove_r 0x1301 {
-	.position:vec2 1
-	.velocity:vec2 2
+	.px:float 1
+	.pz:float 2
+	.vx:float 3
+	.vz:float 4
 }
 
 battlemove_a 0x1302 {
-	.uid:integer 1
-	.position:vec2 2
-	.velocity:vec2 3
+	.px:float 1
+	.pz:float 2
+	.vx:float 3
+	.vz:float 4
+	.uid:uinteger 5
 }
 
 battleskill_r 0x1304 {
 	.skill:integer 1
+	.target:uinteger 2
 }
 
 battleskill_a 0x1305 {
 	.uid:uinteger 1
 	.skill:integer 2
+	.mp:integer 3
+	.target:uinteger 4
+	.targethp:integer 5
 }
+
 
 ]]
 return M

@@ -20,9 +20,6 @@ login_r 0x1102 {
 	.uid_:uinteger 3
 }
 login_a 0x1103 {
-	.roomid:integer 1
-	.roomstate:integer 2
-	.members:uinteger[] 3
 }
 kick_n 0x1104 {
 	.errno:integer 1
@@ -36,122 +33,93 @@ roomlist_a 0x1202 {
 		.battle:integer 1
 		.roomid:integer 2
 		.name:string 3
-		.owner:uinteger 4
+		.red:integer 4
+		.blue:integer 5
 	}
 	.list:room[] 1
 }
-roomcreate_c 0x1203 {
-	.name:string 1
-	.uid:uinteger 2
-	.gate:integer 3
-}
-roomcreate_r 0x1204 {
+battlecreate_r 0x1204 {
 	.name:string 1
 	.uid_:uinteger 2
 }
-roomcreate_a 0x1205 {
+battlecreate_a 0x1205 {
 	.roomid:integer 1
 	.name:string 2
 }
-roomenter_c 0x1206 {
+battleenter_c 0x1206 {
 	.roomid:integer 1
 	.uid:uinteger 2
 	.gate:integer 3
+	.side:byte 4
 }
-roomenter_r 0x1207 {
+battleenter_r 0x1207 {
 	.roomid:integer 1
 	.battle:integer 2
-	.side:boolean 3 #false -> red, true ->blue
+	.side:byte 3 #0 -> left, 1 -> right
 	.uid_:uinteger 4
 }
-roomenter_a 0x1208 {
+battleenter_a 0x1208 {
 	.roomid:integer 1
 	.name:string 2
-	.list:uinteger[] 3
+	.redcount:byte 3
+	.uidlist:integer[] 4
 }
-roomenter_n 0x1209 {
+battleenter_n 0x1209 {
 	.roomid:integer 1
 	.uid:integer 2
+	.side:byte 3
 }
-roomleave_r 0x120a {
-	.uid_:uinteger 3
+battleleave_r 0x120a {
+	.uid_:uinteger 4
 }
-roomleave_a 0x120b {
+battleleave_a 0x120b {
 	.roomid:integer 1
 	.uid:uinteger 2
 }
-roomplay_r 0x120c {
+battleready_r 0x120c {
 	.uid_:uinteger 3
 }
-roomplay_a 0x120d {
+battleready_a 0x120d {
+	.current:integer 1
+	.total:integer 2
 }
-roombattle_n 0x120e {
-	.uids:uinteger[] 1
-}
-roomshow_c 0x120f {
-	.battle:integer 1
-	.roomid:integer 2
-	.name:string 3
-	.owner:uinteger 4
-}
-roomshow_a 0x1210 {
-}
-roomhide_c 0x1211 {
-	.battle:integer 1
-	.roomid:integer 2
-}
-roomhide_a 0x1212 {
-}
-battlejoin_c 0x1213 {
-	.battle:integer 1
-	.uid:uinteger 2
-}
-battlejoin_a 0x1214 {
-}
-battleleave_c 0x1215 {
-	.uid:uinteger 1
-}
-battleleave_a 0x1216 {
-}
-whichbattle_c 0x1217 {
-	.uid:uinteger 1
-}
-whichbattle_a 0x1218 {
-	.battle:integer 1
-}
-roomrestore_c 0x1219 {
-	.uid:integer 1
-}
-roomrestore_a 0x121a {
-	.roomid:integer 1
-	.roomstate:integer 2
-	.members:uinteger[] 3
-}
-battleplayers_c 0x121b {
-}
-battleplayers_a 0x121c {
-	.uids:integer[] 1
-}
-vec3 {
-	.x:float 1
-	.y:float 2
-	.z:float 3
+battlestart_n 0x120e {
+	player {
+		.uid:uinteger 1
+		.hero:integer 2
+		.hp:integer 3
+		.mp:integer 4
+		.side:byte 5	#1 -> red 2 -> blue
+		.px:float 6
+		.pz:float 7
+	}
+	.players:player[uid] 1
 }
 battlemove_r 0x1301 {
-	.pos:vec3 1
-	.uid_:uinteger 2
+	.px:float 1
+	.pz:float 2
+	.vx:float 3
+	.vz:float 4
+	.uid_:uinteger 5
 }
 battlemove_a 0x1302 {
-	.uid:integer 1
-	.pos:vec3 2
+	.px:float 1
+	.pz:float 2
+	.vx:float 3
+	.vz:float 4
+	.uid:uinteger 5
 }
 battleskill_r 0x1304 {
 	.skill:integer 1
-	.uid_:uinteger 2
+	.target:uinteger 2
+	.uid_:uinteger 3
 }
 battleskill_a 0x1305 {
 	.uid:uinteger 1
 	.skill:integer 2
+	.mp:integer 3
+	.target:uinteger 4
+	.targethp:integer 5
 }
 #----------cluster protocol----------
 
@@ -221,6 +189,98 @@ multicast_n 0x100e {
 	.dat:string 3
 }
 
+battlerestore_c 0x100f {
+	.uid:integer 1
+}
+
+battlerestore_a 0x1010 {
+}
+
+battlecreate_c 0x1011 {
+	.name:string 1
+	.uid:uinteger 2
+	.gate:integer 3
+}
+
+
+battleplayers_c 0x1013 {
+}
+
+battleplayers_a 0x1014 {
+	room {
+		.name:string 1
+		.roomid:integer 2
+		.redcount:integer 3
+		.uidlist:uinteger[] 4
+	}
+	.rooms:room[] 1
+}
+
+battlejoin_c 0x1015 {
+	.battle:integer 1
+	.uid:uinteger 2
+}
+
+battlejoin_a 0x1016 {
+
+}
+
+battleleave_c 0x1017 {
+	.uid:uinteger 1
+	.side:byte 2
+}
+
+whichbattle_c 0x1018 {
+	.uid:uinteger 1
+}
+
+whichbattle_a 0x1019 {
+	.battle:integer 1
+}
+
+
+roomcreate_c 0x101a {
+	.battle:integer 1
+	.roomid:integer 2
+	.name:string 3
+	.owner:uinteger 4
+}
+
+roomcreate_a 0x101b {
+
+}
+
+roomhide_c 0x101c {
+	.battle:integer 1
+	.roomid:integer 2
+}
+
+roomhide_a 0x101d {
+
+}
+
+roomclear_c 0x101e {
+	.battle:integer 1
+	.roomid:integer 2
+	.uidlist:uinteger[] 3
+}
+
+roomclear_a 0x101f {
+}
+
+roomjoin_c 0x1020 {
+	.roomid:integer 1
+	.battle:integer 2
+	.uid:uinteger 3
+	.side:byte 4
+}
+
+roomjoin_a 0x1021 {
+	.roomid:integer 1
+	.battle:integer 2
+	.uid:uinteger 3
+	.side:byte 4
+}
 ]]
 return M
 

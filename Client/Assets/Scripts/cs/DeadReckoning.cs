@@ -14,16 +14,18 @@ public class DeadReckoning : MonoBehaviour
 	private Vector3 syn_v = Vector3.zero;
 	private readonly float t_delta = 1.0f / 10.0f; 
 	private float t_elapse = 0.0f;
+	private Character c = null;
 	// Start is called before the first frame update
 	void Start()
 	{
+		c = GetComponent<Character>();
 		position = transform.position;
 		dr_p = position;
 		syn_p = position;
 	}
 	void LateUpdate()
 	{
-		if (syn_v == Vector3.zero)
+		if (syn_v == Vector3.zero || c == null || c.IsFiring)
 			return ;
 		t_elapse += Time.deltaTime;
 		float t = Mathf.Clamp01(t_elapse / t_delta);

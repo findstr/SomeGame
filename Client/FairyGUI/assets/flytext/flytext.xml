@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="100,100">
+  <displayList>
+    <text id="n0_mmpj" name="text" xy="0,64" size="100,35" fontSize="25" align="right" autoSize="none" text="300"/>
+  </displayList>
+  <transition name="ctrl">
+    <item time="0" type="Alpha" target="n0_mmpj" tween="true" startValue="0" endValue="1" duration="6" ease="Quad.In"/>
+    <item time="0" type="XY" target="n0_mmpj" tween="true" startValue="0,66" endValue="-37.6,21.943" duration="12" ease="Quad.In"/>
+    <item time="6" type="Alpha" target="n0_mmpj" tween="true" startValue="1" endValue="1" duration="12" ease="Quad.In"/>
+    <item time="12" type="XY" target="n0_mmpj" tween="true" startValue="-37.6,21.943" endValue="-59,66" duration="12"/>
+    <item time="18" type="Alpha" target="n0_mmpj" tween="true" startValue="1" endValue="0" duration="6"/>
+    <item time="24" type="Alpha" target="n0_mmpj" value="0"/>
+    <item time="24" type="XY" target="n0_mmpj" value="-59,66"/>
+  </transition>
+</component>

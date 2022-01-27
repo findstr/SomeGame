@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="p33xx0ke">
+  <resources>
+    <image id="mmpj0" name="80668E524672C2EE_0.png" path="/Images/"/>
+    <component id="mmpj1" name="main.xml" path="/" exported="true"/>
+    <image id="mmpj3" name="HP.png" path="/Images/"/>
+    <image id="mmpj4" name="MP.png" path="/Images/"/>
+    <image id="mmpj5" name="BarBackGround.png" path="/Images/"/>
+    <component id="mmpj7" name="HP.xml" path="/"/>
+    <component id="mmpj8" name="MP.xml" path="/"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

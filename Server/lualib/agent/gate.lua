@@ -194,5 +194,31 @@ function M.multicast(uids, cmd, obj)
 	end
 end
 
+function M.mapcast(map, cmd, obj)
+	local dat, sz = proto:encode(cmd, obj, true)
+	dat = proto:pack(dat, sz)
+	local uids = {}
+	for uid, _ in pairs(map) do
+		uids[#uids + 1] = uid
+		local slot = uid_slot[uid]
+		if slot then
+			cache[slot] = true
+		end
+	end
+	local req = {
+		uids = uids,
+		cmd = proto:tag(cmd),
+		dat = dat
+	}
+	for slot, _ in pairs(cache) do
+		cache[slot] = nil
+		local rpc = gate_rpc[slot]
+		if rpc then
+			rpc:send("multicast_n", req)
+		end
+	end
+end
+
+
 return M
 

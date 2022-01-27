@@ -12,14 +12,10 @@ namespace ZX
 {
 	public class UI
 	{
-		private int pkg_idx = 0;
 		private int ud_idx = 0;
 		private string prefix = "";
-		List<int> pkg_id_pool = new List<int>();
+		Dictionary<UIPackage, int> package_ref = new Dictionary<UIPackage, int>();
 		Dictionary<int, PackageItem> ud_map = new Dictionary<int, PackageItem>();
-		Dictionary<int, UIPackage> id_to_package = new Dictionary<int, UIPackage>();
-		Dictionary<string, int> name_to_packageid = new Dictionary<string, int>();
-		Dictionary<string, UIPackage> dead_package = new Dictionary<string, UIPackage>();
 		IRL.load_cb_t ui_load_callback = null;
 		static void unload_audio(AudioClip asset)
 		{
@@ -42,7 +38,6 @@ namespace ZX
 
 		void LoadAsync(string name, string extension, System.Type type, PackageItem item)
 		{
-			Debug.Log("load_async:" + name);
 			ud_map[ud_idx] = item;
 			RL.Instance.load_asset_async(name + extension, type, ui_load_callback, ud_idx++);
 		}
@@ -59,68 +54,65 @@ namespace ZX
 		{
 			prefix = s;
 		}
-
-		public int AddPackage(string package)
+		
+		private UIPackage AddPackage(string package)
 		{
-			Debug.Log("AddPackage:" + package);
-			if (name_to_packageid.TryGetValue(package, out int id))
-				return id;
-			if (pkg_id_pool.Count > 0) {
-				int i = pkg_id_pool.Count - 1;
-				id = pkg_id_pool[i];
-				pkg_id_pool.RemoveAt(i);
-			} else {
-				id = pkg_idx++;
-			}
-			if (dead_package.TryGetValue(package, out UIPackage pkg)) {//try resurrect uipackage
-				pkg.ReloadAssets();
+			var pkg = GetByName(package);
+			if (pkg != null) {
+				int n = package_ref[pkg];
+				package_ref[pkg] = n + 1;
+				if (n == 0) //try resurrent UIPackage
+					pkg.ReloadAssets();
 			} else {
 				var name = string.Format("{0}/{1}", prefix, package);
 				var path = name + "_fui.bytes";
 				var abr = RL.Instance.load_asset(path, typeof(TextAsset));
 				pkg = UIPackage.AddPackage((abr.asset as TextAsset).bytes, name, LoadAsync);
 				RL.Instance.unload_asset(abr);
-				if (pkg == null)
-					return -1;
+				if (pkg != null)
+					package_ref[pkg] = 1;
 			}
-			id_to_package.Add(id, pkg);
-			name_to_packageid.Add(package, id);
-			return id;
+			return pkg;
 		}
 
-		public void RemovePackage(int id)
+		private void RemovePackage(UIPackage pkg)
 		{
-			if (id_to_package.TryGetValue(id, out UIPackage pkg)) {
-				id_to_package.Remove(id);
-				name_to_packageid.Remove(pkg.name);
-				dead_package.Add(pkg.name, pkg);
+			int n = package_ref[pkg];
+			package_ref[pkg] = n - 1;
+			if (n == 1) {
 				pkg.UnloadAssets();
 				//TODO:use LRU to evict package
 			}
 		}
 
-		public GObject CreateObject(int id, string resName)
+		public GObject CreateObject(string package, string name)
 		{
-			if (!id_to_package.TryGetValue(id, out UIPackage pkg))
+			var pkg = AddPackage(package);
+			if (pkg == null)
 				return null;
-			return pkg.CreateObject(resName);
+			return pkg.CreateObject(name);
 		}
 
-		public void CreateObjectAsync(int id, string resName, CreateObjectCallback callback)
+		public void CreateObjectAsync(string package, string name, CreateObjectCallback callback)
 		{
-			if (!id_to_package.TryGetValue(id, out UIPackage pkg))
-				return;
-			pkg.CreateObjectAsync(resName, callback);
+			var pkg = AddPackage(package);
+			if (pkg == null)
+				return ;
+			pkg.CreateObjectAsync(name, callback);
+		}
+
+		public void RemoveObject(GObject go)
+		{
+			var pkg = go.packageItem.owner;
+			RemovePackage(pkg);
+			go.Dispose();
 		}
 
 		public void RemoveAllPackages()
 		{
 			UIPackage.RemoveAllPackages();
-			pkg_id_pool.Clear();
 			ud_map.Clear();
-			id_to_package.Clear();
-			name_to_packageid.Clear();
-			dead_package.Clear();
+			package_ref.Clear();
 		}
 	}
 }

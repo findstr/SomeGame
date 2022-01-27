@@ -420,6 +420,7 @@ namespace ZX
 					}
 					result.callback(result);
 				}
+				ListPool<AssetRequest>.Release(result.assets);
 				result.assets = null;
 				result_pool.Release(result);
 			}

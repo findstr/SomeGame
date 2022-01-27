@@ -8,7 +8,7 @@ using static FairyGUI.UIPackage;
 
 namespace ZX {
 static partial class Core {
-	static private UI UI = null;
+	static public UI UI = null;
 	static void InitUI() {
 		if (UI != null)
 			UI.RemoveAllPackages();
@@ -17,17 +17,14 @@ static partial class Core {
         static public void SetPathPrefix(string s) {
 		UI.SetPathPrefix(s);
         }
-        static public int AddPackage(int id) {
-		return UI.AddPackage(Strings.Get(id));
+	static public GObject CreateObject(int package, int name) {
+		return UI.CreateObject(Strings.Get(package), Strings.Get(name));
+        }
+        static public void CreateObjectAsync(int package, int name, CreateObjectCallback callback) {
+		UI.CreateObjectAsync(Strings.Get(package), Strings.Get(name), callback);
 	}
-        static public void RemovePackage(int id) {
-		UI.RemovePackage(id);
-        }
-	static public GObject CreateObject(int id, int resName) {
-		return UI.CreateObject(id, Strings.Get(resName));
-        }
-        static public void CreateObjectAsync(int id, int resName, CreateObjectCallback callback) {
-		UI.CreateObjectAsync(id, Strings.Get(resName), callback);
+	static public void RemoveObject(GObject obj) {
+		UI.RemoveObject(obj);
 	}
 }}
 

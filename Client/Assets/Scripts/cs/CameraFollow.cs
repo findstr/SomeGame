@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public GameObject target;
     public Vector3 offset;
+    public GameObject target = null;
     void LateUpdate()
     {
         if (target != null) {

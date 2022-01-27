@@ -6,85 +6,76 @@ local ui = require "zx.ui"
 local battle = require "model.battle"
 
 local M = {}
-local roomid = nil
-local room_list = {}
+local members = {}
+local RED<const> = 1
+local BLUE<const> = 2
 local remove = table.remove
+
 local function click_back()
-	server.send("roomleave_r")
+	server.send("battleleave_r")
 	ui.back()
 end
 
 local function click_begin()
-	server.send("roomplay_r")
+	server.send("battleready_r")
 end
 
-local function sync_data(members)
-	for i = 1, #members do
-		room_list[i] = members[i]
+local function sync_data(list, redcount)
+	for i = 1, #list do
+		members[list[i]] = i <= redcount and RED or BLUE
 	end
-	for i = #members + 1, #room_list do
-		room_list[i] = nil
+	for i = #list + 1, #members do
+		members[i] = nil
 	end
 end
 
 local function refresh_list()
-	local list = M.atk_list
-	list:RemoveChildrenToPool()
+	local left, right = M.left_list, M.right_list
+	local list = {
+		[RED] = left,
+		[BLUE] = right,
+	}
+	left:RemoveChildrenToPool()
+	right:RemoveChildrenToPool()
 	local x = {}
-	for k, uid in pairs(room_list) do
-		local obj = list:AddItemFromPool("ui://room/pinfo");
+	for uid, side in pairs(members) do
+		local obj = list[side]:AddItemFromPool("ui://room/pinfo");
 		pinfo(x, obj)
 		x.name.text = uid
 		x.level.text = "30"
 	end
 end
 
-function router.roomleave_a(ack)
-	print("roomleave_a", ack.roomid, roomid)
-	if roomid == ack.roomid then
-		local uid = ack.uid
-		for i = 1, #room_list do
-			if room_list[i] == uid then
-				remove(room_list, i)
-				break
-			end
-		end
-		refresh_list()
-	end
+function router.battleleave_a(ack)
+	print("battleleave_a", ack.roomid, roomid)
+	local uid = ack.uid
+	members[uid] = nil
+	refresh_list()
 end
 
-function router.roomenter_n(ack)
-	print("roomenter_n", ack.roomid, roomid)
-	if roomid == ack.roomid then
-		local has = false
-		local uid = ack.uid
-		for i = 1, #room_list do
-			if room_list[i] == uid then
-				has = true
-				break
-			end
-		end
-		room_list[#room_list + 1] = uid
-		refresh_list()
-	end
+function router.battleenter_n(ack)
+	print("battleenter_n", ack.roomid, ack.side)
+	local has = false
+	local uid = ack.uid
+	members[uid] = ack.side
+	refresh_list()
 end
 
-function router.roombattle_n(ack)
+function router.battlestart_n(ack)
 	print("roombattle_n")
 	ui.clear()
-	battle.start(ack.uids)
+	battle.start(ack.players)
 end
 
-function M:start(view, rid, name, list)
-	print("room.room", rid, name, list)
+function M:start(view, roomid, name, uidlist, redcount)
+	print("room.room", roomid, name, uidlist, redcount)
 	view:MakeFullScreen()
 	GRoot.inst:AddChild(view)	
 	bind(M, view)
 	M.back.onClick:Add(click_back)
 	M.begin.onClick:Add(click_begin)
 	M.room_name.text = name
-	roomid = rid
-	sync_data(list)
+	sync_data(uidlist, redcount)
 	refresh_list()
 	return 
 end

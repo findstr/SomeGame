@@ -9,7 +9,7 @@ end
 
 local function room_mode()
 	print("room_mode")
-	ui.inplace("room.room")
+	ui.inplace("room.list")
 end
 
 local function hell_mode()

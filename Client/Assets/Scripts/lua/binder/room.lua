@@ -11,13 +11,14 @@ function M.rinfo(vm, view)
     vm.room_name = view:GetChildAt(1);
     vm.player_count = view:GetChildAt(3);
     vm.room_id = view:GetChildAt(5);
-    vm.join = view:GetChildAt(6);
+    vm.join_left = view:GetChildAt(6);
+    vm.join_right = view:GetChildAt(7);
 end
 function M.room(vm, view)
     vm.room_name = view:GetChildAt(2);
     vm.back = view:GetChildAt(3);
-    vm.atk_list = view:GetChildAt(4);
-    vm.def_list = view:GetChildAt(5);
+    vm.left_list = view:GetChildAt(4);
+    vm.right_list = view:GetChildAt(5);
     vm.begin = view:GetChildAt(6);
 end
 function M.pinfo(vm, view)

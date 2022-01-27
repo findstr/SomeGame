@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="p84p8jpy">
+  <resources>
+    <image id="mmpj0" name="Avatar.PNG" path="/Images/"/>
+    <component id="mmpji" name="normal.xml" path="/"/>
+    <component id="mmpj5" name="main.xml" path="/" exported="true"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

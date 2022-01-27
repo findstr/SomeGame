@@ -6,6 +6,7 @@ local battle_errno = require "errno.battle"
 local msgserver = require "cluster.msg"
 local proto = require "proto.client"
 
+local pcall = core.pcall
 local assert = assert
 local pairs = pairs
 local ipairs = ipairs
@@ -112,23 +113,13 @@ local function login_r(fd, req)
 		return
 	end
 	local battle = ack.battle
-	if battle then
-		local ack, err = battle_rpc[battle]:call("roomrestore_c", req)
-		if not ack then
-			error_a(fd, "login_a", errno.SYSTEM)
-			lprint("[gate] login_r", fd, uid, "roomrestore_c error:", err)
-			return
-		end
-		req = ack
-	end
+	u.battle = battle
 	fd_to_uid[fd] = uid
 	gate_server:send(fd, "login_a", req)
 	lprint("[gate] login_r", fd, uid, "battle", battle, "ok")
 end
 
 ------------------------------------------------ROOM
-
-local error_cmd = proto:tag("error")
 
 local function forward_room(cmdr, cmda)
 	return function(fd, uid, req, cmdx)
@@ -159,7 +150,7 @@ local function forward_battle(cmdr)
 		req.uid = uid
 		req.gate = gate_slot
 		print("forward_room fd", fd, "uid", uid)
-		local ack, cmd = room_rpc:call(cmdr, req)
+		local ack, cmd = battle_rpc[uid_info[uid].battle]:call(cmdr, req)
 		if not ack then
 			lprint("[gate] cmd:", cmdr, "fail", cmd)
 			return
@@ -179,10 +170,32 @@ local function forward_battle(cmdr)
 
 end
 
-msg.roomcreate_r = function(fd, uid, req, cmdx)
+msg.roomlist_r = function(fd, uid, req, cmdx)
+	local u = uid_info[uid]
+	local battle = u.battle
+	if battle then
+		req.uid = uid
+		local ack, cmd = battle_rpc[battle]:call("battlerestore_c", req)
+		if not ack then
+			lprint("[gate] cmd:", cmdx, "fail", cmd)
+			return
+		end
+		gate_server:send(fd, cmd, ack)
+	else
+		lprint("[gate] roomlist_r uid:", uid, "in", battle)
+		local ack, cmd = room_rpc:call(cmdx)
+		if not ack then
+			lprint("[gate] cmd:", cmdx, "fail", cmd)
+			return
+		end
+		gate_server:send(fd, "roomlist_a", ack)
+	end
+end
+
+msg.battlecreate_r = function(fd, uid, req, cmdx)
 	local u = uid_info[uid]
 	if u.battle then
-		lprint("[gate] roomcreate uid:", uid, "already in", u.battle)
+		lprint("[gate] battlecreate uid:", uid, "already in", u.battle)
 		gate_server:send(fd, "error_a", {
 			cmd = cmdx+1,
 			errno = battle_errno.INROOM
@@ -194,9 +207,9 @@ msg.roomcreate_r = function(fd, uid, req, cmdx)
 	local battle = battle_roundrobin % battle_count + 1
 	battle_roundrobin = battle
 	u.battle = battle
-	local ack, cmd = battle_rpc[battle]:call("roomcreate_c", req)
+	local ack, cmd = battle_rpc[battle]:call("battlecreate_c", req)
 	if not ack then
-		lprint("[gate] roomcreate_c fail", cmd)
+		lprint("[gate] battlecreate_c fail", cmd)
 		return
 	end
 	local errno = ack.errno
@@ -210,10 +223,10 @@ msg.roomcreate_r = function(fd, uid, req, cmdx)
 	end
 end
 
-msg.roomenter_r = function(fd, uid, req, cmdx)
+msg.battleenter_r = function(fd, uid, req, cmdx)
 	local u = uid_info[uid]
 	if u.battle then
-		lprint("[gate] roomcreate uid:", uid, "already in", u.battle)
+		lprint("[gate] enter uid:", uid, "already in", u.battle)
 		gate_server:send(fd, "error_a", {
 			cmd = cmdx+1,
 			errno = battle_errno.INROOM
@@ -223,25 +236,28 @@ msg.roomenter_r = function(fd, uid, req, cmdx)
 	local battle = req.battle
 	req.uid = uid
 	req.gate = gate_slot
+	req.side = req.side
 	u.battle = battle
-	local ack, cmd = battle_rpc[battle]:call("roomenter_c", req)
+	local ack, cmd = battle_rpc[battle]:call("battleenter_c", req)
 	if not ack then
-		lprint("[gate] roomcreate_c fail", cmd)
+		u.battle = nil
+		lprint("[gate] battleenter_c fail", cmd)
 		return
 	end
 	local errno = ack.errno
 	if errno then
+		u.battle = nil
 		gate_server:send(fd, "error_a", {
 			cmd = cmdx+1,
 			errno = errno
 		})
 	else
-		print("roomenter", fd, cmd, ack)
+		print("battleenter", fd, cmd, ack)
 		gate_server:send(fd, cmd, ack)
 	end
 end
 
-msg.roomleave_r = function(fd, uid, req, cmdx)
+msg.battleleave_r = function(fd, uid, req, cmdx)
 	local u = uid_info[uid]
 	local battle = u.battle
 	if not battle then
@@ -251,9 +267,10 @@ msg.roomleave_r = function(fd, uid, req, cmdx)
 		})
 		return
 	end
+	req.uid_ = uid
 	local ack, cmd = battle_rpc[battle]:call(cmdx, req)
 	if not ack then
-		lprint("[gate] roomleave_r fail", cmd)
+		lprint("[gate] battleleave_r fail", cmd)
 		return
 	end
 	local errno = ack.errno
@@ -264,7 +281,7 @@ msg.roomleave_r = function(fd, uid, req, cmdx)
 		})
 	else
 		u.battle = nil
-		print("roomleave", fd, cmd, ack)
+		print("battleleave", fd, cmd, ack)
 		gate_server:send(fd, cmd, ack)
 	end
 end
@@ -275,10 +292,12 @@ msg.battlemove_r = function(fd, uid, req, cmdx)
 	req.uid_ = uid
 	local u = uid_info[uid]
 	local battle = u.battle
+	print("battlemove_r")
 	if battle then
 		battle_rpc[battle]:send(cmdx, req)
 	end
 end
+print("msg.battlemove_r", msg.battlemove_r)
 msg.battleskill_r = msg.battlemove_r
 
 
@@ -433,7 +452,7 @@ function M.start(slot)
 				return
 			end
 			local u = fd_cmd_queue[fd]
-			print("MSG", fd, cmd, req, u[1], msg[cmd])
+			print("MSG", fd, cmd, json.encode(req), u[1], msg[cmd])
 			if u[1] then
 				print("----------pending", cmd)
 				req.cmd_ = cmd
@@ -442,7 +461,10 @@ function M.start(slot)
 				u[1] = true
 				local func = msg[cmd]
 				if func then
-					func(fd, uid, req, cmd)
+					local ok, err = pcall(func, fd, uid, req, cmd)
+					if not ok then
+						lprint("[MSG] cmd:", cmd, err)
+					end
 				end
 				while true do
 					local req = tremove(u, 2)
@@ -452,7 +474,10 @@ function M.start(slot)
 					local cmd = req.cmd_
 					local func = msg[cmd]
 					if func then
-						func(fd, uid, req, cmd)
+						local ok, err = func(fd, uid, req, cmd)
+						if not ok then
+							lprint("[MSG] cmd:", cmd, err)
+						end
 					end
 				end
 				u[1] = nil

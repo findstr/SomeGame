@@ -14,15 +14,7 @@ local ROOM_BATTLE<const> = 2
 
 local function login_finish(ack, status)
 	if ack then
-		print("login_finish", ack.roomstate)
-		if ack.roomstate == ROOM_IDLE then
-			ui.inplace("room.room", ack.roomid, "", ack.members)
-		elseif ack.roomstate == ROOM_BATTLE then
-			ui.clear()
-			battle.start(ack.members)
-		else
-			ui.inplace("lobby.lobby")
-		end
+		ui.inplace("lobby.lobby")
 	end
 end
 

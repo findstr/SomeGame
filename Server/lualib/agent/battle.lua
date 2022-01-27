@@ -25,8 +25,11 @@ function M.join(conns, count)
 	for i = 1, count do
 		local w = conns[i]
 		if w then
-			if join_cb and w.epoch > battle_epoch[i] then
-				join_cb(i)
+			if join_cb then
+				local e = battle_epoch[i]
+				if not e or w.epoch > e then
+					join_cb(i)
+				end
 			end
 			battle_epoch[i] = w.epoch
 			battle_rpc[i] = w.rpc
@@ -43,9 +46,12 @@ function M.call(slot, cmd, obj)
 	return ack, cmd
 end
 
-function M.restore(cb)
-	local buf = {}
+function M.restart_cb(cb)
 	join_cb = cb
+end
+
+function M.restore()
+	local buf = {}
 	while not battle_count do
 		core.sleep(100)
 	end
@@ -57,9 +63,7 @@ function M.restore(cb)
 			local rpc = battle_rpc[i]
 			local ack, err = rpc:call("battleplayers_c")
 			if ack then
-				for _, uid in pairs(ack.uids) do
-					buf[uid] = i
-				end
+				buf[i] = ack.rooms
 				break
 			else
 				lprint(TAG, "restore_online", i, "error", err)

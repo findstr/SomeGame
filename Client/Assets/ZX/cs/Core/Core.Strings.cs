@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ZX{
 static partial class Core {
-	static private Strings Strings = null;
+	static public Strings Strings = null;
 	static void InitStrings() {
 		Strings = new Strings();
 	}

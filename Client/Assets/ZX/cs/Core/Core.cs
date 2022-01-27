@@ -65,6 +65,7 @@ public static partial class Core {
 	static private float logic_delta = 0;
 	static private float logic_elapse = 0.0f;
 	static private LuaTable expire_array;
+	static public LuaTable result = null;
 	static private List<long>  expire_list = null;
 
 	static private update_t core_fixedupdate;
@@ -92,7 +93,7 @@ public static partial class Core {
 		core_lateupdate = core.Get<update_t>("_lateupdate");
 		core_logicupdate = core.Get<update_t>("_logicupdate");
 		core_timerexire = core.Get<expire_t>("_timerexpire");
-
+		result = core.Get<LuaTable>("result");
 		expire_list = new List<long>();
 		expire_array = L.NewTable();
 	}

@@ -9,9 +9,8 @@ public class Joystick : MonoBehaviour
 	public InputActionAsset asset;
 	public string actionName;
 	public GameObject stick;
+	public Camera cam;
 	private InputAction action;
-	private Camera cam;
-	private Vector2 value = new Vector2();
 	void Start()
 	{
 		action = asset.FindAction(actionName);
@@ -20,8 +19,13 @@ public class Joystick : MonoBehaviour
 
 	void Update()
 	{
-		value = action.ReadValue<Vector2>();
-		if (Mathf.Abs(value.x) > Mathf.Epsilon || Mathf.Abs(value.y) > Mathf.Epsilon) {
+
+	}
+	public bool Read()
+	{
+		var value = action.ReadValue<Vector2>();
+		bool moving = Mathf.Abs(value.x) > Mathf.Epsilon || Mathf.Abs(value.y) > Mathf.Epsilon;
+		if (moving) {
 			var angle = Vector2.Angle(Vector2.up, value);
 			if (value.x > 0.0)
 				angle *= -1;
@@ -32,14 +36,9 @@ public class Joystick : MonoBehaviour
 			stick.transform.rotation = Quaternion.identity;
 			value = Vector2.zero;
 		}
-	}
-	public void SetCamera(Camera c) 
-	{
-		cam = c;
-	}
-	public Vector2 Read()
-	{
-		return value;
+		ZX.Core.result.Set(1, value.x);
+		ZX.Core.result.Set(2, value.y);
+		return moving;
 	}
 }
 

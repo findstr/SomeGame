@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ZX
 {
-	class Strings {
+	public class Strings {
 		Dictionary<string, int> StrToId = new Dictionary<string, int>();
 		readonly List<string> IdToStr = new List<string>();
 		public int New(string s) {

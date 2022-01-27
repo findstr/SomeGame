@@ -1,4 +1,5 @@
 local socket = require "zx.socket"
+local json = require "zx.json"
 local proto = require "proto"
 local router = require "router"
 local errno = require "conf.Errno"
@@ -148,6 +149,9 @@ function M.login(user, pwd, cb)
 end
 
 function M.send(cmd, obj)
+	if cmd ~= "battlemove_r" then
+		print("Send:" .. cmd .. (obj and json.encode(obj) or "[]"))
+	end
 	gate_server:send(cmd, obj)
 end
 
