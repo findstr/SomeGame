@@ -141,7 +141,6 @@ local function new_room(id, name, uid, p)
 		local players = r.players
 		r.roomid = id + roomid_start
 		r.state = IDLE
-		r.roomid = roomid
 		r.name = name
 		r.frame = 0
 		r.redcount = 0
