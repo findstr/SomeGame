@@ -30,11 +30,10 @@ roomlist_r 0x1201 {
 
 roomlist_a 0x1202 {
 	room {
-		.battle:integer 1
-		.roomid:integer 2
-		.name:string 3
-		.red:integer 4
-		.blue:integer 5
+		.roomid:integer 1
+		.name:string 2
+		.red:integer 3
+		.blue:integer 4
 	}
 	.list:room[] 1
 }
@@ -57,8 +56,7 @@ battleenter_c 0x1206 {
 
 battleenter_r 0x1207 {
 	.roomid:integer 1
-	.battle:integer 2
-	.side:byte 3 #0 -> left, 1 -> right
+	.side:byte 2 #0 -> left, 1 -> right
 }
 
 battleenter_a 0x1208 {

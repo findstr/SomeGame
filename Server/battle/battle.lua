@@ -5,6 +5,7 @@ local core = require "sys.core"
 local gate = require "agent.gate"
 local room = require "agent.room"
 local errno = require "errno.battle"
+local const = require "const"
 
 local log = core.log
 local next = next
@@ -15,6 +16,7 @@ local concat = table.concat
 local remove = table.remove
 local monotonic = core.monotonic
 local battle_slot
+local roomid_start
 
 local rooms = {}
 local uid_to_room = {}
@@ -70,7 +72,7 @@ local function leave(r, uid)
 	print("battleleave_a", uidlist[1])
 	gate.multicast(uidlist, "battleleave_a", {uid = uid, roomid = roomid,})
 	if #uidlist == 0 then
-		rooms[roomid] = nil
+		rooms[roomid - roomid_start] = nil
 		room_cache[#room_cache + 1] = r
 	end
 	log("[room] leave uid:", uid, "room", roomid)
@@ -84,8 +86,8 @@ local function new_player(uid, side)
 			hero = 1000,
 			hp = 100,
 			mp = 100,
-			px = 1.08,
-			pz = -6.29,
+			px = -4.6,
+			pz = -5.8,
 			vx = 0,
 			vz = 0,
 			mt = 0,
@@ -97,8 +99,8 @@ local function new_player(uid, side)
 		p.hero = 1000
 		p.hp = 100
 		p.mp = 100
-		p.px = 1.08
-		p.pz = -6.29
+		p.px = -4.6
+		p.pz = -5.8
 		p.vx = 0
 		p.vz = 0
 		p.mt = 0
@@ -108,22 +110,21 @@ local function new_player(uid, side)
 	return p
 end
 
-local function new_room(roomid, name, uid, p)
+local function new_room(id, name, uid, p)
 	local r = remove(room_cache)
 	if not r then
 		r = {
-			roomid = roomid,
+			roomid = id + roomid_start,
 			frame = 0,
 			redcount = 0,
 			state = IDLE,
-			roomid = roomid,
 			name = name,
 			players = {[uid] = p},
 			uidlist = {uid},
 		}
 	else
 		local players = r.players
-		r.roomid = roomid
+		r.roomid = id + roomid_start
 		r.state = IDLE
 		r.roomid = roomid
 		r.name = name
@@ -143,25 +144,25 @@ function router.battlecreate_c(req)
 		leave(r, uid)
 	end
 	local name = req.name
-	local roomid = #rooms + 1
+	local id = #rooms + 1
 	local p = new_player(uid, RED)
-	local r = new_room(roomid, name, uid, p)
+	local r = new_room(id, name, uid, p)
+	local roomid = r.roomid
 	r.redcount = 1
-	rooms[roomid] = "" --shadow
+	rooms[id] = "" --shadow
 	local ack, err = room.call("roomcreate_c", {
-		battle = battle_slot,
 		roomid = roomid,
 		name = name,
 		owner = uid,
 	})
 	if ack then
-		rooms[roomid] = r
+		rooms[id] = r
 		uid_to_room[uid] = r
 		req.roomid = roomid
 		log("[room] create uid:", uid, "room", roomid)
 		return "battlecreate_a", req
 	end
-	rooms[roomid] = nil
+	rooms[id] = nil
 	log("[room] create uid:", uid, "room", roomid, "err", err)
 	return "error", {errno = errno.SYSTEM}
 end
@@ -174,13 +175,14 @@ function E.battleenter_c(req)
 		leave(r, uid)
 	end
 	local roomid = req.roomid
-	r = rooms[roomid]
+	local id = roomid - roomid_start
+	r = rooms[id]
 	if not r then
 		log("[room] enter uid:", uid, "room", roomid, "no room")
 		return "error", {errno = errno.NOROOM}
 	end
 	local ack, err = room.call("roomjoin_c", {
-		roomid = roomid, battle = battle_slot, uid = uid, side = side
+		roomid = roomid, uid = uid, side = side
 	})
 	if not ack then
 		log("[room] enter uid:", uid, "room", roomid, "rpc error:", err)
@@ -207,11 +209,13 @@ function E.battleleave_r(req)
 	local r = uid_to_room[uid]
 	log("[room] leave uid:", uid, "room", roomid)
 	if r then
+		p = r.players[uid]
+		req.uid = uid
+		req.side = p.side
+		room.call("roomleave_c", req)
 		leave(r, uid)
 	end
-	req.uid = uid
 	gate.offline(uid, nil)
-	room.call("battleleave_c", req)
 	return "battleleave_a", req
 end
 
@@ -279,6 +283,7 @@ end
 
 local function start(slot)
 	battle_slot = slot
+	roomid_start = slot * const.ROOM_PER_BATTLE
 end
 
 return start

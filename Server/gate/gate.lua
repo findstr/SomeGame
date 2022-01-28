@@ -5,6 +5,7 @@ local errno = require "errno.auth"
 local battle_errno = require "errno.battle"
 local msgserver = require "cluster.msg"
 local proto = require "proto.client"
+local const = require "const"
 
 local pcall = core.pcall
 local assert = assert
@@ -94,6 +95,8 @@ local function error_a(fd, cmd, errno)
 	})
 end
 
+local ROOM_PER_BATTLE = const.ROOM_PER_BATTLE
+
 local function login_r(fd, req)
 	local uid = req.uid
 	local u = uid_info[uid]
@@ -106,13 +109,14 @@ local function login_r(fd, req)
 	end
 	u.token = token + 1
 	u.fd = fd
-	local ack, err = room_rpc:call("whichbattle_c", req)
+	local ack, err = room_rpc:call("whichroom_c", req)
 	if not ack then
 		error_a(fd, "login_a", errno.SYSTEM)
-		lprint("[gate] login_r", fd, uid, "whichbattle_c error:", err)
+		lprint("[gate] login_r", fd, uid, "whichroom_c error:", err)
 		return
 	end
-	local battle = ack.battle
+	local roomid = ack.roomid
+	local battle = roomid and roomid // ROOM_PER_BATTLE
 	u.battle = battle
 	fd_to_uid[fd] = uid
 	gate_server:send(fd, "login_a", req)
@@ -233,7 +237,7 @@ msg.battleenter_r = function(fd, uid, req, cmdx)
 		})
 		return
 	end
-	local battle = req.battle
+	local battle = req.roomid // ROOM_PER_BATTLE
 	req.uid = uid
 	req.gate = gate_slot
 	req.side = req.side

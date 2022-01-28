@@ -30,11 +30,10 @@ roomlist_r 0x1201 {
 }
 roomlist_a 0x1202 {
 	room {
-		.battle:integer 1
-		.roomid:integer 2
-		.name:string 3
-		.red:integer 4
-		.blue:integer 5
+		.roomid:integer 1
+		.name:string 2
+		.red:integer 3
+		.blue:integer 4
 	}
 	.list:room[] 1
 }
@@ -54,9 +53,8 @@ battleenter_c 0x1206 {
 }
 battleenter_r 0x1207 {
 	.roomid:integer 1
-	.battle:integer 2
-	.side:byte 3 #0 -> left, 1 -> right
-	.uid_:uinteger 4
+	.side:byte 2 #0 -> left, 1 -> right
+	.uid_:uinteger 3
 }
 battleenter_a 0x1208 {
 	.roomid:integer 1
@@ -217,7 +215,7 @@ battleplayers_a 0x1014 {
 }
 
 battlejoin_c 0x1015 {
-	.battle:integer 1
+	.roomid:integer 1
 	.uid:uinteger 2
 }
 
@@ -225,25 +223,18 @@ battlejoin_a 0x1016 {
 
 }
 
-battleleave_c 0x1017 {
-	.uid:uinteger 1
-	.side:byte 2
-}
-
-whichbattle_c 0x1018 {
+whichroom_c 0x1018 {
 	.uid:uinteger 1
 }
 
-whichbattle_a 0x1019 {
-	.battle:integer 1
+whichroom_a 0x1019 {
+	.roomid:integer 1
 }
-
 
 roomcreate_c 0x101a {
-	.battle:integer 1
-	.roomid:integer 2
-	.name:string 3
-	.owner:uinteger 4
+	.roomid:integer 1
+	.name:string 2
+	.owner:uinteger 3
 }
 
 roomcreate_a 0x101b {
@@ -251,8 +242,7 @@ roomcreate_a 0x101b {
 }
 
 roomhide_c 0x101c {
-	.battle:integer 1
-	.roomid:integer 2
+	.roomid:integer 1
 }
 
 roomhide_a 0x101d {
@@ -260,9 +250,8 @@ roomhide_a 0x101d {
 }
 
 roomclear_c 0x101e {
-	.battle:integer 1
-	.roomid:integer 2
-	.uidlist:uinteger[] 3
+	.roomid:integer 1
+	.uidlist:uinteger[] 2
 }
 
 roomclear_a 0x101f {
@@ -270,7 +259,6 @@ roomclear_a 0x101f {
 
 roomjoin_c 0x1020 {
 	.roomid:integer 1
-	.battle:integer 2
 	.uid:uinteger 3
 	.side:byte 4
 }
@@ -280,6 +268,14 @@ roomjoin_a 0x1021 {
 	.battle:integer 2
 	.uid:uinteger 3
 	.side:byte 4
+}
+
+roomleave_c 0x1022 {
+	.uid:uinteger 1
+	.side:byte 2
+}
+
+roomleave_a 0x1023 {
 }
 ]]
 return M

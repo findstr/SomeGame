@@ -1,7 +1,7 @@
 local E = require "E"
+local const = require "const"
 local router = require "router"
 local json = require "sys.json"
-local proto = require "proto.client" --TODO: reduce proto
 local core = require "sys.core"
 local gate = require "agent.gate"
 local battle = require "agent.battle"
@@ -19,29 +19,26 @@ local jencode = json.encode
 local RED<const> = 1
 local BLUE<const> = 2
 
-local function makeid(battle, room)
-	return room * 2000 + battle
-end
+local ROOM_PER_BATTLE = const.ROOM_PER_BATTLE
 
 function router.roomcreate_c(req)
-	local battle = req.battle
-	local id = makeid(req.battle, req.roomid)
-	req.red = 1
-	req.blue = 0
-	rooms[id] = req
+	local roomid = req.roomid
+	req.redcount = 1
+	req.bluecount = 0
+	rooms[roomid] = req
 	uid_to_room[req.owner] = req
-	log("[room] roomcreate_c", id, jencode(req))
+	log("[room] roomcreate_c", roomid, jencode(req))
 	return "roomcreate_a", req
 end
 
 function router.roomhide_c(req)
-	rooms[makeid(req.battle, req.roomid)] = nil
+	rooms[req.roomid] = nil
 	log("[room] roomhide_c", id)
 	return "roomhide_a", req
 end
 
 function router.roomclear_c(req)
-	rooms[makeid(req.battle, req.roomid)] = nil
+	rooms[req.roomid] = nil
 	for _, uid in pairs(req.uidlist) do
 		uid_to_room[uid] = nil
 	end
@@ -50,36 +47,49 @@ end
 
 function router.roomjoin_c(req)
 	local uid = req.uid
-	local id = makeid(req.battle, req.roomid)
+	local id = req.roomid
+	local r = rooms[id]
 	uid_to_room[uid] = rooms[id]
-	log("[room] roomjoin uid:", uid, "battle:", id)
+	if req.side == RED then
+		r.redcount = r.redcount + 1
+	else
+		r.bluecount = r.bluecount + 1
+	end
+	log("[room] roomjoin uid:", uid, "roomid:", id)
 	return "roomjoin_a", nil
 end
 
-function router.battleleave_c(req)
+function router.roomleave_c(req)
 	local uid = req.uid
-	local battle = uid_to_room[uid]
-	uid_to_room[uid] = nil
-	log("[room] battleleave uid:", uid, "battle:", battle)
-	return "battleleave_a", nil
+	local r = uid_to_room[uid]
+	if r then
+		uid_to_room[uid] = nil
+		if req.side == RED then
+			r.redcount = r.redcount - 1
+		else
+			r.bluecount = r.bluecount + 1
+		end
+	end
+	log("[room] roomleave uid:", uid)
+	return "roomleave_a", nil
 end
 
-function router.whichbattle_c(req)
+function router.whichroom_c(req)
 	local room = uid_to_room[req.uid]
-	req.battle = room and room.battle
-	log("[room] whichbattle_c uid:", req.uid, "battle", req.battle)
-	return "whichbattle_a", req
+	req.roomid = room and room.roomid
+	log("[room] whichroom_c uid:", req.uid, "roomid", req.roomid)
+	return "whichroom_a", req
 end
 
 local function battleclear(battle)
 	for k, v in pairs(uid_to_room) do
-		if v.battle == battle then
+		if (v.roomid // ROOM_PER_BATTLE)  == battle then
 			uid_to_room[k] = nil
 		end
 	end
 	for k, v in pairs(rooms) do
-		print("battle clear:", v.battle, battle)
-		if v.battle == battle then
+		print("battle clear:", v.roomid, battle)
+		if (v.roomid // ROOM_PER_BATTLE) == battle then
 			rooms[k] = nil
 		end
 	end
@@ -101,18 +111,18 @@ local function start()
 		for _, r in pairs(rs) do
 			local roomid = r.roomid
 			local room = {
-				battle = battle,
 				roomid = roomid,
 				name = r.name,
-				red = r.redcount,
-				blue = #r.uidlist - red
+				redcount = r.redcount,
+				bluecount = #r.uidlist - red
 			}
 			for _, uid in pairs(r.uidlist) do
 				uid_to_battle[uid] = roomid
 			end
-			rooms[makeid(battle, roomid)] = room
+			rooms[roomid] = room
 		end
 	end
 end
 
 return start
+
