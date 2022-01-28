@@ -13,7 +13,6 @@ public class CharacterManager : MonoBehaviour
         };
         class Player {
                 public Team team;
-                public GObject hud;
                 public Character c;
                 public DeadReckoning dr;
         };
@@ -24,11 +23,7 @@ public class CharacterManager : MonoBehaviour
                 public Vector3 position;
                 public Quaternion rotation;
         };
-        public Camera cam;
-        public Vector3 HudOffset;
-        public Vector3 FlyOffset;
-        public Color HealColor;
-        public Color HurtColor;
+        public Camera cam;      
         CameraFollow follow;
         TextFly flyText;
         Dictionary<uint, Player> players = new Dictionary<uint, Player>();
@@ -42,18 +37,14 @@ public class CharacterManager : MonoBehaviour
                 GameObject go = Instantiate(result.assets[0].asset, trs.position, trs.rotation, transform) as GameObject;
                 var p = new Player {
 			team = trs.team,
-			hud = trs.hud,
 			c = go.GetComponent<Character>(),
 			dr = go.GetComponent<DeadReckoning>(),
                 };
+                p.c.Init(cam, flyText, trs.hud, trs.m);
                 players.Add(uid, p);
-                Debug.Log("AddHud:" + p.hud);
-                GRoot.inst.AddChild(p.hud);
-                p.c.SetMode(trs.m);
                 if (trs.m != Character.Mode.LOCAL) 
                         return ;
                 follow.target = p.c.gameObject;
-
                 if (p.team == Team.BLUE)
                         follow.transform.rotation = Quaternion.Euler(cam.transform.eulerAngles.x, cam.transform.eulerAngles.y + 180, cam.transform.eulerAngles.z);
         }
@@ -101,29 +92,6 @@ public class CharacterManager : MonoBehaviour
                 return false;
         }
 
-        private Vector3 ScreenPointOfCharacter(Character c, Vector3 offset) 
-        {
-                var pos = cam.WorldToScreenPoint(c.transform.position + offset);
-                pos.y = Screen.height - pos.y;
-                return pos;
-        }
-
-        private void TextFly(uint uid, int text, Color c) 
-        {
-                if (players.TryGetValue(uid, out Player p)) {
-                        var offset = FlyOffset.x * cam.transform.right + FlyOffset.y * cam.transform.up;
-                        flyText.Fly(ScreenPointOfCharacter(p.c, offset), string.Format("{0}", text), c);
-                }
-        }
-
-        public void HP(uint uid, int text) 
-        {
-                if (text < 0)
-                        TextFly(uid, text, HurtColor);
-                else
-                        TextFly(uid, text, HealColor);
-        }
-
         public int Collect(uint uid, float radius)
         {
                 int n = 0;
@@ -141,19 +109,13 @@ public class CharacterManager : MonoBehaviour
                 return n;
         }
 
-        public void Fire(uint attacker, Character.SKILL skill, uint target)
+        public bool Fire(uint attacker, int skill, uint target)
         {
-                players[attacker].c.Fire(skill, players[target].c);
+                return players[attacker].c.Fire(skill, players[target].c);
         }
 
-        void LateUpdate()
+        public void SkillEffect(uint attacker, uint target, int skill, int delta) 
         {
-                var iter = players.GetEnumerator();
-                var offset = HudOffset.x * cam.transform.right + HudOffset.y * cam.transform.up;
-                while (iter.MoveNext()) {
-                        var p = iter.Current.Value;
-                        var pos = ScreenPointOfCharacter(p.c, offset); 
-                        p.hud.SetPosition(pos.x, pos.y, pos.z);
-                }
+                players[attacker].c.SkillEffect(players[target].c, skill, delta);
         }
 }

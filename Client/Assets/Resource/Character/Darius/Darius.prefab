@@ -1245,7 +1245,7 @@ Transform:
   - {fileID: 8337343308887979880}
   - {fileID: 1679873897297207864}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &1061931195
 Rigidbody:
@@ -1308,6 +1308,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eea06e24c4f0a741ac4e5183db16f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireState: 0
+  HudOffset: {x: -1, y: 2.5, z: 0}
+  FlyOffset: {x: -1, y: 2.5, z: 0}
+  HealColor: {r: 0.055220194, g: 0.9622642, b: 0.004538993, a: 0}
+  HurtColor: {r: 0.8490566, g: 0.07609467, b: 0.07609467, a: 0}
 --- !u!114 &6296835435058235362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1320,6 +1325,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1a42c4d9957a3478bf1addab6e39ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAway: 0
+  debug_pos: {x: 0, y: 0, z: 0}
+  position: {x: 0, y: 0, z: 0}
 --- !u!1 &2829147735163432475
 GameObject:
   m_ObjectHideFlags: 0

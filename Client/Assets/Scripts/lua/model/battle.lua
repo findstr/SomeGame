@@ -21,8 +21,6 @@ local joystick = CS.UnityEngine.GameObject.Find("Joystick")
 local input_move, input_skill
 local INPUT_MOUSE<const> = 1
 local INPUT_KEY<const> = 2
-local SKILL_ATK1<const> = CS.Character.SKILL.ATK1
-local SKILL_ATK2<const> = CS.Character.SKILL.ATK2
 local SKILL_NORMAL<const> = 1
 local move = {uid = uid, px = nil, pz = nil, vx = nil, vz = nil}
 
@@ -61,15 +59,17 @@ local function skill_normal()
 		print("find on target")
 		return
 	end
-	local tuid = result[1]
-	print("find target", tuid)
 	local atk = 1
-	local req = {
-		skill = atk,
-		target = tuid,
-	}
-	CM:Fire(server.uid, atk, tuid)
-	server.send("battleskill_r", req)
+	local tuid = result[1]
+	if CM:Fire(server.uid, atk, tuid) then
+		s.cd = time_elapse + 2.0
+		print("find target", tuid)
+		local req = {
+			skill = atk,
+			target = tuid,
+		}
+		server.send("battleskill_r", req)
+	end
 end
 
 function router.battlemove_a(req)
@@ -95,7 +95,7 @@ function router.battleskill_a(req)
 	t.hp = targethp
 	c.hud.mp.value = mp
 	t.hud.hp.value = targethp
-	CM:HP(target, delta_hp)
+	CM:SkillEffect(uid, target, req.skill, delta_hp)
 end
 
 function M.start(list)
