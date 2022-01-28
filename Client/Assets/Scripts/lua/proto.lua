@@ -139,6 +139,9 @@ battleskill_a 0x1305 {
 	.targethp:integer 5
 }
 
+battleover_n 0x1306 {
+	.winner:byte 1
+}
 
 ]]
 return M

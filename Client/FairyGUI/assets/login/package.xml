@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <packageDescription id="ho0js4a3">
   <resources>
-    <image id="ri352" name="banzi_da.png" path="/Images/" exported="true"/>
-    <image id="ri353" name="Login.png" path="/Images/" exported="true"/>
-    <image id="ri354" name="UI_LoginBtn.PNG" path="/Images/" exported="true"/>
-    <image id="ri355" name="UI_LoginBtn_ONpressed.png" path="/Images/" exported="true"/>
-    <image id="ri356" name="UI_LoginInput.PNG" path="/Images/" exported="true"/>
-    <image id="ri357" name="VersionInfo_Icon.png" path="/Images/" exported="true"/>
+    <image id="ri352" name="banzi_da.png" path="/Images/"/>
+    <image id="ri353" name="Login.png" path="/Images/"/>
+    <image id="ri354" name="UI_LoginBtn.PNG" path="/Images/"/>
+    <image id="ri355" name="UI_LoginBtn_ONpressed.png" path="/Images/"/>
+    <image id="ri356" name="UI_LoginInput.PNG" path="/Images/"/>
+    <image id="ri357" name="VersionInfo_Icon.png" path="/Images/"/>
     <component id="ri35b" name="login.xml" path="/" exported="true"/>
     <component id="ri35f" name="Login.button.xml" path="/"/>
     <component id="ri35g" name="Register.button.xml" path="/"/>

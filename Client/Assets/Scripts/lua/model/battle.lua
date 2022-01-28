@@ -84,7 +84,6 @@ function router.battleskill_a(req)
 	local uid, target = req.uid, req.target
 	local c = players[uid]
 	local t = players[target]
-	print("battleskill_a", c, t)
 	if uid ~= server.uid then
 		CM:Fire(uid, req.skill, req.target)
 	end
@@ -96,6 +95,11 @@ function router.battleskill_a(req)
 	c.hud.mp.value = mp
 	t.hud.hp.value = targethp
 	CM:SkillEffect(uid, target, req.skill, delta_hp)
+end
+
+function router.battleover_n(req)
+	print("battleover_n", req.winner)
+	ui.open("balance.balance", req.winner == players[server.uid].side and "胜利" or "失败")
 end
 
 function M.start(list)

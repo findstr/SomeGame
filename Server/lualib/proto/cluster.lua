@@ -119,6 +119,9 @@ battleskill_a 0x1305 {
 	.target:uinteger 4
 	.targethp:integer 5
 }
+battleover_n 0x1306 {
+	.winner:byte 1
+}
 #----------cluster protocol----------
 
 error 0x1000 {
@@ -277,6 +280,7 @@ roomleave_c 0x1022 {
 
 roomleave_a 0x1023 {
 }
+
 ]]
 return M
 

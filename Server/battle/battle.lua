@@ -51,6 +51,27 @@ function router.battleplayers_c(req)
 	return "battleplayers_a", ack
 end
 
+local function clearplayer(players, uid)
+	local p = players[uid]
+	player_cache[#player_cache + 1] = p
+	players[uid] = nil
+	uid_to_room[uid] = nil
+end
+
+local function clearroom(r)
+	local players = r.players
+	local uidlist = r.uidlist
+	room.call("roomclear_c", r)
+	for i = 1, #uidlist do
+		local uid = uidlist[i]
+		uidlist[i] = nil
+		clearplayer(players, uid);
+	end
+	rooms[r.roomid - roomid_start] = nil
+	room_cache[#room_cache + 1] = r
+end
+
+
 local function leave(r, uid)
 	local redcount = r.redcount
 	local uidlist = r.uidlist
@@ -64,16 +85,10 @@ local function leave(r, uid)
 		end
 	end
 	local roomid = r.roomid
-	local players = r.players
-	local p = players[uid]
-	players[uid] = nil
-	uid_to_room[uid] = nil
-	player_cache[#player_cache] = p
-	print("battleleave_a", uidlist[1])
+	clearplayer(r.players, uid)
 	gate.multicast(uidlist, "battleleave_a", {uid = uid, roomid = roomid,})
 	if #uidlist == 0 then
-		rooms[roomid - roomid_start] = nil
-		room_cache[#room_cache + 1] = r
+		clearroom(r)
 	end
 	log("[room] leave uid:", uid, "room", roomid)
 end
@@ -252,6 +267,9 @@ function E.battlemove_r(req)
 	local uid = req.uid_
 	req.uid = uid
 	local r = uid_to_room[uid]
+	if not r then
+		return
+	end
 	local p = r.players[uid]
 	p.px = req.px
 	p.pz = req.pz
@@ -272,13 +290,24 @@ function E.battleskill_r(req)
 	local players = r.players
 	local a = players[uid]
 	local t = players[target]
-	t.hp = t.hp - 10
+	local hp = t.hp
+	hp = hp - 10
+	if hp < 0 then
+		hp = 0
+	end
+	t.hp = hp
 	a.mp = a.mp - 1
 	print("battleskill_a", json.encode(req))
 	req.uid = uid
 	req.mp = a.mp
 	req.targethp = t.hp
 	gate.multicast(r.uidlist, "battleskill_a", req)
+	if hp == 0 then
+		req.winner = a.side
+		gate.multicast(r.uidlist, "battleover_n", req)
+		clearroom(r)
+	end
+
 end
 
 local function start(slot)
