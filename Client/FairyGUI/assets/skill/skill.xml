@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <component id="n0_mmpj" name="normal" src="mmpji" fileName="normal.xml" xy="1105,542" filter="color" filterData="0,0,0,0">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+    </component>
+  </displayList>
+</component>

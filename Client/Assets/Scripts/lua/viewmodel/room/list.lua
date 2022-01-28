@@ -29,7 +29,7 @@ local function join_right(ctx)
 end
 
 local function click_back()
-	ui.back()
+	ui.single("lobby.lobby")
 end
 
 local function click_refresh()

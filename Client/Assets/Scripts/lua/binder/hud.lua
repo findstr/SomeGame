@@ -1,7 +1,7 @@
 --This is an automatically generated class by FairyGUI. Please do not modify it.
 
 local M = {}
-function M.main(vm, view)
+function M.hud(vm, view)
     vm.name = view:GetChildAt(1);
     vm.level = view:GetChildAt(2);
     vm.hp = view:GetChildAt(3);

@@ -2,13 +2,22 @@
 <component size="1280,720">
   <displayList>
     <image id="n0_dwmx" name="n0" src="dwmx4" fileName="Images/bg.jpg" xy="0,0" size="1280,720">
-      <relation target="" sidePair="width-width,height-height,center-center,middle-middle"/>
+      <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <graph id="n5_xr1c" name="n5" xy="0,0" size="1280,720" alpha="0.22" type="rect"/>
-    <component id="n1_dwmx" name="back" src="dwmxc" fileName="back.xml" xy="19,15"/>
-    <component id="n2_dwmx" name="refresh" src="dwmxb" fileName="refresh.xml" xy="202,15" size="163,54"/>
-    <component id="n3_dwmx" name="create" src="dwmx1" fileName="create.xml" xy="385,15" size="163,54"/>
+    <graph id="n5_xr1c" name="n5" xy="0,0" size="1280,720" alpha="0.22" type="rect">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <component id="n1_dwmx" name="back" src="dwmxc" fileName="back.xml" xy="19,15">
+      <relation target="" sidePair="top-top"/>
+    </component>
+    <component id="n2_dwmx" name="refresh" src="dwmxb" fileName="refresh.xml" xy="202,15" size="163,54">
+      <relation target="" sidePair="top-top"/>
+    </component>
+    <component id="n3_dwmx" name="create" src="dwmx1" fileName="create.xml" xy="385,15" size="163,54">
+      <relation target="" sidePair="top-top"/>
+    </component>
     <list id="n4_dwmx" name="room_list" xy="30,137" size="1220,460" overflow="scroll" autoClearItems="true">
+      <relation target="" sidePair="rightext-right,topext-top,bottomext-bottom,leftext-left"/>
       <item url="ui://x7pd9clldwmxd" title="房间号" name="1"/>
     </list>
   </displayList>

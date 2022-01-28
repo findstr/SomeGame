@@ -13,7 +13,7 @@ local remove = table.remove
 
 local function click_back()
 	server.send("battleleave_r")
-	ui.back()
+	ui.single("lobby.lobby")
 end
 
 local function click_begin()

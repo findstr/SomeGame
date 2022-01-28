@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1280,720">
   <displayList>
-    <image id="n1_xr1c" name="n1" src="dwmx4" fileName="Images/bg.jpg" xy="0,0" size="1280,720"/>
-    <graph id="n2_xr1c" name="n2" xy="0,0" size="1280,720" alpha="0.22" type="rect"/>
-    <text id="n0_xr1c" name="room_name" xy="45,32" size="978,46" fontSize="30" autoSize="none" text="房间名称"/>
-    <component id="n3_xr1c" name="back" src="dwmxc" fileName="back.xml" xy="1057,28"/>
-    <list id="n4_xr1c" name="left_list" xy="48,114" size="449,495" overflow="scroll"/>
-    <list id="n5_xr1c" name="right_list" xy="774,118" size="449,495" overflow="scroll"/>
+    <image id="n1_xr1c" name="n1" src="dwmx4" fileName="Images/bg.jpg" xy="0,0" size="1280,720">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <graph id="n2_xr1c" name="n2" xy="0,0" size="1280,720" alpha="0.22" type="rect">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <text id="n0_xr1c" name="room_name" xy="45,32" size="978,46" fontSize="30" autoSize="none" text="房间名称">
+      <relation target="" sidePair="top-top"/>
+    </text>
+    <component id="n3_xr1c" name="back" src="dwmxc" fileName="back.xml" xy="1057,28">
+      <relation target="" sidePair="right-right,top-top"/>
+    </component>
+    <list id="n4_xr1c" name="left_list" xy="48,114" size="449,495" overflow="scroll">
+      <relation target="" sidePair="left-left,rightext-right,bottomext-bottom"/>
+    </list>
+    <list id="n5_xr1c" name="right_list" xy="774,118" size="449,495" overflow="scroll">
+      <relation target="" sidePair="right-right,bottomext-bottom,leftext-left"/>
+    </list>
     <component id="n6_xr1c" name="begin" src="dwmxc" fileName="back.xml" xy="556,637">
+      <relation target="" sidePair="center-center,bottom-bottom"/>
       <Button title="开始游戏"/>
     </component>
   </displayList>

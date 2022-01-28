@@ -1,4 +1,9 @@
 {
+  "objectStatus": {
+    "n25_ri35": {
+      "collapsed": true
+    }
+  },
   "adaptiveTest": true,
   "fitScreen": "FitSize"
 }

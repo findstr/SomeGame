@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="sg3ewbjq">
+  <resources>
+    <component id="pdcb0" name="balance.xml" path="/" exported="true"/>
+    <image id="pdcb1" name="banzi_da.png" path="/"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

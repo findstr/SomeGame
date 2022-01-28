@@ -100,7 +100,7 @@ public class Character : MonoBehaviour
 
         public void TextFly(int hp) 
         {
-		var delta = (int)this.hp.value - hp;
+		var delta = hp - (int)this.hp.value;
 		this.hp.value = hp;
                 Color c = (delta < 0) ? HurtColor : HealColor;
 		textFly.Fly(ScreenPointOfCharacter(FlyOffset), string.Format("{0}", delta), c);

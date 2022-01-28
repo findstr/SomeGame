@@ -1,7 +1,7 @@
 --This is an automatically generated class by FairyGUI. Please do not modify it.
 
 local M = {}
-function M.skill(vm, view)
-    vm.normal = view:GetChildAt(0);
+function M.balance(vm, view)
+    vm.title = view:GetChildAt(1);
 end
 return M

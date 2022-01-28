@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1280,720">
   <displayList>
-    <image id="n0_dwmx" name="n0" src="dwmx9" fileName="Images/LobbyBck.png" xy="0,0"/>
+    <image id="n0_dwmx" name="n0" src="dwmx9" fileName="Images/LobbyBck.png" xy="0,0">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
     <image id="n1_dwmx" name="n1" src="dwmx2" fileName="Images/Bottom.PNG" xy="-1,644" size="1282,80" group="n14_dwmx"/>
     <component id="n5_dwmx" name="shop" src="dwmxl" fileName="BottomButton.xml" xy="49,650" group="n14_dwmx">
       <Button title="商城" titleColor="#5db9be" titleFontSize="30"/>
@@ -36,20 +38,26 @@
     <component id="n15_dwmx" name="normalpvp" src="dwmxn" fileName="BattleButton.xml" xy="1026,200" size="148,56" group="n19_dwmx" alpha="0">
       <Button title="匹配模式"/>
     </component>
-    <group id="n19_dwmx" name="normal" xy="1006,164" size="279,120" advanced="true"/>
+    <group id="n19_dwmx" name="normal" xy="1006,164" size="279,120" advanced="true">
+      <relation target="" sidePair="middle-middle,right-right,rightext-right"/>
+    </group>
     <image id="n20_dwmx" name="n20" src="dwmxj" fileName="Images/UIPublic_61.PNG" xy="1006,282" group="n24_dwmx"/>
     <image id="n21_dwmx" name="n21" src="dwmxb" fileName="Images/NomalPVP.PNG" xy="1171,288" group="n24_dwmx"/>
     <text id="n22_dwmx" name="n22" xy="1026,318" size="148,56" group="n24_dwmx" fontSize="30" color="#5bb5bb" autoSize="none" text="房间模式"/>
     <component id="n23_dwmx" name="roompvp" src="dwmxn" fileName="BattleButton.xml" xy="1026,318" size="148,56" group="n24_dwmx" alpha="0">
       <Button title="匹配模式"/>
     </component>
-    <group id="n24_dwmx" name="pve" xy="1006,282" size="279,120" advanced="true"/>
+    <group id="n24_dwmx" name="pve" xy="1006,282" size="279,120" advanced="true">
+      <relation target="" sidePair="middle-middle,right-right,rightext-right,topext-top,bottomext-bottom,leftext-left"/>
+    </group>
     <image id="n25_dwmx" name="n25" src="dwmxj" fileName="Images/UIPublic_61.PNG" xy="1006,402" group="n29_dwmx"/>
     <image id="n26_dwmx" name="n26" src="dwmxb" fileName="Images/NomalPVP.PNG" xy="1171,408" group="n29_dwmx"/>
     <text id="n27_dwmx" name="n27" xy="1026,438" size="148,56" group="n29_dwmx" fontSize="30" color="#5bb5bb" autoSize="none" text="地牢模式"/>
     <component id="n28_dwmx" name="hellpvp" src="dwmxn" fileName="BattleButton.xml" xy="1026,438" size="148,56" group="n29_dwmx" alpha="0">
       <Button title="匹配模式"/>
     </component>
-    <group id="n29_dwmx" name="hell" xy="1006,402" size="279,120" advanced="true"/>
+    <group id="n29_dwmx" name="hell" xy="1006,402" size="279,120" advanced="true">
+      <relation target="" sidePair="middle-middle,right-right,rightext-right"/>
+    </group>
   </displayList>
 </component>

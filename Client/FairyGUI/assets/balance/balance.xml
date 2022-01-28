@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <image id="n0_pdcb" name="n0" src="pdcb1" fileName="banzi_da.png" xy="357,180" size="566,360" group="n2_pdcb"/>
+    <text id="n1_pdcb" name="title" xy="416,188" size="445,41" group="n2_pdcb" fontSize="20" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="胜利"/>
+    <group id="n2_pdcb" name="n2" xy="357,180" size="566,360"/>
+  </displayList>
+</component>

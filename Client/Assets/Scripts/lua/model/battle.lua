@@ -106,16 +106,17 @@ function M.start(list)
 	jskill.gameObject:SetActive(false)
 	input_move = jmove:GetComponent(typeof(CS.Joystick))
 	input_skill = jskill:GetComponent(typeof(CS.Joystick))
-	skill_view = ui.new("skill.main")
+	skill_view = ui.new("skill.skill")
+	skill_view:MakeFullScreen()
 	GRoot.inst:AddChild(skill_view)
-	binder_skill.main(skill_vm, skill_view)
+	binder_skill.skill(skill_vm, skill_view)
 	skill_vm.normal.onClick:Add(skill_normal)
 	move.uid = server.uid
 	CS.ZX.RL.Instance:load_scene_async("Map.unity", CS.UnityEngine.SceneManagement.LoadSceneMode.Additive);
 	for _, p in pairs(list) do
 		local hud = {}
-		local hudview = ui.new("hud.main")
-		binder_hud.main(hud, hudview)
+		local hudview = ui.new("hud.hud")
+		binder_hud.hud(hud, hudview)
 		p.hud = hud
 		p.hudview = hudview
 		p.skills = {

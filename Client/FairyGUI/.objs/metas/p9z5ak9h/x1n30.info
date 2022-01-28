@@ -1,6 +1,15 @@
 {
   "objectStatus": {
+    "n24_dwmx": {
+      "collapsed": true
+    },
+    "n19_dwmx": {
+      "collapsed": true
+    },
     "n14_dwmx": {
+      "collapsed": true
+    },
+    "n29_dwmx": {
       "collapsed": true
     }
   }

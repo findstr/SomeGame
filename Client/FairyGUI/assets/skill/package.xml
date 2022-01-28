@@ -3,7 +3,7 @@
   <resources>
     <image id="mmpj0" name="Avatar.PNG" path="/Images/"/>
     <component id="mmpji" name="normal.xml" path="/"/>
-    <component id="mmpj5" name="main.xml" path="/" exported="true"/>
+    <component id="mmpj5" name="skill.xml" path="/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

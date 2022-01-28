@@ -1,6 +1,6 @@
 {
   "docScaleOption": true,
-  "auxline1": true,
+  "gridSize": 30,
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://ho0js4a3ri35b",
@@ -35,7 +35,7 @@
     "p84p8jpy",
     "/"
   ],
-  "doc.activeDoc": "ui://x7pd9cllxr1cf",
+  "doc.activeDoc": "ui://x7pd9clldwmx0",
   "libview.twoColumn": false,
   "auxline2": true,
   "showGrid": false,
@@ -43,6 +43,6 @@
   "test.orientation": "landscape",
   "backgroundColor": 6710886,
   "libview.currentGroup": "",
-  "gridSize": 30,
+  "auxline1": true,
   "gridColor": 80
 }
