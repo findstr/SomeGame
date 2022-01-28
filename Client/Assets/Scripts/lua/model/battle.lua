@@ -89,12 +89,9 @@ function router.battleskill_a(req)
 	end
 	local mp, targethp = req.mp, req.targethp
 	local delta_mp = mp - c.mp
-	local delta_hp = targethp - t.hp
 	c.mp = mp
-	t.hp = targethp
 	c.hud.mp.value = mp
-	t.hud.hp.value = targethp
-	CM:SkillEffect(uid, target, req.skill, delta_hp)
+	CM:SkillEffect(uid, target, req.skill, targethp)
 end
 
 function router.battleover_n(req)
@@ -120,6 +117,7 @@ function M.start(list)
 		local hudview = ui.new("hud.main")
 		binder_hud.main(hud, hudview)
 		p.hud = hud
+		p.hudview = hudview
 		p.skills = {
 			[SKILL_NORMAL] = {
 				cd = time_elapse + 1.0
@@ -131,7 +129,7 @@ function M.start(list)
 		hud.hp.max = 100
 		local mode = (p.uid == server.uid) and CS.Character.Mode.LOCAL or CS.Character.Mode.REMOTE
 		print("create", p.uid, server.uid, mode)
-		CM:Create(p.uid, "Character/Darius/Darius.prefab", hudview, p.px, p.pz, p.side, mode)
+		CM:Create(p.uid, "Character/Darius/Darius.prefab", hudview, hud.hp, p.px, p.pz, p.side, mode)
 	end
 	players = list
 	core.logicupdate(input_process, input_process)

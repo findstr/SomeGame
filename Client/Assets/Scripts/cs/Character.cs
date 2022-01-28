@@ -32,6 +32,7 @@ public class Character : MonoBehaviour
 	private TextFly textFly;
 	private Camera cam;
 	private GObject hud;
+	private GProgressBar hp;
 	private Mode mode = Mode.REMOTE;
 	private Vector3 moveDir = Vector3.zero;
         public Vector3 HudOffset;
@@ -43,12 +44,13 @@ public class Character : MonoBehaviour
 		dr = GetComponent<DeadReckoning>();
 		animator = GetComponent<Animator>();
 	}
-	public void Init(Camera cam, TextFly textFly, GObject hud, Mode m)
+	public void Init(Camera cam, TextFly textFly, GObject hud, GProgressBar hp, Mode m)
 	{
 		this.cam = cam;
 		this.hud = hud;
 		this.textFly = textFly;
 		this.mode = m;
+		this.hp = hp;
                 GRoot.inst.AddChild(hud);
 	}
 	public float Dist(Character c) {
@@ -96,20 +98,22 @@ public class Character : MonoBehaviour
                 return pos;
         }
 
-        public void TextFly(int text) 
+        public void TextFly(int hp) 
         {
-                Color c = (text < 0) ? HurtColor : HealColor;
-		textFly.Fly(ScreenPointOfCharacter(FlyOffset), string.Format("{0}", text), c);
+		var delta = (int)this.hp.value - hp;
+		this.hp.value = hp;
+                Color c = (delta < 0) ? HurtColor : HealColor;
+		textFly.Fly(ScreenPointOfCharacter(FlyOffset), string.Format("{0}", delta), c);
         }
 
-        public void SkillEffect(Character target, int skill, int text) 
+        public void SkillEffect(Character target, int skill, int hp) 
         {
 		Debug.Log("HP:" + skill + ":" + skillid);
 		if (skillid == skill) {
 			this.target = target;
-			targetDeltaHP = text;
+			targetDeltaHP = hp;
 		}  else {
-                        target.TextFly(text);
+                        target.TextFly(hp);
 		}
         }
 	void UpdateAnimation() 

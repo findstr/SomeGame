@@ -16,8 +16,9 @@ public class CharacterManager : MonoBehaviour
                 public Character c;
                 public DeadReckoning dr;
         };
-        struct Transform {
+        struct CreateCtx {
                 public GObject hud;
+                public GProgressBar hp;
                 public Team team;
                 public Character.Mode m;
                 public Vector3 position;
@@ -27,22 +28,22 @@ public class CharacterManager : MonoBehaviour
         CameraFollow follow;
         TextFly flyText;
         Dictionary<uint, Player> players = new Dictionary<uint, Player>();
-        Dictionary<uint, Transform> creating = new Dictionary<uint, Transform>();
+        Dictionary<uint, CreateCtx> creating = new Dictionary<uint, CreateCtx>();
         ZX.IRL.load_cb_t load_cb = null;
 
         void load_cb_(LoadResult result) {
                 uint uid = (uint)result.ud;
-                var trs = creating[uid];
+                var ctx = creating[uid];
                 creating.Remove(uid);
-                GameObject go = Instantiate(result.assets[0].asset, trs.position, trs.rotation, transform) as GameObject;
+                GameObject go = Instantiate(result.assets[0].asset, ctx.position, ctx.rotation, transform) as GameObject;
                 var p = new Player {
-			team = trs.team,
+			team = ctx.team,
 			c = go.GetComponent<Character>(),
 			dr = go.GetComponent<DeadReckoning>(),
                 };
-                p.c.Init(cam, flyText, trs.hud, trs.m);
+                p.c.Init(cam, flyText, ctx.hud, ctx.hp, ctx.m);
                 players.Add(uid, p);
-                if (trs.m != Character.Mode.LOCAL) 
+                if (ctx.m != Character.Mode.LOCAL) 
                         return ;
                 follow.target = p.c.gameObject;
                 if (p.team == Team.BLUE)
@@ -56,16 +57,17 @@ public class CharacterManager : MonoBehaviour
                 follow = cam.GetComponent<CameraFollow>();
 	}
 
-        public void Create(uint uid, string path, GObject hud, float x, float z, int t, Character.Mode m = Character.Mode.REMOTE) 
+        public void Create(uint uid, string path, GObject hud, GProgressBar hp, float x, float z, int t, Character.Mode m = Character.Mode.REMOTE) 
         {
-                var trs = new Transform {
+                var ctx = new CreateCtx {
                         m = m,
                         team = (Team)t,
                         hud = hud,
+                        hp = hp,
                         position = new Vector3(x, 0, z),
                         rotation = Quaternion.identity,
                 };
-                creating.Add(uid, trs);
+                creating.Add(uid, ctx);
                 ZX.RL.Instance.load_asset_async(path, typeof(GameObject), load_cb, (int)uid);
         }
 
@@ -114,8 +116,8 @@ public class CharacterManager : MonoBehaviour
                 return players[attacker].c.Fire(skill, players[target].c);
         }
 
-        public void SkillEffect(uint attacker, uint target, int skill, int delta) 
+        public void SkillEffect(uint attacker, uint target, int skill, int targethp) 
         {
-                players[attacker].c.SkillEffect(players[target].c, skill, delta);
+                players[attacker].c.SkillEffect(players[target].c, skill, targethp);
         }
 }
