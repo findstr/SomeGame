@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="106,11" extention="ProgressBar">
+  <displayList>
+    <image id="n0_foaf" name="n0" src="mmpj5" fileName="Images/BarBackGround.png" xy="0,0" size="106,11">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <image id="n1_foaf" name="bar" src="foafb" fileName="Images/HP_red.png" xy="0,0" size="106,11"/>
+  </displayList>
+  <ProgressBar/>
+</component>

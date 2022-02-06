@@ -1,9 +1,9 @@
 local bind = require "binder.room".room
 local pinfo = require "binder.room".pinfo
 local server = require "server"
-local router = require "router"
+local router = require "router":new()
 local ui = require "zx.ui"
-local battle = require "model.battle"
+local battle = require "battle"
 
 local M = {}
 local members = {}
@@ -68,20 +68,21 @@ function router.battlestart_n(ack)
 end
 
 function M:start(view, roomid, name, uidlist, redcount)
+	router:attach()
 	print("room.room", roomid, name, uidlist, redcount)
 	view:MakeFullScreen()
-	GRoot.inst:AddChild(view)	
+	GRoot.inst:AddChild(view)
 	bind(M, view)
 	M.back.onClick:Add(click_back)
 	M.begin.onClick:Add(click_begin)
 	M.room_name.text = name
 	sync_data(uidlist, redcount)
 	refresh_list()
-	return 
+	return
 end
 
 function M:stop()
-	
+	router:detach()
 end
 
 return M

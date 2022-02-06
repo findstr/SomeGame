@@ -126,7 +126,7 @@ function M.login(user, pwd, cb)
 		return
 	end
 	login_cb = cb
-	local ip = "192.168.2.118"
+	local ip = "127.0.0.1"
 	local port = 7000
 	auth_server = socket:connect {
 		ip = ip,

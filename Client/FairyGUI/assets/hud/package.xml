@@ -2,12 +2,15 @@
 <packageDescription id="p33xx0ke">
   <resources>
     <image id="mmpj0" name="80668E524672C2EE_0.png" path="/Images/"/>
-    <component id="mmpj1" name="hud.xml" path="/" exported="true"/>
-    <image id="mmpj3" name="HP.png" path="/Images/"/>
+    <component id="mmpj1" name="red.xml" path="/" exported="true"/>
+    <image id="mmpj3" name="HP_blue.png" path="/Images/"/>
     <image id="mmpj4" name="MP.png" path="/Images/"/>
     <image id="mmpj5" name="BarBackGround.png" path="/Images/"/>
-    <component id="mmpj7" name="HP.xml" path="/"/>
+    <component id="mmpj7" name="HP_blue.xml" path="/"/>
     <component id="mmpj8" name="MP.xml" path="/"/>
+    <component id="foaf9" name="blue.xml" path="/" exported="true"/>
+    <image id="foafb" name="HP_red.png" path="/Images/"/>
+    <component id="foafc" name="HP_red.xml" path="/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

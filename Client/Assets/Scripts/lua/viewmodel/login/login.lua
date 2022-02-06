@@ -1,6 +1,6 @@
 local ui = require "zx.ui"
 local bind = require "binder.login".login
-local battle = require "model.battle"
+local battle = require "battle"
 local server = require "server"
 local tips = require "tips"
 local log = print

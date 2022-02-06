@@ -1,5 +1,5 @@
 {
-  "path": "D:\\SomeGame\\Client\\Assets\\Resource\\FGUI",
+  "path": "/Users/findstr/code/SomeGame/Client/Assets/Resource/FGUI",
   "branchPath": "",
   "fileExtension": "bytes",
   "packageCount": 2,
@@ -9,7 +9,7 @@
   "compressPNG": false,
   "codeGeneration": {
     "allowGenCode": true,
-    "codePath": "D:\\SomeGame\\Client\\Assets\\Scripts\\Lua\\binder",
+    "codePath": "/Users/findstr/code/SomeGame/Client/Assets/Scripts/Lua/binder",
     "classNamePrefix": "",
     "memberNamePrefix": "m_",
     "packageName": null,

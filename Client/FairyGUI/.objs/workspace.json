@@ -1,6 +1,6 @@
 {
   "docScaleOption": true,
-  "gridSize": 30,
+  "auxline1": true,
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://ho0js4a3ri35b",
@@ -10,6 +10,8 @@
     "ui://pkidkxpmmmpj1",
     "ui://di44e65vsspb0",
     "ui://p33xx0kemmpj7",
+    "ui://p33xx0kefoafc",
+    "ui://p33xx0kefoaf9",
     "ui://p33xx0kemmpj8",
     "ui://p9z5ak9hx1n30",
     "ui://x7pd9clldwmx0",
@@ -24,18 +26,18 @@
     "ui://ho0js4a3ri35f",
     "ui://ho0js4a3ri35g"
   ],
-  "libview.firstColumnWidth": 339,
+  "libview.firstColumnWidth": 283,
   "test.device": "iPhone Xs",
   "canvasColor": 10066329,
   "libview.expandedNodes": [
-    "ho0js4a3",
+    "p33xx0ke",
     "/",
-    "x7pd9cll",
-    "/",
+    "p33xx0ke",
+    "/Images/",
     "p84p8jpy",
     "/"
   ],
-  "doc.activeDoc": "ui://x7pd9clldwmx0",
+  "doc.activeDoc": "ui://p33xx0kefoaf9",
   "libview.twoColumn": false,
   "auxline2": true,
   "showGrid": false,
@@ -43,6 +45,6 @@
   "test.orientation": "landscape",
   "backgroundColor": 6710886,
   "libview.currentGroup": "",
-  "auxline1": true,
+  "gridSize": 30,
   "gridColor": 80
 }

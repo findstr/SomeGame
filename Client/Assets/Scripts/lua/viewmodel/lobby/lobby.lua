@@ -1,8 +1,8 @@
 local bind = require "binder.lobby".lobby
-local router = require "router"
+local router = require "router":new()
 local server = require "server"
 local ui = require "zx.ui"
-local battle = require "model.battle"
+local battle = require "battle"
 
 local M = {}
 
@@ -34,11 +34,13 @@ end
 local function hell_mode()
 	print("hell_mode")
 end
-
-function M:start(view)
 	router.roomlist_a = roomlist_a
 	router.battleenter_a = battleenter_a
 	router.battlestart_n = battlestart_n
+
+function M:start(view)
+	print("lobby start")
+	router:attach()
 	view:MakeFullScreen()
 	bind(M, view)
 	GRoot.inst:AddChild(view)
@@ -46,13 +48,11 @@ function M:start(view)
 	M.roompvp.onClick:Add(room_mode)
 	M.hellpvp.onClick:Add(hell_mode)
 	print("[lobby] start")
-	return 
+	return
 end
 
 function M:stop(view)
-	router.roomlist_a = nil
-	router.battleenter_a = nil
-	router.battlestart_n = nil
+	router:detach()
 	print("[lobby] stop")
 end
 

@@ -1,7 +1,7 @@
 local bind = require "binder.room".list
 local rinfo = require "binder.room".rinfo
 local server = require "server"
-local router = require "router"
+local router = require "router":new()
 local ui = require "zx.ui"
 
 local M = {}
@@ -34,7 +34,7 @@ end
 
 local function click_refresh()
 	print("click_refresh")
-	server.send("roomlist_r", {}) 
+	server.send("roomlist_r", {})
 end
 
 local function click_create()
@@ -90,18 +90,19 @@ local function hell_mode()
 end
 
 function M:start(view, list)
+	router:attach()
 	view:MakeFullScreen()
-	GRoot.inst:AddChild(view)	
+	GRoot.inst:AddChild(view)
 	bind(M, view)
 	M.back.onClick:Add(click_back)
 	M.refresh.onClick:Add(click_refresh)
 	M.create.onClick:Add(click_create)
 	refresh_list(list)
-	return 
+	return
 end
 
 function M:stop()
-	
+	router:detach()
 end
 
 return M
