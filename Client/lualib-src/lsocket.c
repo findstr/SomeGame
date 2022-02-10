@@ -307,7 +307,7 @@ static int
 trypull(lua_State *L, struct sock *s)
 {
 	if (s->sz >= 2 ) {
-        int size = ((int)s->buf[0] >> 8) | s->buf[1];
+        int size = (s->buf[0] << 8) | s->buf[1];
 		if (s->sz >= (size + 2)) {
 			int body = size - 4;
             int cmd = 	((unsigned int)s->buf[body + 2 + 0]) << 0 |

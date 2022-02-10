@@ -119,12 +119,11 @@ function M.start(list)
 	move.uid = hostuid
 	CS.ZX.RL.Instance:load_scene_async("Map.unity", CS.UnityEngine.SceneManagement.LoadSceneMode.Additive);
 	local hostside = list[hostuid].side
-
 	for _, p in pairs(list) do
 		local mode
 		local hud = {}
 		local hudview
-		print("create", p.side, hostside)
+		print("createx", p.side, hostside)
 		if p.side == hostside then
 			hudview = ui.new("hud.blue")
 			binder_hud.blue(hud, hudview)

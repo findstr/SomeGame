@@ -54,6 +54,7 @@ local function socket_poll(s)
 			print("[zx.socket] unsupport cmd", format("%02x", cmd))
 		else
 			local proto = s.proto
+			print("RECV", cmd, #dat)
 			local dat, sz = proto:unpack(dat, true)
 			local obj = proto:decode(cmd, dat, sz)
 			local ok, err = pcall(cb, obj, cmd)
