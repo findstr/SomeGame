@@ -64,7 +64,7 @@ end
 function router.battlestart_n(ack)
 	print("roombattle_n")
 	ui.clear()
-	battle.start(ack.players)
+	battle.start(ack.entities)
 end
 
 function M:start(view, roomid, name, uidlist, redcount)

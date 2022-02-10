@@ -104,11 +104,11 @@ battlestart_n 0x120e {
 		.hero:integer 2
 		.hp:integer 3
 		.mp:integer 4
-		.side:byte 5	#1 -> red 2 -> blue
-		.px:float 6
-		.pz:float 7
+		.px:float 5
+		.pz:float 6
+		.side:integer 7
 	}
-	.players:player[uid] 1
+	.entities:player[uid] 1
 }
 
 battlemove_r 0x1301 {

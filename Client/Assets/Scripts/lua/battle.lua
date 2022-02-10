@@ -11,6 +11,9 @@ local binder_hud = require "binder.hud"
 local skill_vm = {}
 local skill_view
 
+local RED<const> = 1
+local BLUE<const> = 2
+
 local tonumber = tonumber
 
 local M = {}
