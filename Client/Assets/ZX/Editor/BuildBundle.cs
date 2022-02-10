@@ -173,6 +173,7 @@ namespace ZX
 			if (GUILayout.Button("Select")) {
 				var path = EditorUtility.OpenFilePanel("Config file path", configPath, "yaml");
 				if (path != "") {
+					path = Path.GetRelativePath(Application.dataPath + "/../", path);
 					configPath = path;
 					EditorUserSettings.SetConfigValue(keyConfig, configPath);
 				}
@@ -186,6 +187,7 @@ namespace ZX
 			if (GUILayout.Button("Select")) {
 				var path = EditorUtility.OpenFolderPanel("Asset Bundle Output Path:", outputPath, "");
 				if (path != "") {
+					path = Path.GetRelativePath(Application.dataPath + "/../", path);
 					outputPath = path;
 					EditorUserSettings.SetConfigValue(keyOutput, outputPath);
 				}

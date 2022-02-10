@@ -346,6 +346,7 @@ namespace ZX
             if (GUILayout.Button("Select")) {
                 var path =EditorUtility.OpenFolderPanel("Excel path", excelPath, "");
                 if (path != "") {
+                    path = Path.GetRelativePath(Application.dataPath + "/../", path);
                     excelPath = path;
                     EditorUserSettings.SetConfigValue(keyExcel, excelPath);
                 }
@@ -367,6 +368,7 @@ namespace ZX
             if (GUILayout.Button("Select")) {
                 var path =EditorUtility.SaveFilePanel("Language file path", lanPath, "Lan", "xlsx");
                 if (path != "") {
+                    path = Path.GetRelativePath(Application.dataPath + "/../", path);
                     lanPath = path;
                     EditorUserSettings.SetConfigValue(keyLanPath, lanPath);
                 }
@@ -380,6 +382,7 @@ namespace ZX
             if (GUILayout.Button("Select")) {
                 var path =EditorUtility.OpenFolderPanel("Client output", clientOutput, "");
                 if (path != "") {
+                    path = Path.GetRelativePath(Application.dataPath + "/../", path);
                     clientOutput = path;
                     EditorUserSettings.SetConfigValue(keyClient, clientOutput);
                 }
@@ -393,6 +396,7 @@ namespace ZX
             if (GUILayout.Button("Select")) {
                 var path =EditorUtility.OpenFolderPanel("Server output", serverOutput, "");
                 if (path != "") {
+                    path = Path.GetRelativePath(Application.dataPath + "/../", path);
                     serverOutput = path;
                     EditorUserSettings.SetConfigValue(keyServer, serverOutput);
                 }
