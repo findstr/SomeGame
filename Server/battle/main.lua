@@ -5,7 +5,6 @@ core.start(function()
 	local agent_gate = require "agent.gate"
 	local agent_room = require "agent.room"
 	local room = require "room"
-	local player = require "player"
 	local E = require "E"
 	local router = require "router"
 

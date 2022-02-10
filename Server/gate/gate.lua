@@ -184,16 +184,20 @@ msg.roomlist_r = function(fd, uid, req, cmdx)
 			lprint("[gate] cmd:", cmdx, "fail", cmd)
 			return
 		end
-		gate_server:send(fd, cmd, ack)
-	else
-		lprint("[gate] roomlist_r uid:", uid, "in", battle)
-		local ack, cmd = room_rpc:call(cmdx)
-		if not ack then
-			lprint("[gate] cmd:", cmdx, "fail", cmd)
+		print("roomlist_r", ack.errno)
+		if not ack.errno then
+			gate_server:send(fd, cmd, ack)
 			return
 		end
-		gate_server:send(fd, "roomlist_a", ack)
+		u.battle = nil
 	end
+	lprint("[gate] roomlist_r uid:", uid, "in", battle)
+	local ack, cmd = room_rpc:call(cmdx)
+	if not ack then
+		lprint("[gate] cmd:", cmdx, "fail", cmd)
+		return
+	end
+	gate_server:send(fd, "roomlist_a", ack)
 end
 
 msg.battlecreate_r = function(fd, uid, req, cmdx)

@@ -1,9 +1,22 @@
 local M = {}
 local mem_path = {}
-local function tick(tree, actions, obj, delta)
-	local res
-	local running_id
-	local ctx = self
+local tick_count = setmetatable({}, {__mode = "k"})
+
+local function tick(tree, actions, ctx)
+	local result
+	local n = tick_count[ctx] or 0 + 1
+	ctx.__tick = n
+	local last = ctx.__running
+	if last then
+		local n = ctx.__downclock
+		if n > 0 then
+			ctx.__downclock = n - 1
+			tree = last
+		end
+		ctx.__running = nil
+	end
+	local running
+	tick_count[ctx] = n
 	repeat
 		local n
 		if tree.mem then
@@ -15,16 +28,16 @@ local function tick(tree, actions, obj, delta)
 		else
 			local func = actions[tree.name]
 			if tree.type == "decorator" then
-				res = func(obj, tree.properties, res)
+				result = func(ctx, tree.properties, result)
 			else
-				res = func(obj, tree.properties, delta)
+				result = func(ctx, tree.properties)
 			end
-			print("exec", tree.name, res)
-			if res == nil then
-				running_id = tree.id
+			print("exec", tree.name, result)
+			if result == nil then
+				running = tree
 				break
 			end
-			if res then
+			if result then
 				n = tree.success
 			else
 				n = tree.failure
@@ -32,12 +45,13 @@ local function tick(tree, actions, obj, delta)
 		end
 		tree = n
 	until not tree
-	if res ~= nil then
+	if result ~= nil then
 		for i = 1, #mem_path do
 			ctx[mem_path[i]] = false --prevent rehash
 			mem_path[i] = nil
 		end
 	else
+		local running_id = running.id
 		for i = 1, #mem_path do
 			local nxt
 			local node = mem_path[i]
@@ -55,8 +69,12 @@ local function tick(tree, actions, obj, delta)
 			end
 			mem_path[i] = nil
 		end
+		if running ~= last then
+			ctx.__running = running
+			ctx.__downclock = 10
+		end
 	end
-	return res
+	return result
 end
 
 return tick
