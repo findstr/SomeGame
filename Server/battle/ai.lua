@@ -1,4 +1,6 @@
 local core = require "sys.core"
+local property = require "property"
+local helper = require "helper"
 local bt = require "bt"
 local npc = require "bt.npc"
 local cache = require "cache" ()
@@ -18,50 +20,45 @@ local GOHOME<const> = 1
 local FOLLOW<const> = 2
 
 local DELTA = 0
+local ROOM = nil
 
-function M:newctx(e, name, broadcast, room)
-	print("****newctx", broadcast)
+local HP<const> = property.HP
+local SPEED<const> = property.SPEED
+
+function M:newctx(e, name)
 	local p = remove(cache)
 	if not p then
 		p = setmetatable({
 			host = e,
 			tree = npc,
-			room = room,
 			target = nil,
-			broadcast = broadcast,
 			status = IDLE,
 		}, mt)
 	else
 		p.host = e
-		p.room = room
 		p.tree = npc
 		p.target = nil
-		p.broadcast = broadcast
 		p.status = IDLE
 	end
 	return p
 end
 
 function M:del()
-	p.host = nil
-	p.tree = nil
-	p.target = nil
-	p.broadcast = nil
+	for k, _ in pairs(self) do
+		self[k] = nil
+	end
 	cache[#cache + 1] = self
 end
 
-function M:tick(delta)
+function M:tick(room, delta)
+	ROOM = room
 	DELTA = delta
 	bt(self.tree, AI, self)
 end
 
 ----------------BT action
 
-local function dist(x1, y1, x2, y2)
-	local x = x1 - x2
-	local y = y1 - y2
-	return x*x + y*y
-end
+local dist = helper.dist
 
 function AI:bt_is_lock_target(args)
 	local t = self.target
@@ -72,19 +69,19 @@ function AI:bt_is_lock_target(args)
 	local host = self.host
 	local d = dist(t.px, t.pz, host.px, host.pz)
 	print("is_lock_target2", d)
-	if d < 50 then
+	if d < args.range then
 		return true
 	end
 	self.target = nil
 	host.vx = 0
 	host.vz = 0
-	self.broadcast("battlemove_a", host)
+	ROOM:broadcast("battlemove_a", host)
 	return false
 end
 
 function AI:bt_is_hp_less(args)
-	local v = args.hp
-	return self.host.hp < v
+	print("bt_is_hp_less", self.host[HP], args.hp)
+	return self.host[HP] < args.hp
 end
 
 local function move_to(x, z, dx, dz)
@@ -108,7 +105,7 @@ function AI:bt_gohome(_)
 	if vx ~= 0 or vz ~= 0 then
 		local ret
 		host.vx, host.vz = vx, vz
-		local delta = DELTA
+		local delta = DELTA * host[SPEED]
 		host.px = host.px + vx * delta
 		host.pz = host.pz + vz * delta
 		local dx = host.px - host.homex
@@ -119,7 +116,7 @@ function AI:bt_gohome(_)
 			host.vz = 0
 			ret = true
 		end
-		host.broadcast("battlemove_a", host)
+		ROOM:broadcast("battlemove_a", host)
 		return ret
 	end
 	return true
@@ -133,7 +130,7 @@ function AI:bt_follow_target(_)
 	if not t then
 		host.vx = 0
 		host.vz = 0
-		self.broadcast("battlemove_a", host)
+		ROOM:broadcast("battlemove_a", host)
 		return false
 	end
 	local vx, vz = move_to(host.px, host.pz, t.px, t.pz)
@@ -143,7 +140,7 @@ function AI:bt_follow_target(_)
 		local delta = DELTA
 		host.px = host.px + vx * delta
 		host.pz = host.pz + vz * delta
-		self.broadcast("battlemove_a", host)
+		ROOM:broadcast("battlemove_a", host)
 	end
 	print("**follow_target", host.vx, host.vz)
 	return nil
@@ -154,18 +151,17 @@ function AI:bt_stop_follow(_)
 	local host = self.host
 	host.vx = 0
 	host.vz = 0
-	self.broadcast("battlemove_a", host)
+	ROOM:broadcast("battlemove_a", host)
 	return true
 end
 
-function AI:bt_lock_nearest()
+function AI:bt_lock_nearest(args)
 	local host = self.host
-	local p, d = self.room:select_nearest(host.px, host.pz, host.side % 2 + 1)
-	print("lock_nearest", p, d)
+	local p, d = ROOM:select_nearest(host.px, host.pz, host.side % 2 + 1)
 	if not p then
 		return false
 	end
-	if d > 2 then
+	if d > args.range then
 		return false
 	end
 	print("=========lock target:", p.uid)
@@ -174,14 +170,7 @@ function AI:bt_lock_nearest()
 end
 
 function AI:bt_atk_target()
-	local t = self.target
-	local host = self.host
-	local d = dist(host.px, host.pz, t.px, t.pz)
-	if d > 2 then
-		return false
-	end
-	self.room:fire_skill(host, t, 1)
-	return true
+	return self.host.skills[1]:fire(ROOM, self.host, self.target)
 end
 
 return M

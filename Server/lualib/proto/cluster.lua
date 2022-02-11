@@ -84,12 +84,15 @@ battleready_a 0x120d {
 battlestart_n 0x120e {
 	player {
 		.uid:uinteger 1
-		.hero:integer 2
-		.hp:integer 3
-		.mp:integer 4
-		.px:float 5
-		.pz:float 6
-		.side:integer 7
+		.heroid:integer 2
+		.px:float 3
+		.pz:float 4
+		.side:integer 5
+		.hp:integer 6
+		.mp:integer 7
+		.hpmax:integer 8
+		.mpmax:integer 9
+		.speed:integer 10
 	}
 	.entities:player[uid] 1
 }
@@ -121,6 +124,8 @@ battleskill_a 0x1305 {
 }
 battleover_n 0x1306 {
 	.winner:byte 1
+}
+battleclose_n 0x1307 {
 }
 #----------cluster protocol----------
 
