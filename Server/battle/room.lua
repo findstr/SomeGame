@@ -2,6 +2,7 @@ local core = require "sys.core"
 local gate = require "agent.gate"
 local room = require "agent.room"
 local errno = require "errno.battle"
+local property = require "property"
 local const = require "const"
 local entity = require "entity"
 local router = require "router"
@@ -32,6 +33,13 @@ local RED<const> = 1
 local BLUE<const> = 2
 
 local NPC_BLUE<const> = 500
+
+local HP<const> = property.HP
+local MP<const> = property.MP
+local HPMAX<const> = property.HPMAX
+local MPMAX<const> = property.MPMAX
+local SPEED<const> = property.SPEED
+
 
 local roomid_start
 
@@ -128,10 +136,8 @@ local function leave(room, e)
 	e:del()
 end
 
-local function broadcast(list)
-	return function(cmd, ack)
-		multicast(list, cmd, ack)
-	end
+function M:broadcast(cmd, ack)
+	multicast(self.uidlist, cmd, ack)
 end
 
 function M:select_nearest(x, z, side)
@@ -167,7 +173,6 @@ local function new(name, uid)
 			[BLUE] = {},
 			entities = {},
 			brains = {},
-			broadcast = broadcast(uidlist)
 		}, mt)
 	end
 	rooms[id] = "" --shadow
@@ -194,15 +199,14 @@ local function born(room)
 	local blue = room[BLUE]
 	local brains = room.brains
 	local entities = room.entities
-	local broadcast = room.broadcast
 	local npc = require "bt.npc"
 	for i = 1, 1 do
 		local id = #blue + 1
 		local uid = id + NPC_BLUE
-		local e = entity:new(uid, 1000, -16, -17, BLUE, broadcast)
+		local e = entity:new(uid, 10001, -16, -17, BLUE)
 		blue[id] = e
 		entities[uid] = e
-		brains[uid] = ai:newctx(e, npc, broadcast, room)
+		brains[uid] = ai:newctx(e, npc)
 	end
 end
 
@@ -214,6 +218,26 @@ local function exist_alive(self, side)
 		end
 	end
 	return false
+end
+
+local function battlestart_n(room)
+	local l = {}
+	local entities = room.entities
+	for uid, e in pairs(entities) do
+		l[#l + 1] = {
+			uid = e.uid,
+			heroid = e.heroid,
+			px = e.px,
+			pz = e.pz,
+			side = e.side,
+			hp = e[HP],
+			mp = e[MP],
+			hpmax = e[HPMAX],
+			mpmax = e[MPMAX],
+			speed = e[SPEED],
+		}
+	end
+	return {entities = l}
 end
 
 local function check_ready(room, uid)
@@ -234,7 +258,7 @@ local function check_ready(room, uid)
 	if n == total then
 		room.status = BATTLE
 		born(room)
-		multicast(uidlist, "battlestart_n", room)
+		multicast(uidlist, "battlestart_n", battlestart_n(room))
 	end
 	local ack = {
 		current = n,
@@ -254,38 +278,6 @@ function M:checkover()
 	end
 end
 
-
-local battleskill_a = {
-	uid = nil,
-	skill = nil,
-	mp = nil,
-	target = nil,
-	targethp = nil
-}
-
-
-local function fire_skill(room, atk, t, skill)
-	local hp = t.hp
-	hp = hp - 10
-	if hp < 0 then
-		hp = 0
-	end
-	t.hp = hp
-	atk.mp = atk.mp - 1
-	battleskill_a.uid = atk.uid
-	battleskill_a.skill = skill
-	battleskill_a.mp = atk.mp
-	battleskill_a.target = t.uid
-	battleskill_a.targethp = t.hp
-	print("fire_skill", skill)
-	multicast(room.uidlist, "battleskill_a", battleskill_a)
-	if hp == 0 then
-		room:checkover()
-	end
-end
-
-M.fire_skill = fire_skill
-
 function M:tick(delta)
 	local status = self.status
 	if status == IDLE then
@@ -298,12 +290,12 @@ function M:tick(delta)
 	for i = 1, #self do
 		local players = self[i]
 		for j = 1, #players do
-			players[j]:tick(delta)
+			players[j]:tick(self, delta)
 		end
 	end
 	local brains = self.brains
 	for _, b in pairs(brains) do
-		b:tick(delta)
+		b:tick(self, delta)
 	end
 end
 
@@ -322,7 +314,7 @@ local function timer_tick()
 			log("[room] tick roomid:", r.roomid, "err:", err)
 		end
 	end
-	core.timeout(1000, timer_tick)
+	core.timeout(100, timer_tick)
 end
 
 ----------------------handler
@@ -348,7 +340,7 @@ function router.battlerestore_c(req)
 	if room.status == IDLE then
 		return "battleenter_a", room
 	else
-		return "battlestart_n", room
+		return "battlestart_n", battlestart_n(room)
 	end
 end
 
@@ -356,12 +348,11 @@ function router.battlecreate_c(req)
 	local uid = req.uid
 	local r = new(req.name, uid)
 	if r then
-		local e = entity:new(uid, 1000, -6, -6, RED, r.broadcast)
+		local e = entity:new(uid, 10000, -6, -6, RED, r.broadcast)
 		enter(r, e, req.gate)
 		log("[player] battlecreate uid:", uid, "room", r.roomid)
 		return "battlecreate_a", r
 	end
-	e:del()
 	log("[player] battlecreate uid:", uid, "error")
 	return "error", {errno = errno.SYSTEM}
 end
@@ -389,7 +380,7 @@ function E.battleenter_c(req)
 	}
 	local uidlist = r.uidlist
 	multicast(uidlist, "battleenter_n", req)
-	local e = entity:new(uid, 1000, -6, -6, side, r.broadcast)
+	local e = entity:new(uid, 1000, -6, -6, side)
 	enter(r, e, gateid)
 	log("[room] enter uid:", uid, "room", roomid, "count", #uidlist)
 	return "battleenter_a" ,r
@@ -442,8 +433,8 @@ function E.battleskill_r(req)
 		local entities = r.entities
 		local atk = entities[uid]
 		local target = entities[req.target]
-		fire_skill(r, atk, target, req.skill)
-		return
+		local s = atk.skills[req.skill]
+		s:fire(r, atk, target)
 	end
 end
 

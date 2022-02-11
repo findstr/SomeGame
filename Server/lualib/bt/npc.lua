@@ -19,6 +19,9 @@ local M = {
 	id = 3,
 	["type"] = "condition",
 	["name"] = "bt_is_lock_target",
+	["properties"] = {
+		["range"] = 10,
+	},
 	success = nil,
 	failure = nil,
 },
@@ -45,6 +48,9 @@ local M = {
 	id = 7,
 	["type"] = "action",
 	["name"] = "bt_lock_nearest",
+	["properties"] = {
+		["range"] = 10,
+	},
 },
 }
 M[1].success = M[2]

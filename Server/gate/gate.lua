@@ -19,6 +19,7 @@ local tremove = table.remove
 local lprint = core.log
 local room_rpc = nil
 local battle_rpc = {}
+local battle_epoch = {}
 local battle_count = 1
 local battle_roundrobin = 0
 
@@ -417,13 +418,28 @@ function M.room_join(workers, count)
 	end
 end
 
+local function clear_battle(battle)
+	for uid, u in pairs(uid_info) do
+		if u.battle == battle then
+			u.battle = nil
+			gate_server:send(u.fd, "battleclose_n", u)
+		end
+	end
+end
+
 function M.battle_join(workers, count)
 	battle_count = count
 	for i = 1, count do
 		local w = workers[i]
 		if w then
-			print("battle_join", i, w.rpc)
+			local oepoch = battle_epoch[i]
+			local nepoch = w.epoch
+			print("battle_join", i, w.rpc, w.epoch)
 			battle_rpc[i] = w.rpc
+			battle_epoch[i] = nepoch
+			if nepoch ~= oepoch then
+				clear_battle(i)
+			end
 		end
 	end
 end
