@@ -6,20 +6,20 @@ local battle = require "battle"
 
 local M = {}
 
-local function roomlist_a(ack)
+function router.roomlist_a(ack)
 	print("roomlist")
 	ui.inplace("room.list", ack.list)
 end
 
-local function battleenter_a(ack)
+function router.battleenter_a(ack)
 	print("battleenter")
 	ui.inplace("room.room", ack.roomid, ack.name, ack.uidlist, ack.redcount)
 end
 
-local function battlestart_n(ack)
+function router.battlestart_n(ack)
 	print("battlestart_n")
 	ui.clear()
-	battle.start(ack.players)
+	battle.start(ack.entities)
 end
 
 local function normal_mode()
@@ -34,9 +34,6 @@ end
 local function hell_mode()
 	print("hell_mode")
 end
-	router.roomlist_a = roomlist_a
-	router.battleenter_a = battleenter_a
-	router.battlestart_n = battlestart_n
 
 function M:start(view)
 	print("lobby start")

@@ -16,7 +16,6 @@ local function transfer(t, kk, v)
 		x = v
 	else
 		x = function(obj, cmd)
-			print(string.format("%02x", cmd), obj)
 			print("RECV:" .. json.encode(obj) .. string.format("%02x", cmd))
 			v(obj, cmd)
 		end

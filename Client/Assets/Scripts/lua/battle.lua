@@ -38,16 +38,17 @@ local result = core.result
 local function input_process(_, delta)
 	time_elapse = time_elapse + delta
 	input_move:Read()
+	local speed = players[hostuid].speed
 	local x, y = result[1], result[2]
-	local xx, yy = x * 3, y * 3;
+	local xx, yy = x * speed, y * speed;
 	local dirty = CM:LocalMove(hostuid, xx, yy, 0.2)
 	sync_delta = sync_delta - delta
 	if dirty or sync_delta < 0.0001 then
 		CM:RemoteSync(hostuid, xx, yy)
 		move.px = result[1]
 		move.pz = result[2]
-		move.vx = xx
-		move.vz = yy
+		move.vx = x
+		move.vz = y
 		server.send("battlemove_r", move)
 		sync_delta = sync_delta + dr_force_time
 	end
@@ -81,12 +82,16 @@ end
 function router.battlemove_a(req)
 	local uid = req.uid
 	if uid ~= hostuid then
-		CM:RemoteMove(uid, req.px, req.pz, req.vx, req.vz)
+		local p = players[uid]
+		if p then
+			local speed = p.speed
+			CM:RemoteMove(uid, req.px, req.pz, req.vx * speed, req.vz * speed)
+		end
 	end
 end
 
 function router.battleskill_a(req)
-	print("battleskill_a", req.uid, req.target)
+	print("========battleskill_a", req.uid, req.target)
 	local uid, target = req.uid, req.target
 	local c = players[uid]
 	local t = players[target]
@@ -103,6 +108,12 @@ end
 function router.battleover_n(req)
 	print("battleover_n", req.winner)
 	ui.open("balance.balance", req.winner == players[hostuid].side and "胜利" or "失败")
+end
+
+function router.battleclose_n(req)
+	print("battleclose_n")
+	M.stop()
+	ui.inplace("lobby.lobby")
 end
 
 function M.start(list)
@@ -134,6 +145,7 @@ function M.start(list)
 			hudview = ui.new("hud.red")
 			binder_hud.red(hud, hudview)
 		end
+		hud.name.text = tostring(p.uid)
 		p.hud = hud
 		p.hudview = hudview
 		p.skills = {
@@ -142,9 +154,11 @@ function M.start(list)
 			}
 		}
 		hud.mp.min = 0
-		hud.mp.max = 100
+		hud.mp.max = p.hpmax
 		hud.hp.min = 0
-		hud.hp.max = 100
+		hud.hp.max = p.mpmax
+		hud.mp.value = p.mp
+		hud.hp.value = p.hp
 		if p.uid == hostuid then
 			mode = LOCAL
 		else
@@ -162,6 +176,13 @@ function M.stop()
 	input_move.gameObject:SetActive(false)
 	input_skill.gameObject:SetActive(false)
 	core.logicupdate(input_process, nil)
+	CS.ZX.RL.Instance:unload_scene_async("Map.unity");
+	CM:Reset()
+	ui.del(skill_view)
+	skill_view = nil
+	for _, p in pairs(players) do
+		ui.del(p.hudview)
+	end
 end
 
 return M
