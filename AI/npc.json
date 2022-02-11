@@ -1,0 +1,257 @@
+{
+  "version": "0.3.0",
+  "scope": "project",
+  "selectedTree": "f3482de3-a55a-43fb-86e8-250d5a144994",
+  "trees": [
+    {
+      "version": "0.3.0",
+      "scope": "tree",
+      "id": "f3482de3-a55a-43fb-86e8-250d5a144994",
+      "title": "A behavior tree",
+      "description": "",
+      "root": "d2166014-bf3b-4509-81c8-8f8231c11f0f",
+      "properties": {
+        "hp": 4
+      },
+      "nodes": {
+        "0d7d676e-8116-436d-9973-d4e610cb0c69": {
+          "id": "0d7d676e-8116-436d-9973-d4e610cb0c69",
+          "name": "bt_is_hp_less",
+          "title": "血量少于<hp>",
+          "description": "",
+          "properties": {
+            "hp": 50
+          },
+          "display": {
+            "x": -924,
+            "y": 312
+          }
+        },
+        "d2166014-bf3b-4509-81c8-8f8231c11f0f": {
+          "id": "d2166014-bf3b-4509-81c8-8f8231c11f0f",
+          "name": "Priority",
+          "title": "Priority",
+          "description": "",
+          "properties": {},
+          "display": {
+            "x": -384,
+            "y": -72
+          },
+          "children": [
+            "20b27424-3b83-4764-9d85-5e3c38ff641a",
+            "e0d38fce-f6f2-4c4a-8c9d-f07def57e4b5",
+            "647dba24-dc57-47c5-8910-6643c6b068a0"
+          ]
+        },
+        "20b27424-3b83-4764-9d85-5e3c38ff641a": {
+          "id": "20b27424-3b83-4764-9d85-5e3c38ff641a",
+          "name": "Sequence",
+          "title": "Sequence",
+          "description": "",
+          "properties": {},
+          "display": {
+            "x": -828,
+            "y": 168
+          },
+          "children": [
+            "0d7d676e-8116-436d-9973-d4e610cb0c69",
+            "1d59c906-1a47-425f-8c13-147741976d9d"
+          ]
+        },
+        "1d59c906-1a47-425f-8c13-147741976d9d": {
+          "id": "1d59c906-1a47-425f-8c13-147741976d9d",
+          "name": "bt_gohome",
+          "title": "回出生点",
+          "description": "",
+          "properties": {},
+          "display": {
+            "x": -708,
+            "y": 312
+          }
+        },
+        "eb0cd3d2-23b9-40ea-8b52-a5db08691029": {
+          "id": "eb0cd3d2-23b9-40ea-8b52-a5db08691029",
+          "name": "bt_atk_target",
+          "title": "攻击目标",
+          "description": "",
+          "properties": {},
+          "display": {
+            "x": -360,
+            "y": 600
+          }
+        },
+        "5baf665d-f263-42ff-a766-07ef0db29c54": {
+          "id": "5baf665d-f263-42ff-a766-07ef0db29c54",
+          "name": "bt_is_lock_target",
+          "title": "范围<range>内有锁定目标",
+          "description": "",
+          "properties": {
+            "range": 10
+          },
+          "display": {
+            "x": -492,
+            "y": 336
+          }
+        },
+        "e0d38fce-f6f2-4c4a-8c9d-f07def57e4b5": {
+          "id": "e0d38fce-f6f2-4c4a-8c9d-f07def57e4b5",
+          "name": "Sequence",
+          "title": "Sequence",
+          "description": "",
+          "properties": {},
+          "display": {
+            "x": -348,
+            "y": 216
+          },
+          "children": [
+            "5baf665d-f263-42ff-a766-07ef0db29c54",
+            "7d0a9aea-62b3-4490-8c16-4454cde521dc"
+          ]
+        },
+        "647dba24-dc57-47c5-8910-6643c6b068a0": {
+          "id": "647dba24-dc57-47c5-8910-6643c6b068a0",
+          "name": "bt_lock_nearest",
+          "title": "锁定范围<range>内最近的敌人",
+          "description": "",
+          "properties": {
+            "range": 10
+          },
+          "display": {
+            "x": 372,
+            "y": 300
+          }
+        },
+        "e654eee1-9f9c-4740-9ba8-a573311f0e33": {
+          "id": "e654eee1-9f9c-4740-9ba8-a573311f0e33",
+          "name": "bt_follow_target",
+          "title": "接近锁定目标",
+          "description": "",
+          "properties": {},
+          "display": {
+            "x": 192,
+            "y": 588
+          }
+        },
+        "7d0a9aea-62b3-4490-8c16-4454cde521dc": {
+          "id": "7d0a9aea-62b3-4490-8c16-4454cde521dc",
+          "name": "Priority",
+          "title": "Priority",
+          "description": "",
+          "properties": {},
+          "display": {
+            "x": -12,
+            "y": 336
+          },
+          "children": [
+            "b2714859-3424-413e-8f86-a794cbc749b7",
+            "e654eee1-9f9c-4740-9ba8-a573311f0e33"
+          ]
+        },
+        "ed08b60b-7e02-424f-8102-864955e62e18": {
+          "id": "ed08b60b-7e02-424f-8102-864955e62e18",
+          "name": "bt_stop_follow",
+          "title": "停止接近目标",
+          "description": "",
+          "properties": {},
+          "display": {
+            "x": -84,
+            "y": 600
+          }
+        },
+        "b2714859-3424-413e-8f86-a794cbc749b7": {
+          "id": "b2714859-3424-413e-8f86-a794cbc749b7",
+          "name": "Sequence",
+          "title": "Sequence",
+          "description": "",
+          "properties": {},
+          "display": {
+            "x": -252,
+            "y": 468
+          },
+          "children": [
+            "eb0cd3d2-23b9-40ea-8b52-a5db08691029",
+            "ed08b60b-7e02-424f-8102-864955e62e18"
+          ]
+        }
+      },
+      "display": {
+        "camera_x": 1112,
+        "camera_y": 244.5,
+        "camera_z": 0.75,
+        "x": -384,
+        "y": -180
+      }
+    }
+  ],
+  "custom_nodes": [
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "bt_gohome",
+      "category": "action",
+      "title": "回出生点",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "bt_atk_target",
+      "category": "action",
+      "title": "攻击目标",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "bt_follow_target",
+      "category": "action",
+      "title": "接近锁定目标",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "bt_stop_follow",
+      "category": "action",
+      "title": "停止接近目标",
+      "description": null,
+      "properties": {}
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "bt_is_hp_less",
+      "category": "condition",
+      "title": "血量少于<hp>",
+      "description": null,
+      "properties": {
+        "hp": 0
+      }
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "bt_lock_nearest",
+      "category": "action",
+      "title": "锁定范围<range>内最近的敌人",
+      "description": null,
+      "properties": {
+        "range": 10
+      }
+    },
+    {
+      "version": "0.3.0",
+      "scope": "node",
+      "name": "bt_is_lock_target",
+      "category": "condition",
+      "title": "范围<range>内有锁定目标",
+      "description": null,
+      "properties": {
+        "range": 10
+      }
+    }
+  ]
+}
