@@ -25,6 +25,10 @@ namespace ZX
 			select = o.Groups[2].Value.ToLower();
 			iskey = o.Groups[3].Value == "*";
 		}
+		public bool IsMatch(string s) 
+		{
+			return (s == "a") || (select == "a") || select == s;
+		}
 	};
 	class SubKey
 	{
@@ -151,14 +155,13 @@ namespace ZX
 	{
 		public const int NAME_ROW = ExportLan.NAME_ROW;
 		public const int TYPE_ROW = ExportLan.TYPE_ROW;
+		string output;
 		readonly string path;
 		readonly lan_map_t lans;
 		List<FieldInfo> fields = new List<FieldInfo>();
-		string output;
 		StringBuilder keyStuff = new StringBuilder();
 		StringBuilder keyAssign = new StringBuilder();
 		lan_builder_t lanBuilder = new lan_builder_t();
-		List<string> contents = new List<string>();
 		void ParseFieldInfo()
 		{
 			var fi = new FileInfo(path);
@@ -187,37 +190,40 @@ namespace ZX
 
 		string BuildValue(int rowid, ref FieldInfo field, string s)
 		{
-			switch (field.type) {
-			case "string":
-			return "\"" + s + "\"";
-			case "float":
-			case "int":
-			if (s.Contains(';')) {
-				StringBuilder sb = new StringBuilder();
-				var l1 = s.Split(';');
+			if (s.Contains(',')) {
+				var sb = new StringBuilder();
+				var list = s.Split(',');
 				sb.Append("{");
-				foreach (var x in l1) {
-					sb.Append("{");
-					sb.Append(x);
-					sb.Append("}");
-				}
+				foreach (var x in list) 
+					sb.AppendFormat("{0},", BuildValue(rowid, ref field, x));
 				sb.Append("}");
 				return sb.ToString();
-			} else if (s.Contains(',')) {
-				return "{" + s + "}";
-			} else {
-				return s;
 			}
+			if (s.Contains(':')) {
+				var sb = new StringBuilder();
+				var list = s.Split(':');
+				sb.Append("{");
+				foreach (var x in list) 
+					sb.AppendFormat("{0},", BuildValue(rowid, ref field, x));
+				sb.Append("}");
+				return sb.ToString();
+			}
+
+			switch (field.type) {
+			case "string":
+				return "\"" + s + "\"";
+			case "number":
+				return  s;
 			case "lan":
-			string variable = field.name + "_" + rowid;
-			foreach (var item in lanBuilder) {
-				if (!lans[item.Key].TryGetValue(s, out string translation))
-					throw new Exception(string.Format("BuildConf: now translation of row {0} in File {1}", rowid, path));
-				item.Value.Append(variable + "=\"" + translation + "\",\n");
-			}
-			return "lan." + variable;
+				string variable = field.name + "_" + rowid;
+				foreach (var item in lanBuilder) {
+					if (!lans[item.Key].TryGetValue(s, out string translation))
+						throw new Exception(string.Format("BuildConf: now translation of row {0} in File {1}", rowid, path));
+					item.Value.Append(variable + "=\"" + translation + "\",\n");
+				}
+				return "lan." + variable;
 			default:
-			throw new Exception("BuildConf:Unspport field type:" + field.type);
+				throw new Exception("BuildConf:Unspport field type:" + field.type);
 			}
 		}
 
@@ -241,43 +247,60 @@ namespace ZX
 		}
 		public void Execute(string select, string output)
 		{
+			bool export_kv = false;
 			this.output = output;
-			this.contents = new List<string>();
 			keyStuff.Clear();
 			keyAssign.Clear();
 			Dictionary<string, SubKey> key_root = new Dictionary<string, SubKey>();
 			foreach (var item in lanBuilder) {
 				item.Value.Clear();
 			}
-			contents.Clear();
-
+			int select_count = 0;
 			var fi = new FileInfo(path);
 			using var pkg = new ExcelPackage(fi);
 			var sheet = pkg.Workbook.Worksheets[1];
-
+			string[] row = new string[fields.Count];
+			for (int c = 0; c < fields.Count; c++) {
+					var field = fields[c];
+					if (!field.IsMatch(select)) 
+						continue;
+					select_count++;
+					if (field.name.ToLower() == "@key")
+						export_kv = true;
+			}
+			if (select_count == 0)
+				return ;
 			for (int r = TYPE_ROW + 1; r <= sheet.Dimension.Rows; r++) {
 				int n = 0;
 				StringBuilder sb = new StringBuilder();
-				string id = sheet.GetValue(r, 1).ToString();
-				sb.AppendFormat("[{0}] = {{", id);
+				var field = fields[0];
+				string id = BuildValue(1, ref field, sheet.GetValue(r, 1).ToString());
 				for (int c = 1; c <= fields.Count; c++) {
-					FieldInfo field = fields[c - 1];
-					string v = sheet.GetValue(r, c).ToString();
-					if (field.select == select || (field.select == "a" || select == "a")) {
-						n++;
-						sb.Append(field.name + "=" + BuildValue(c, ref field, v) + ",");
+					field = fields[c - 1];
+					string s = sheet.GetValue(r, c).ToString();
+					if (field.IsMatch(select)) {
+						string v = BuildValue(c, ref field, s);
+						row[c-1] = v;
 					}
 				}
-				sb.Append("},");
-				if (n > 0) {
-					var keys = key_root;
-					for (int c = 2; c <= fields.Count; c++) {
-						FieldInfo field = fields[c - 1];
-						string v = sheet.GetValue(r, c).ToString();
-						if (field.name == "key" && (field.select == select || select == "a")) {
-							keyStuff.AppendFormat("\n[\"{0}\"] = nil,", v);
-							keyAssign.AppendFormat("M[\"{0}\"]=M[{1}]\n", v, id);
+				if (export_kv) {
+					for (int c = 1; c <= fields.Count; c++) {
+						field = fields[c - 1];
+						string v = row[c - 1];
+						if (field.name.ToLower() == "@key" && field.IsMatch(select)) {
+							keyStuff.AppendFormat("\n[{0}] = ", v);
 						}
+						if (field.name.ToLower() == "@value" && field.IsMatch(select)) {
+							keyStuff.Append(v);
+						}
+					}
+				} else {
+					keyStuff.AppendFormat("[{0}] = {{", id);
+					var keys = key_root;
+					for (int c = 1; c <= fields.Count; c++) {
+						field = fields[c - 1];
+						string v = row[c - 1];
+						keyStuff.AppendFormat("{0} = {1},", field.name, v);
 						if (field.iskey) {
 							if (!keys.TryGetValue(v, out var sub)) {
 								sub = new SubKey();
@@ -287,8 +310,9 @@ namespace ZX
 							keys = sub.children;
 						}
 					}
-					contents.Add(sb.ToString());
+					keyStuff.Append("}");
 				}
+				keyStuff.Append(",\n");
 			}
 			var firstkeys = new List<string>(key_root.Keys);
 			for (int i = 0; i < firstkeys.Count; i++) {
@@ -296,14 +320,12 @@ namespace ZX
 				keyStuff.AppendFormat("\n[{0}] = nil,", key);
 				keyAssign.AppendFormat("\nM[{0}]={1}\n", key, key_root[key].Format(""));
 			}
-			if (contents.Count > 0) {
+			if (select_count > 0) {
 				var filename = Path.GetFileNameWithoutExtension(output);
 				File.WriteAllText(output, "");
 				if (WriteLanFile())
 					File.AppendAllText(output, string.Format("local lan = require (ZX_LAN .. \".{0}\")\n", filename));
 				File.AppendAllText(output, "local M = {\n");
-				for (int i = 0; i < contents.Count; i++)
-					File.AppendAllText(output, contents[i] + "\n");
 				File.AppendAllText(output, keyStuff.ToString());
 				File.AppendAllText(output, "\n}\n");
 				File.AppendAllText(output, keyAssign.ToString());
