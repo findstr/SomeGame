@@ -112,7 +112,7 @@ function M.wakeup(t, res)
 	wakeup_task_queue[#wakeup_task_queue + 1] = t
 end
 
-local timeout = CS.ZX.Timer.timeout
+local timeout = CS.ZX.Core.Timeout
 
 function M.sleep(ms)
 	local t = task_running

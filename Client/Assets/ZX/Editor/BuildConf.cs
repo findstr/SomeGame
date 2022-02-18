@@ -24,6 +24,7 @@ namespace ZX
 			type = o.Groups[1].Value.ToLower();
 			select = o.Groups[2].Value.ToLower();
 			iskey = o.Groups[3].Value == "*";
+			Debug.Log("Parse:" + s + ":" + type + ":" + select + ":" + iskey);
 		}
 		public bool IsMatch(string s) 
 		{
@@ -268,16 +269,22 @@ namespace ZX
 					if (field.name.ToLower() == "@key")
 						export_kv = true;
 			}
+			Debug.Log("Rows:" + sheet.Dimension.Rows + ":" + select_count + ":" + output);
 			if (select_count == 0)
 				return ;
 			for (int r = TYPE_ROW + 1; r <= sheet.Dimension.Rows; r++) {
-				int n = 0;
 				StringBuilder sb = new StringBuilder();
 				var field = fields[0];
-				string id = BuildValue(1, ref field, sheet.GetValue(r, 1).ToString());
+				var cell = sheet.GetValue(r, 1);	
+				if (cell == null) 
+					Debug.LogError(string.Format("{0}[{1}][{2}] not exist", output, r, 1));
+				string id = BuildValue(1, ref field, cell.ToString());
 				for (int c = 1; c <= fields.Count; c++) {
 					field = fields[c - 1];
-					string s = sheet.GetValue(r, c).ToString();
+					cell = sheet.GetValue(r, c);	
+					if (cell == null) 
+						Debug.LogError(string.Format("{0}[{1}][{2}] not exist", output, r, c));
+					string s = cell.ToString();
 					if (field.IsMatch(select)) {
 						string v = BuildValue(c, ref field, s);
 						row[c-1] = v;
@@ -300,14 +307,16 @@ namespace ZX
 					for (int c = 1; c <= fields.Count; c++) {
 						field = fields[c - 1];
 						string v = row[c - 1];
-						keyStuff.AppendFormat("{0} = {1},", field.name, v);
-						if (field.iskey) {
-							if (!keys.TryGetValue(v, out var sub)) {
-								sub = new SubKey();
-								keys.Add(v, sub);
+						if (field.IsMatch(select)) {
+							keyStuff.AppendFormat("{0} = {1},", field.name, v);
+							if (field.iskey) {
+								if (!keys.TryGetValue(v, out var sub)) {
+									sub = new SubKey();
+									keys.Add(v, sub);
+								}
+								sub.id = id;
+								keys = sub.children;
 							}
-							sub.id = id;
-							keys = sub.children;
 						}
 					}
 					keyStuff.Append("}");

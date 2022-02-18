@@ -10,6 +10,7 @@ local tremove = table.remove
 local Object = typeof(CS.UnityEngine.Object)
 local LoadAsset = CS.ZX.Core.LoadAsset
 local UnloadAsset = CS.ZX.Core.UnloadAsset
+
 local assets_ref = {}
 local assets = {}
 local requests = {}
@@ -22,8 +23,8 @@ local function recycle(tbl)
 	pool[#pool + 1] = tbl
 end
 
-function M.load_async(names, cb, ud, T) 
-	local key 
+function M.load_async(names, cb, ud, T)
+	local key
 	local typ = type(names)
 	if typ == "table" then
 		count = #names
@@ -50,7 +51,7 @@ function M.load_async(names, cb, ud, T)
 			__callback = cb,
 			__userdata = ud,
 		}
-	else	
+	else
 		req.__key = key
 		req.__callback = cb
 		req.__userdata = ud
@@ -80,6 +81,18 @@ function M.unload(name)
 	assets[name] = nil
 end
 
+M.additive = CS.UnityEngine.SceneManagement.LoadSceneMode.Additive
+
+local LoadSceneAsync = CS.ZX.Core.LoadSceneAsync
+local UnloadSceneAsync = CS.ZX.Core.UnloadSceneAsync
+
+function M.load_scene_async(name, mode)
+	LoadSceneAsync(strings[name], mode)
+end
+
+function M.unload_scene_async(name)
+	UnloadSceneAsync(strings[name])
+end
 
 local function update_cb()
 	for i = 1, #requests do

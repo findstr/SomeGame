@@ -10,6 +10,32 @@ using static FairyGUI.UIPackage;
 
 namespace ZX
 {
+	class ZXGLoader : GLoader {
+		readonly IRL.load_cb_t load_callback = null;
+		public ZXGLoader():base() {
+			load_callback = LoadFinish;
+		}
+		private void LoadFinish(IRL.LoadResult lr) {
+			var asset = lr.assets[0];
+			if (lr.name != url || isDisposed) {
+				if (lr.assets[0] == null)
+					RL.Instance.unload_asset(lr.name);
+				return ;
+			}
+			if (asset != null)
+				onExternalLoadSuccess(new NTexture(asset.asset as Texture));
+			else
+				onExternalLoadFailed();
+		}
+		protected override void LoadExternal() {
+			RL.Instance.load_asset_async(url, typeof(Sprite), load_callback, 0);
+		}
+		protected override void FreeExternal(NTexture texture)
+		{
+			RL.Instance.unload_asset(texture.nativeTexture);
+		}
+	}
+
 	public class UI
 	{
 		private int ud_idx = 0;
@@ -42,12 +68,17 @@ namespace ZX
 			RL.Instance.load_asset_async(name + extension, type, ui_load_callback, ud_idx++);
 		}
 
+		static GLoader CreateGLoader() {
+			return new ZXGLoader();
+		}
+
 		public UI()
 		{
 			NAudioClip.CustomDestroyMethod = unload_audio;
 			NTexture.CustomDestroyMethod -= unload_texture;
 			NTexture.CustomDestroyMethod += unload_texture;
 			ui_load_callback = LoadCB;
+			UIObjectFactory.SetLoaderExtension(CreateGLoader);
 		}
 
 		public void SetPathPrefix(string s)

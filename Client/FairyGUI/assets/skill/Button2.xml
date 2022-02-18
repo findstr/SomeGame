@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="120,120" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <loader id="n0_ice7" name="sprite" xy="0,2" size="122,118" url="ui://p84p8jpymmpj0" fill="scale" clearOnPublish="true">
+      <relation target="" sidePair="width-width,height-height"/>
+    </loader>
+    <text id="n1_ice7" name="name" xy="-1,61" size="120,21" fontSize="20" align="center" vAlign="middle" autoSize="none" singleLine="true" text="你好">
+      <relation target="" sidePair="width-width,height-height"/>
+      <relation target="n0_ice7" sidePair=""/>
+    </text>
+  </displayList>
+  <Button/>
+</component>

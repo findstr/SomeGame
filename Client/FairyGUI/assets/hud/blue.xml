@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="136,48" anchor="true">
+<component size="136,58">
   <displayList>
-    <image id="n0_mmpj" name="n0" src="mmpj0" fileName="Images/80668E524672C2EE_0.png" xy="0,19" size="136,29"/>
-    <text id="n11_mmpj" name="name" xy="0,0" size="136,19" customData="dd " fontSize="12" color="#ffffff" align="center" autoSize="none" strokeColor="#000000" text="重归混沌"/>
-    <text id="n1_mmpj" name="level" xy="4,24" size="19,19" fontSize="12" color="#ffffff" autoSize="none" text="18"/>
-    <component id="n2_mmpj" name="hp" src="mmpj7" fileName="HP.xml" xy="27,24" size="106,11">
+    <image id="n0_mmpj" name="n0" src="mmpj0" fileName="Images/80668E524672C2EE_0.png" xy="0,28" size="136,29"/>
+    <text id="n11_mmpj" name="name" xy="0,1" size="136,29" customData="dd " fontSize="20" color="#ffffff" align="center" autoSize="none" strokeColor="#000000" text="重归混沌"/>
+    <text id="n1_mmpj" name="level" xy="4,33" size="19,19" fontSize="12" color="#ffffff" autoSize="none" text="18"/>
+    <component id="n2_mmpj" name="hp" src="mmpj7" fileName="HP_blue.xml" xy="27,33" size="106,11">
       <ProgressBar value="50" max="100"/>
     </component>
-    <component id="n10_mmpj" name="mp" src="mmpj8" fileName="MP.xml" xy="27,37" size="106,5">
+    <component id="n10_mmpj" name="mp" src="mmpj8" fileName="MP.xml" xy="27,46" size="106,5">
       <ProgressBar value="50" max="100"/>
     </component>
   </displayList>

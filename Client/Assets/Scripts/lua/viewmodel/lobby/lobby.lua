@@ -19,7 +19,7 @@ end
 function router.battlestart_n(ack)
 	print("battlestart_n")
 	ui.clear()
-	battle.start(ack.entities)
+	battle.start(ack)
 end
 
 local function normal_mode()

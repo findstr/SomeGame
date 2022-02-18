@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.SceneManagement;
 using XLua;
 using LuaAPI = XLua.LuaDLL.Lua;
 using LuaCSFunction = XLua.LuaDLL.lua_CSFunction;
@@ -38,5 +39,11 @@ static partial class Core {
 	}
 	static public void UnloadAsset(int id) {
 		RL.Instance.unload_asset(Strings.Get(id));
+	}
+	static public AsyncOperation LoadSceneAsync(int id, LoadSceneMode mode) {
+		return RL.Instance.load_scene_async(Strings.Get(id), mode);
+	}
+	static public void UnloadSceneAsync(int id) {
+		RL.Instance.unload_scene_async(Strings.Get(id));
 	}
 }}

@@ -9,20 +9,20 @@ namespace ZX
     class Timer {
         struct Event {
             public long time;
-            public long session;
+            public ulong session;
         };
         private long clock = 0;
-        private long session = 0;
+        private ulong session = 0;
         private List<Event> events = new List<Event>();
-        public long TimeOut(int ms) {
-            long s = session + 1;
+        public ulong TimeOut(int ms) {
+            ulong s = session + 1;
             long t = ms + clock;
             session = s;
             events.Add(new Event{ time = t, session = s });
             return s;
         }
 
-        public void Update(int delta, List<long> expire) {
+        public void Update(int delta, List<ulong> expire) {
             clock += delta;
             for (int i = events.Count - 1; i >= 0; i--) {
                 Event e = events[i];

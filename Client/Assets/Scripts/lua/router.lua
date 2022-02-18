@@ -25,12 +25,9 @@ end
 
 local mt = {
 	attach = function(self)
-		print("attach==")
 		for k, v in pairs(self) do
-			print("takeover", string.format("%02x", k))
 			M[k] = v
 		end
-		print("attach==**")
 	end,
 	detach = function(self)
 		for k, _ in pairs(self) do

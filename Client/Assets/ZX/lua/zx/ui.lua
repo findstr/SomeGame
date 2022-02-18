@@ -8,9 +8,11 @@ local match = string.match
 local remove = table.remove
 local pairs = pairs
 
-local function new(fullname)
+local function new(fullname, ...)
 	local pkg, name = match(fullname, "([^%.]+).([^%.]+)")
-	return CreateObject(strings[pkg], strings[name])
+	local view = CreateObject(strings[pkg], strings[name])
+	local vm = require ("viewmodel." .. fullname)
+	return (vm:start(view, ...) or vm), view
 end
 
 local function close(tag)
@@ -36,9 +38,7 @@ local function closeall()
 end
 
 local function open(fullname, ...)
-	local view = new(fullname)
-	local vm = require ("viewmodel." .. fullname)
-	local vm = vm:start(view, ...) or vm
+	local vm, view = new(fullname, ...)
 	ui_stack[#ui_stack + 1] = {
 		view = view,
 		name = fullname,

@@ -1,9 +1,7 @@
 local core = require "zx.core"
 local ui = require "zx.ui"
 local bind = require "binder.common".tips
-local view = ui.new("common.tips")
-local com = {}
-bind(com, view)
+local com = ui.new("common.tips")
 
 local M = {}
 local pending = 0
@@ -18,7 +16,7 @@ local function play_finish()
 		core.pcall(cb)
 	end
 	if #cb_queue == 0 then
-		GRoot.inst:RemoveChild(view)
+		com:hide()
 	else
 		local str = remove(str_queue, 1)
 		com.text.text = str
@@ -33,7 +31,7 @@ function M.show(str, cb)
 		return 
 	end
 	pending = pending + 1
-	GRoot.inst:AddChild(view)
+	com:show()
 	com.text.text = str
 	com.ctrl:Play(play_finish)
 end

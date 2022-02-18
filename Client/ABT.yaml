@@ -20,3 +20,7 @@ ABT:
         match:
             - "Character/$/*.controller"
             - "Character/$/*.prefab"
+    Skills/$:
+        root: Assets/Resource
+        match:
+            - "Skills/$/*.png"

@@ -23,16 +23,13 @@ public class Character : MonoBehaviour
 	public bool IsFiring { get { return skillid != 0; } }
 	public TeamSide Team {get; set; }
 	private int skillid = 0;
-	private Character target;
 	private int targetDeltaHP = 0;
 	private float HitAdjustTime = 0.0f;
 	private Character HitTarget = null;
 	private DeadReckoning dr;
 	private Animator animator;
-	private TextFly textFly;
 	private Camera cam;
 	private GObject hud;
-	private GProgressBar hp;
 	private Mode mode = Mode.REMOTE;
 	private Vector3 moveDir = Vector3.zero;
         public Vector3 HudOffset;
@@ -44,14 +41,14 @@ public class Character : MonoBehaviour
 		dr = GetComponent<DeadReckoning>();
 		animator = GetComponent<Animator>();
 	}
-	public void Init(Camera cam, TextFly textFly, GObject hud, GProgressBar hp, Mode m)
+	public void Init(Camera cam,  GObject hud)
 	{
 		this.cam = cam;
 		this.hud = hud;
-		this.textFly = textFly;
-		this.mode = m;
-		this.hp = hp;
                 GRoot.inst.AddChild(hud);
+	}
+	public void SetMode(Mode m) {
+		this.mode = m;
 	}
 	public float Dist(Character c) {
 		var a = new Vector2(transform.position.x, transform.position.z);
@@ -60,7 +57,6 @@ public class Character : MonoBehaviour
 	}
 	public void FireFinish() 
 	{
-		target = null;
 		skillid = 0;
 		targetDeltaHP = 0;
 		fireState = FireState.NOP;
@@ -69,9 +65,7 @@ public class Character : MonoBehaviour
 	public void FireHit()
 	{
 		if (targetDeltaHP != 0) {
-			target.TextFly(targetDeltaHP);
 			targetDeltaHP = 0;
-			target = null;
 		}
 		Debug.Log("FireHit");
 	}
@@ -96,25 +90,6 @@ public class Character : MonoBehaviour
                 var pos = cam.WorldToScreenPoint(transform.position + off);
                 pos.y = Screen.height - pos.y;
                 return pos;
-        }
-
-        public void TextFly(int hp) 
-        {
-		var delta = hp - (int)this.hp.value;
-		this.hp.value = hp;
-                Color c = (delta < 0) ? HurtColor : HealColor;
-		textFly.Fly(ScreenPointOfCharacter(FlyOffset), string.Format("{0}", delta), c);
-        }
-
-        public void SkillEffect(Character target, int skill, int hp) 
-        {
-		Debug.Log("HP:" + skill + ":" + skillid);
-		if (skillid == skill) {
-			this.target = target;
-			targetDeltaHP = hp;
-		}  else {
-                        target.TextFly(hp);
-		}
         }
 	void UpdateAnimation() 
 	{

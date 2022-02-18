@@ -2,8 +2,10 @@
 <packageDescription id="p84p8jpy">
   <resources>
     <image id="mmpj0" name="Avatar.PNG" path="/Images/"/>
-    <component id="mmpji" name="normal.xml" path="/"/>
     <component id="mmpj5" name="skill.xml" path="/" exported="true"/>
+    <component id="ice7q" name="Button1.xml" path="/"/>
+    <component id="ice7r" name="Button2.xml" path="/"/>
+    <component id="ice7s" name="Button3.xml" path="/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

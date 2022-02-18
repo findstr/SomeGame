@@ -2,7 +2,7 @@
 
 local M = {}
 function M.tips(vm, view)
-    vm.text = view:GetChildAt(1);
-    vm.ctrl = view:GetTransitionAt(0);
+    vm.text = view:GetChildAt(1)
+    vm.ctrl = view:GetTransitionAt(0)
 end
 return M

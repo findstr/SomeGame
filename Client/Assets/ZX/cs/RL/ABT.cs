@@ -117,8 +117,9 @@ namespace ZX
         }
         public Dictionary<string, string> GetFullName() {
             Dictionary<string, string> x = new Dictionary<string, string>();
-            foreach (var item in file_to_name) 
+            foreach (var item in file_to_name) {
                 x.Add(item.Value, item.Key);
+            }
             return x;
         }
 

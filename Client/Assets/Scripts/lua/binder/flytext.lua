@@ -2,7 +2,7 @@
 
 local M = {}
 function M.flytext(vm, view)
-    vm.text = view:GetChildAt(0);
-    vm.ctrl = view:GetTransitionAt(0);
+    vm.text = view:GetChildAt(0)
+    vm.ctrl = view:GetTransitionAt(0)
 end
 return M

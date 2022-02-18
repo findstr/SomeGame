@@ -66,7 +66,7 @@ public static partial class Core {
 	static private float logic_elapse = 0.0f;
 	static private LuaTable expire_array;
 	static public LuaTable result = null;
-	static private List<long>  expire_list = null;
+	static private List<ulong>  expire_list = null;
 
 	static private update_t core_fixedupdate;
 	static private update_t core_update;
@@ -94,7 +94,7 @@ public static partial class Core {
 		core_logicupdate = core.Get<update_t>("_logicupdate");
 		core_timerexire = core.Get<expire_t>("_timerexpire");
 		result = core.Get<LuaTable>("result");
-		expire_list = new List<long>();
+		expire_list = new List<ulong>();
 		expire_array = L.NewTable();
 	}
 
@@ -110,7 +110,9 @@ public static partial class Core {
 		InitLua();
 		logic_delta = 1.0f / LogicHZ;
 	}
-
+	static public ulong Timeout(int ms) {
+		return Timer.TimeOut(ms);
+	}
 	static public void Start() {
 		logic_last_frame = Time.realtimeSinceStartup;
 		L.DoString("require 'main'");

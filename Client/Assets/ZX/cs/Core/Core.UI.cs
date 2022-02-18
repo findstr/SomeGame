@@ -13,6 +13,7 @@ static partial class Core {
 		if (UI != null)
 			UI.RemoveAllPackages();
 		UI = new UI();
+		UIObjectFactory.SetLoaderExtension(typeof(ZXGLoader));
 	}
         static public void SetPathPrefix(string s) {
 		UI.SetPathPrefix(s);
