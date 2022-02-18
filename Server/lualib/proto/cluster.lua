@@ -85,16 +85,26 @@ battlestart_n 0x120e {
 	player {
 		.uid:uinteger 1
 		.heroid:integer 2
-		.px:float 3
-		.pz:float 4
-		.side:integer 5
-		.hp:integer 6
-		.mp:integer 7
-		.hpmax:integer 8
-		.mpmax:integer 9
-		.speed:integer 10
+		.level:integer 3
+		.name:string 4
+		.px:float 5
+		.pz:float 6
+		.side:integer 7
+		.hp:integer 8
+		.mp:integer 9
+		.hpmax:integer 10
+		.mpmax:integer 11
+		.speed:integer 12
 	}
 	.entities:player[uid] 1
+	.redcrystal:player 2
+	.bluecrystal:player 3
+	.redup:player[] 4
+	.redmiddle:player[] 5
+	.reddown:player[] 6
+	.blueup:player[] 7
+	.bluemiddle:player[] 8
+	.bluedown:player[] 9
 }
 battlemove_r 0x1301 {
 	.px:float 1

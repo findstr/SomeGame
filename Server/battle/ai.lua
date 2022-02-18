@@ -157,7 +157,7 @@ end
 
 function AI:bt_lock_nearest(args)
 	local host = self.host
-	local p, d = ROOM:select_nearest(host.px, host.pz, host.side % 2 + 1)
+	local p, d = ROOM:select_nearest_enemy(host.uid, host.px, host.pz)
 	if not p then
 		return false
 	end

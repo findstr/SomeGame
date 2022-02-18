@@ -68,7 +68,7 @@ function M:fire(room, atk, target)
 	battleskill_a.targethp = n
 	room:broadcast("battleskill_a", battleskill_a)
 	if n == 0 then
-		room:checkover()
+		room:killed(target)
 	end
 	return true
 end

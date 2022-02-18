@@ -22,24 +22,26 @@ local HPMAX<const> = property.HPMAX
 local MPMAX<const> = property.MPMAX
 
 
-function M:new(uid, heroid, x, z, side, broadcast)
+function M:new(uid, name, heroid, coord, side, type)
 	local conf = Hero[heroid][1]
 	local e = remove(cache)
 	if not e then
 		e = setmetatable({}, mt)
 	end
+	local x, z = coord[1], coord[2]
 	e.uid = uid
+	e.name = name
 	e.heroid = heroid
 	e.level = 1
+	e.side = side
+	e.type = type
 	e.px = x
 	e.pz = z
-	e.vx = 0
-	e.vz = 0
 	e.homex = x
 	e.homez = z
-	e.side = side
+	e.vx = 0
+	e.vz = 0
 	e.skills = {nskill:new(1, conf.NormalSkill)}
-	e.broadcast = broadcast
 	for k, id in pairs(property) do
 		e[id] = conf[k]
 	end

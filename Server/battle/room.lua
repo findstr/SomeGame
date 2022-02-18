@@ -17,6 +17,8 @@ local room_cache = require "cache" ()
 
 local pairs = pairs
 local log = core.log
+local ms = core.monotonic
+local tostring = tostring
 local remove = table.remove
 local insert = table.insert
 local online = gate.online
@@ -32,6 +34,14 @@ local OVER<const> = 3
 local RED<const> = 1
 local BLUE<const> = 2
 
+local ROAD_UP<const> = 1
+local ROAD_MID<const> = 2
+local ROAD_DOWN<const> = 3
+
+local CHARACTER<const> = 1
+local TOWER<const> = 2
+local CRYSTAL<const> = 3
+
 local NPC_BLUE<const> = 500
 
 local HP<const> = property.HP
@@ -43,136 +53,33 @@ local SPEED<const> = property.SPEED
 
 local roomid_start
 
-local function enter(room, e, gateid)
-	local uid, side = e.uid, e.side
-	room[side][e.uid] = e
-	local uidlist = room.uidlist
-	if side == RED then
-		local redcount = room.redcount + 1
-		room.redcount = redcount
-		insert(uidlist, redcount, uid)
-	else
-		uidlist[#uidlist + 1] = uid
-	end
-	room.entities[uid] = e
-	online(uid, gateid)
-	uid_to_room[uid] = room
-end
-
-local function clear_side(from, to, uidlist, readylist, sidelist)
-	for i = from, to do
-		local uid = uidlist[i]
-		local e = sidelist[uid]
-		uid_to_room[uid] = nil
-		offline(uid, nil)
-		e:del()
-		readylist[uid] = nil
-		sidelist[uid] = nil
-		uidlist[i] = nil
-	end
-	--the last is npc
-	for uid, e in pairs(sidelist) do
-		sidelist[uid] = nil
-		e:del()
-	end
-end
-
-local function del(self)
-	local uidlist = self.uidlist
-	local readylist = self.readylist
-	local redcount = self.redcount
-	local uidcount = #uidlist
-	local entities = self.entities
-	local brains = self.brains
-	self.redcount = 0
-	clear_side(1, redcount, uidlist, readylist, self[RED])
-	clear_side(redcount + 1, uidcount, uidlist, readylist, self[BLUE])
-	for k, _ in pairs(entities) do
-		entities[k] = nil
-	end
-	for k, _ in pairs(brains) do
-		brains[k] = nil
-	end
-	local roomid = self.roomid
-	rooms[roomid - roomid_start] = nil
-	room.call("roomclear_c", self)
-	room_cache[#room_cache + 1] = self
-	log("[room] del room:", roomid)
-end
-
-local function leave(room, e)
-	local uid, side = e.uid, e.side
-	room[side][uid] = nil
-	room.entities[uid] = nil
-	room.brains[uid] = nil
-	offline(uid, nil)
-	uid_to_room[uid] = nil
-	local uidlist, redcount = room.uidlist, room.redcount
-	local from, to
-	if side == RED then
-		from = 1
-		to = redcount
-	else
-		from = redcount + 1
-		to = #uidlist
-	end
-	for i = from, to do
-		if uidlist[i] == uid then
-			if side == RED then
-				room.redcount = redcount - 1
-			end
-			remove(uidlist, i)
-			if #uidlist == 0 then
-				del(room)
-			else
-				multicast(uidlist, "battleleave_a", {
-					uid = uid, roomid = room.roomid
-				})
-				room.call("roomleave_c", e)
-			end
-			break
-		end
-	end
-	e:del()
-end
-
-function M:broadcast(cmd, ack)
-	multicast(self.uidlist, cmd, ack)
-end
-
-function M:select_nearest(x, z, side)
-	local dist = maxinteger
-	local target = nil
-	local players = self[side]
-	for _, p in pairs(players) do
-		local dx = x - p.px
-		local dz = z - p.pz
-		local n = dx * dx + dz * dz
-		if n < dist then
-			dist = n
-			target = p
-		end
-	end
-	return target, dist
-end
-
 local function new(name, uid)
 	local id = #rooms + 1
 	local roomid = id + roomid_start
-	local r = remove(room_cache)
+	local r = nil --TODO: remove(room_cache)
 	if not r then
-		local uidlist = {}
 		r = setmetatable({
 			roomid = nil,
 			status = IDLE,
 			name = nil,
+			npcidx = 0,
 			redcount = 0,
+			uidlist = {},
 			readylist = {},
-			uidlist = uidlist,
+			brains = {},
+			depend = {},
+			redcrystal = nil,
+			bluecrystal = nil,
+			redup = {},
+			redmiddle = {},
+			reddown = {},
+			blueup = {},
+			bluemiddle = {},
+			bluedown = {},
+			reborn = {},
+			entities = {},
 			[RED] = {},
 			[BLUE] = {},
-			entities = {},
-			brains = {},
 		}, mt)
 	end
 	rooms[id] = "" --shadow
@@ -185,7 +92,6 @@ local function new(name, uid)
 		r.roomid = roomid
 		r.status = IDLE
 		r.name = name
-		r.redcount = 0
 		rooms[id] = r
 		log("[room] create uid:", uid, "room", roomid)
 		return r
@@ -195,49 +101,180 @@ local function new(name, uid)
 	return nil
 end
 
-local function born(room)
-	local blue = room[BLUE]
-	local brains = room.brains
-	local entities = room.entities
-	local npc = require "bt.npc"
-	for i = 1, 1 do
-		local id = #blue + 1
-		local uid = id + NPC_BLUE
-		local e = entity:new(uid, 10001, -16, -17, BLUE)
-		blue[id] = e
-		entities[uid] = e
-		brains[uid] = ai:newctx(e, npc)
+local function del(self)
+	--TODO: recycle
+	local roomid = self.roomid
+	rooms[roomid - roomid_start] = nil
+	log("[room] del room:", roomid)
+end
+
+local function enter(room, uid, side, gate)
+	local uidlist = room.uidlist
+	if side == RED then
+		local redcount = room.redcount + 1
+		room.redcount = redcount
+		insert(uidlist, redcount, uid)
+	else
+		uidlist[#uidlist + 1] = uid
+	end
+	online(uid, gate)
+	uid_to_room[uid] = room
+end
+
+
+local function leave(room, uid)
+	local uid = e.uid
+	local side = BLUE
+	local uidlist = room.uidlist
+	for i = 1, #uidlist do
+		if uidlist[i] == uid then
+			remove(uidlist, i)
+			local redcount = room.redcount
+			if i <= redcount then
+				side = RED
+				room.redcount = redcount - 1
+			end
+			break
+		end
+	end
+	offline(uid, nil)
+	if room.status ~= BATTLE then
+		room.entities[uid] = nil
+		room[SIDE][uid] = nil
+	end
+	if #uidlist == 0 then
+		del(room)
+	else
+		local ack = {
+			uid = uid,
+			side = side,
+			roomid = room.roomid
+		}
+		multicast(uidlist, "battleleave_a", ack)
+		room.call("roomleave_c", ack)
 	end
 end
 
-local function exist_alive(self, side)
-	local l = self[side]
-	for i = 1, #l do
-		if l[i].hp > 0.0001 then
-			return true
-		end
+local scene = require "conf.Scene"
+local building = require "conf.Building"
+local conf_red_tower = {
+	"RedCrystal",
+	"RedUpTower",
+	"RedMidTower",
+	"RedDownTower",
+}
+local red_tower = {
+	"redcrystal",
+	"redup",
+	"redmiddle",
+	"reddown",
+}
+local conf_blue_tower = {
+	"BlueCrystal",
+	"BlueUpTower",
+	"BlueMidTower",
+	"BlueDownTower",
+}
+local blue_tower = {
+	"bluecrystal",
+	"blueup",
+	"bluemiddle",
+	"bluedown",
+}
+
+local function from_entity(e)
+	return {
+		uid = e.uid,
+		name = e.name,
+		heroid = e.heroid,
+		level = e.level,
+		px = e.px,
+		pz = e.pz,
+		hp = e[HP],
+		mp = e[MP],
+		side = e.side,
+		hpmax = e[HPMAX],
+		mpmax = e[MPMAX],
+		speed = e[SPEED],
+	}
+end
+
+local function collect_list(list, l)
+	for j = 1, #list do
+		l[#l + 1] = from_entity(list[j])
 	end
-	return false
+	return l
 end
 
 local function battlestart_n(room)
-	local l = {}
-	local entities = room.entities
-	for uid, e in pairs(entities) do
-		l[#l + 1] = {
-			uid = e.uid,
-			heroid = e.heroid,
-			px = e.px,
-			pz = e.pz,
-			side = e.side,
-			hp = e[HP],
-			mp = e[MP],
-			hpmax = e[HPMAX],
-			mpmax = e[MPMAX],
-			speed = e[SPEED],
-		}
+	local entities = {}
+	for _, e in pairs(room.entities) do
+		if e.type == CHARACTER then
+			entities[#entities + 1] = from_entity(e)
+		end
 	end
-	return {entities = l}
+	return {
+		entities = entities,
+		redcrystal = from_entity(room.redcrystal),
+		bluecrystal = from_entity(room.bluecrystal),
+		redup = collect_list(room.redup, {}),
+		redmiddle = collect_list(room.redmiddle, {}),
+		reddown = collect_list(room.reddown, {}),
+		blueup = collect_list(room.blueup, {}),
+		bluemiddle = collect_list(room.bluemiddle, {}),
+		bluedown = collect_list(room.bluedown, {}),
+	}
+end
+
+
+local function born_building(room, side, conf, tower)
+	local depend = room.depend
+	local id = room.npcidx + 1
+	local team = room[side]
+	local entities = room.entities
+	-- create building
+	local s = scene[conf[1]].Building
+	local b = building[s]
+	local crystal = entity:new(id, b.Desc, b.HeroID, b.Coord, side, CRYSTAL)
+	room[tower[1]] = crystal
+	for i = 2, #conf do
+		local parent = crystal
+		local l = room[tower[i]]
+		local s = scene[conf[i]].Building
+		for j = 1, #s do
+			id = id + 1
+			local b = building[s[j]]
+			local e = entity:new(id, b.Desc, b.HeroID,
+				b.Coord, side, TOWER)
+			print("depend", e.uid, e.name, "=>", parent.name)
+			l[#l + 1] = e
+			depend[e] = parent
+			parent = e
+		end
+		entities[id] = parent
+		team[id] = parent
+	end
+	room.npcidx = id
+end
+
+local function born_character(room)
+	local uidlist = room.uidlist
+	local redcount = room.redcount
+	local red = room[RED]
+	local blue = room[BLUE]
+	local entities = room.entities
+	for i = 1, redcount do
+		local uid = uidlist[i]
+		local e = entity:new(uid, tostring(uid), 10000, {-6, -6}, RED, CHARACTER)
+		entities[uid] = e
+		red[uid] = e
+	end
+	for i = redcount + 1, #uidlist do
+		local uid = uidlist[i]
+		local e = entity:new(uid, tostring(uid), 10000, {-6, -6}, BLUE, CHARACTER)
+		entities[uid] = e
+		blue[uid] = e
+	end
 end
 
 local function check_ready(room, uid)
@@ -257,7 +294,9 @@ local function check_ready(room, uid)
 	log("[room] battleready uid:", uid, n, "/", total)
 	if n == total then
 		room.status = BATTLE
-		born(room)
+		born_building(room, RED, conf_red_tower, red_tower)
+		born_building(room, BLUE, conf_blue_tower, blue_tower)
+		born_character(room)
 		multicast(uidlist, "battlestart_n", battlestart_n(room))
 	end
 	local ack = {
@@ -268,13 +307,35 @@ local function check_ready(room, uid)
 end
 
 
-function M:checkover()
-	if not exist_alive(self, RED) then
-		self.status = OVER
-		gate.multicast(self.uidlist, "battleover_n", {winner = BLUE})
-	elseif not exist_alive(self, BLUE) then
-		self.status = OVER
-		gate.multicast(self.uidlist, "battleover_n", {winner = RED})
+function M:killed(e)
+	local t = e.type
+	print("killed", e.uid, t)
+	if t == CRYSTAL then
+		if self.redcrystal == e then
+			self.status = OVER
+			gate.multicast(self.uidlist, "battleover_n", {winner = BLUE})
+		else
+			self.status = OVER
+			gate.multicast(self.uidlist, "battleover_n", {winner = RED})
+		end
+	else
+		local entities = self.entities
+		local team = self[e.side]
+		local uid = e.uid
+		entities[uid] = nil
+		team[uid] = nil
+		if t == CHARACTER then
+			self.reborn[e] = ms() + 6000
+		else
+			local depend = self.depend
+			local p = depend[e]
+			if p then
+				local xuid = p.uid
+				depend[e] = nil
+				entities[xuid] = p
+				team[xuid] = p
+			end
+		end
 	end
 end
 
@@ -298,10 +359,30 @@ function M:tick(delta)
 		b:tick(self, delta)
 	end
 end
+---------------------helper
+
+function M:broadcast(cmd, ack)
+	multicast(self.uidlist, cmd, ack)
+end
+
+function M:select_nearest_enemy(uid, x, z)
+	local target = nil
+	local dist = maxinteger
+	local players = self[side]
+	for _, p in pairs(players) do
+		local dx = x - p.px
+		local dz = z - p.pz
+		local n = dx * dx + dz * dz
+		if n < dist then
+			dist = n
+			target = p
+		end
+	end
+	return target, dist
+end
 
 ---------------------tick
 
-local ms = core.monotonic
 local last_time = ms() / 1000
 local pcall = core.pcall
 local function timer_tick()
@@ -348,8 +429,7 @@ function router.battlecreate_c(req)
 	local uid = req.uid
 	local r = new(req.name, uid)
 	if r then
-		local e = entity:new(uid, 10000, -6, -6, RED, r.broadcast)
-		enter(r, e, req.gate)
+		enter(r, uid, side, req.gate)
 		log("[player] battlecreate uid:", uid, "room", r.roomid)
 		return "battlecreate_a", r
 	end
@@ -372,7 +452,6 @@ function E.battleenter_c(req)
 		log("[room] enter uid:", uid, "room", roomid, "error:", err)
 		return "error", {errno = errno.SYSTEM}
 	end
-	local gateid = req.gate
 	local req = {
 		roomid = roomid,
 		uid = uid,
@@ -380,8 +459,7 @@ function E.battleenter_c(req)
 	}
 	local uidlist = r.uidlist
 	multicast(uidlist, "battleenter_n", req)
-	local e = entity:new(uid, 1000, -6, -6, side)
-	enter(r, e, gateid)
+	enter(r, uid, side, req.gate)
 	log("[room] enter uid:", uid, "room", roomid, "count", #uidlist)
 	return "battleenter_a" ,r
 end
@@ -390,10 +468,7 @@ function E.battleleave_r(req)
 	local uid = req.uid_
 	local r = uid_to_room[uid]
 	if r then
-		local e = r[RED][uid] or r[BLUE][uid]
-		if e then
-			leave(r, e)
-		end
+		leave(r, uid)
 	end
 	log("[player] battleleave uid:", uid)
 	return "battleleave_a", req
@@ -433,8 +508,11 @@ function E.battleskill_r(req)
 		local entities = r.entities
 		local atk = entities[uid]
 		local target = entities[req.target]
-		local s = atk.skills[req.skill]
-		s:fire(r, atk, target)
+		print("ATK", atk, target, req.target, req.skill)
+		if target then
+			local s = atk.skills[req.skill]
+			s:fire(r, atk, target)
+		end
 	end
 end
 
