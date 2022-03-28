@@ -2,6 +2,7 @@
 
 local M = {}
 function M.lobby(vm, view)
+    vm.__view = view
     vm.shop = view:GetChildAt(2)
     vm.social = view:GetChildAt(3)
     vm.prebattle = view:GetChildAt(4)
@@ -17,5 +18,6 @@ function M.lobby(vm, view)
     vm.pve = view:GetChildAt(20)
     vm.hellpvp = view:GetChildAt(24)
     vm.hell = view:GetChildAt(25)
+    return vm
 end
 return M

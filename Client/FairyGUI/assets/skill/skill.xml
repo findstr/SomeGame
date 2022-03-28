@@ -2,19 +2,23 @@
 <component size="1280,720">
   <displayList>
     <component id="n0_mmpj" name="s1" src="ice7q" fileName="Button1.xml" xy="1116,547" size="150,150" aspect="true" filter="color" filterData="0,0,0,0">
-      <relation target="" sidePair="right-right,bottom-bottom"/>
+      <relation target="" sidePair="width-width,height-height,left-right,right-right,top-bottom,bottom-bottom"/>
+      <Button title="1111" selectedTitle="1111"/>
     </component>
-    <component id="n7_c2ik" name="s2" src="ice7r" fileName="Button2.xml" xy="1146,414" size="120,120">
-      <relation target="" sidePair="right-right,rightext-right,topext-bottom,bottomext-bottom,leftext-right"/>
+    <component id="n7_c2ik" name="s2" src="ice7r" fileName="Button2.xml" xy="1146,393" size="120,120">
+      <relation target="" sidePair="width-width,height-height,left-right,right-right,top-bottom,bottom-bottom"/>
     </component>
-    <component id="n8_c2ik" name="s3" src="ice7r" fileName="Button2.xml" xy="1035,465" size="120,120">
-      <relation target="" sidePair="right-right,rightext-right,topext-bottom,bottomext-bottom,leftext-right"/>
+    <component id="n8_c2ik" name="s3" src="ice7r" fileName="Button2.xml" xy="1009,438" size="120,120">
+      <relation target="" sidePair="width-width,height-height,left-right,right-right,top-bottom,bottom-bottom"/>
     </component>
-    <component id="n9_c2ik" name="s4" src="ice7r" fileName="Button2.xml" xy="986,577" size="120,120">
-      <relation target="" sidePair="right-right,rightext-right,topext-bottom,bottomext-bottom,leftext-right"/>
+    <component id="n9_c2ik" name="s4" src="ice7r" fileName="Button2.xml" xy="983,578" size="120,120">
+      <relation target="" sidePair="width-width,height-height,left-right,right-right,top-bottom,bottom-bottom"/>
     </component>
-    <component id="n10_c2ik" name="s5" src="ice7s" fileName="Button3.xml" xy="864,597" size="100,100"/>
-    <component id="n11_c2ik" name="s6" src="ice7s" fileName="Button3.xml" xy="759,597" size="100,100"/>
-    <component id="n12_c2ik" name="s7" src="ice7s" fileName="Button3.xml" xy="652,597" size="100,100"/>
+    <component id="n10_c2ik" name="s5" src="ice7s" fileName="Button3.xml" xy="873,597" size="100,100">
+      <relation target="" sidePair="width-width,height-height,left-right,right-right,top-bottom,bottom-bottom"/>
+    </component>
+    <component id="n11_c2ik" name="s6" src="ice7s" fileName="Button3.xml" xy="768,597" size="100,100">
+      <relation target="" sidePair="width-width,height-height,left-right,right-right,top-bottom,bottom-bottom"/>
+    </component>
   </displayList>
 </component>

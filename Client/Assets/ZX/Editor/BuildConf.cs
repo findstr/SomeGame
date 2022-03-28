@@ -83,11 +83,12 @@ namespace ZX
 					if (t.type == "lan") {
 						for (int r = TYPE_ROW + 1; r <= sheet.Dimension.Rows; r++) {
 							var v = sheet.GetValue(r, c);
-							nset.Add(v.ToString());
+							var x = v.ToString();
+							if (x != "nil")
+								nset.Add(x);
 						}
 					}
 				}
-
 			}
 		}
 
@@ -195,8 +196,10 @@ namespace ZX
 				var sb = new StringBuilder();
 				var list = s.Split(',');
 				sb.Append("{");
-				foreach (var x in list) 
-					sb.AppendFormat("{0},", BuildValue(rowid, ref field, x));
+				foreach (var x in list) { 
+					if (x != "") 
+						sb.AppendFormat("{0},", BuildValue(rowid, ref field, x));
+				}
 				sb.Append("}");
 				return sb.ToString();
 			}
@@ -209,7 +212,8 @@ namespace ZX
 				sb.Append("}");
 				return sb.ToString();
 			}
-
+			if (s == "nil")
+				return s;
 			switch (field.type) {
 			case "string":
 				return "\"" + s + "\"";
@@ -286,7 +290,7 @@ namespace ZX
 						Debug.LogError(string.Format("{0}[{1}][{2}] not exist", output, r, c));
 					string s = cell.ToString();
 					if (field.IsMatch(select)) {
-						string v = BuildValue(c, ref field, s);
+						string v = BuildValue(r, ref field, s);
 						row[c-1] = v;
 					}
 				}

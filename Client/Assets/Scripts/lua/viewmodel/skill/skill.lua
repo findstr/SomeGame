@@ -1,13 +1,14 @@
 local bind = require "binder.skill".skill
 local root = GRoot.inst
 local M = {}
-function M:start(view)	
-	M.view = view
+function M:start(view)
 	view:MakeFullScreen()
+	root:AddChild(view)
 	bind(M, view)
 end
 
-function M:stop(view)
+function M:stop()
+
 end
 
 return M

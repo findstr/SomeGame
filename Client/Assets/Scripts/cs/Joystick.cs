@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.OnScreen;
 
 [XLua.LuaCallCSharp]
 public class Joystick : MonoBehaviour
 {
 	public InputActionAsset asset;
 	public string actionName;
-	public GameObject stick;
+	public OnScreenStick stick;
 	public Camera cam;
 	private InputAction action;
 	void Start()
@@ -17,13 +18,14 @@ public class Joystick : MonoBehaviour
 		action.Enable();
 	}
 
-	void Update()
+	public void Touch()
 	{
-
 	}
+
 	public bool Read()
 	{
 		var value = action.ReadValue<Vector2>();
+		Debug.Log("Read:" + value);
 		bool moving = Mathf.Abs(value.x) > Mathf.Epsilon || Mathf.Abs(value.y) > Mathf.Epsilon;
 		if (moving) {
 			var angle = Vector2.Angle(Vector2.up, value);

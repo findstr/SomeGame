@@ -2,6 +2,8 @@
 
 local M = {}
 function M.balance(vm, view)
+    vm.__view = view
     vm.title = view:GetChildAt(1)
+    return vm
 end
 return M

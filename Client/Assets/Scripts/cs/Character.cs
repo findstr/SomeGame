@@ -127,11 +127,11 @@ public class Character : MonoBehaviour
 	}
 	void UpdateHud()
 	{
-                var pos = ScreenPointOfCharacter(HudOffset); 
-                hud.SetPosition(pos.x, pos.y, pos.z);
+                var npos = ScreenPointOfCharacter(HudOffset); 
+                hud.SetPosition(npos.x, npos.y, npos.z);
 	}
 	// Update is called once per frame
-	void LateUpdate()
+	void FixedUpdate()
 	{
 		UpdateAnimation();
 		UpdateHud();

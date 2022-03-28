@@ -48,7 +48,7 @@ function M:start(view)
 	return
 end
 
-function M:stop(view)
+function M:stop()
 	router:detach()
 	print("[lobby] stop")
 end

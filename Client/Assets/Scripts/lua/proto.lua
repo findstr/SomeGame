@@ -100,6 +100,12 @@ battleready_a 0x120d {
 
 battlestart_n 0x120e {
 	player {
+		skill {
+			.skillid:integer 1
+			.level:integer 2
+			.cd:float 3
+			.sing:float 4
+		}
 		.uid:uinteger 1
 		.heroid:integer 2
 		.level:integer 3
@@ -112,16 +118,18 @@ battlestart_n 0x120e {
 		.hpmax:integer 10
 		.mpmax:integer 11
 		.speed:integer 12
+		.skills:skill[] 13
 	}
-	.entities:player[uid] 1
-	.redcrystal:player 2
-	.bluecrystal:player 3
-	.redup:player[] 4
-	.redmiddle:player[] 5
-	.reddown:player[] 6
-	.blueup:player[] 7
-	.bluemiddle:player[] 8
-	.bluedown:player[] 9
+	.roomtime:float 1
+	.entities:player[uid] 2
+	.redcrystal:player 3
+	.bluecrystal:player 4
+	.redup:player[] 5
+	.redmiddle:player[] 6
+	.reddown:player[] 7
+	.blueup:player[] 8
+	.bluemiddle:player[] 9
+	.bluedown:player[] 10
 }
 
 battlemove_r 0x1301 {

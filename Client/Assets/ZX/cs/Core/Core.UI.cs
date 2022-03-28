@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 using static FairyGUI.UIPackage;
 
 namespace ZX {
@@ -27,5 +28,10 @@ static partial class Core {
 	static public void RemoveObject(GObject obj) {
 		UI.RemoveObject(obj);
 	}
+	static public Vector3 ScreenPosition(GObject obj) {
+		var pos = obj.LocalToGlobal(Vector2.zero);
+		pos.y = Screen.height - pos.y;
+		return new Vector3(pos.x, pos.y, 0);
+	}	
 }}
 

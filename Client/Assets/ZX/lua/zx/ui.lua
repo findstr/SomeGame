@@ -12,16 +12,17 @@ local function new(fullname, ...)
 	local pkg, name = match(fullname, "([^%.]+).([^%.]+)")
 	local view = CreateObject(strings[pkg], strings[name])
 	local vm = require ("viewmodel." .. fullname)
-	return (vm:start(view, ...) or vm), view
+	return (vm:start(view, ...) or vm)
 end
 
 local function close(tag)
 	for i = #ui_stack, 1, -1 do
 		local ui = ui_stack[i]
-		if ui.name == tag or ui.viewmode == tag then	
+		if ui.name == tag or ui.viewmodel == tag then	
+			local vm = ui.viewmodel
 			remove(ui_stack, i)
-			ui.viewmodel:stop(ui.view)
-			RemoveObject(ui.view)
+			vm:stop()
+			RemoveObject(vm.__view)
 			ui_stack[i] = nil
 			break
 		end
@@ -30,17 +31,16 @@ end
 
 local function closeall()
 	for i = #ui_stack, 1, -1 do
-		local ui = ui_stack[i]
-		ui.viewmodel:stop(ui.view)
-		RemoveObject(ui.view)
+		local vm = ui_stack[i].viewmodel
+		vm:stop()
+		RemoveObject(vm.__view)
 		ui_stack[i] = nil
 	end
 end
 
 local function open(fullname, ...)
-	local vm, view = new(fullname, ...)
+	local vm = new(fullname, ...)
 	ui_stack[#ui_stack + 1] = {
-		view = view,
 		name = fullname,
 		viewmodel = vm,
 	}
@@ -89,5 +89,6 @@ function M.lan(lan)
 end
 
 M.assetdir = CS.ZX.Core.SetPathPrefix
+M.screenposition = CS.ZX.Core.ScreenPosition
 
 return M

@@ -120,9 +120,6 @@ public static partial class Core {
 	///////////////Update Function
 	static public void FixedUpdate() {
 		core_fixedupdate(Time.fixedDeltaTime);
-	}
-	static public void Update() {
-		core_update(Time.deltaTime);
 		expire_list.Clear();
 		Timer.Update((int)(Time.deltaTime * 1000f), expire_list);
 		if (expire_list.Count > 0) {
@@ -151,6 +148,9 @@ public static partial class Core {
 			}
 #endif
 		}
+	}
+	static public void Update() {
+		core_update(Time.deltaTime);
 	}
 	static public void LateUpdate() {
 		ZX.RL.Instance.update();

@@ -118,16 +118,13 @@ local ui = require "zx.ui"
 local json = require "zx.json"
 local core = require "zx.core"
 local server = require "server"
+local skill = require "skill"
 local router = require "router":new()
 
 local conf_hero = require "conf.Hero"
-local conf_skill = require "conf.Skill"
-
-
 
 local red_road = {"redup", "redmiddle", "reddown"}
 local blue_road = {"blueup", "bluemiddle", "bluedown"}
-
 
 local pairs = pairs
 local load = resources.load
@@ -135,12 +132,11 @@ local unload = resources.unload
 local CM = CS.UnityEngine.GameObject.Find("Characters"):GetComponent(typeof(CS.CharacterManager))
 
 local M = {}
-local depend
-local skill_ui
-local host = nil
+local TIME
+local host
 local entities = {}
 local joystick_move
-local joystick_skill
+local depend
 local resource = setmetatable({}, {
 __index = function(t, path)
 	local ar = load(path)
@@ -177,19 +173,6 @@ local function build_road(root, list, sidehud, creating)
 	return root
 end
 
-local function create_hero(entity, heroid)
-	local conf = conf_hero[heroid][1]
-	local nskill = conf_skill[conf.NormalSkill][1]
-	entity.skills = {
-		[1] = {
-			time = 0,
-			cd = nskill.CD,
-			dist = nskill.Distance * nskill.Distance,
-		}
-	}
-end
-
-local time_elapse  = 0
 local dr_force_time<const> = 1.0
 local sync_delta = dr_force_time
 local result = core.result
@@ -197,18 +180,16 @@ local move = {uid = uid, px = nil, pz = nil, vx = nil, vz = nil}
 local lastmoving = false
 
 local function move_update(_, delta)
-	time_elapse = time_elapse + delta
+	TIME = TIME + delta
 	local dirty = false
 	local moving = joystick_move:Read()
-	if moving then
+	if moving or lastmoving == true then
 		local speed = host.speed
 		local x, y = result[1], result[2]
 		print("move_update", speed, x, y)
 		local xx, yy = x * speed, y * speed;
 		dirty = CM:LocalMove(hostuid, xx, yy, 0.2)
-		if not dirty and moving == false and lastmoving == true then
-			dirty = true
-		end
+		dirty = true
 		lastmoving = moving
 	end
 	sync_delta = sync_delta - delta
@@ -223,29 +204,22 @@ local function move_update(_, delta)
 	end
 end
 
-local function init_skill_ui()
-	local joystick = CS.UnityEngine.GameObject.Find("Joystick")
-	local jmove = joystick.transform:Find("Move")
-	local jskill = joystick.transform:Find("Skill")
-	joystick_move = jmove:GetComponent(typeof(CS.Joystick))
-	joystick_skill = jskill:GetComponent(typeof(CS.Joystick))
-	joystick_move.gameObject:SetActive(true)
-	joystick_skill.gameObject:SetActive(false)
-	skill_ui = ui.new("skill.skill")
-	--skill_vm.normal.onClick:Add(skill_normal)
-end
-
 function M.start(ack)
 	depend = {}
 	hostuid = server.uid
 	router:attach()
 	CM:Reset()
 	move.uid = hostuid
-	init_skill_ui()
 	resources.load_scene_async("Map.unity", resources.additive)
 	print(json.encode(ack))
+	TIME = ack.roomtime
 	local list = ack.entities
 	host = list[hostuid]
+	local joystick = CS.UnityEngine.GameObject.Find("Joystick")
+	local jmove = joystick.transform:Find("Move")
+	joystick_move = jmove:GetComponent(typeof(CS.Joystick))
+	joystick_move.gameObject:SetActive(true)
+	skill.start(host.skills)
 	local hostside = host.side
 	local sidehud = {
 		[hostside] = "hud.blue",
@@ -272,9 +246,8 @@ function M.start(ack)
 		local c = creating[i]
 		local e = c.entity
 		local uid = e.uid
-		local hud, hudview = ui.new(c.hud)
+		local hud = ui.new(c.hud)
 		hud.name.text = e.name
-		create_hero(e, e.heroid)
 		hud.mp.min = 0
 		hud.mp.max = e.hpmax
 		hud.hp.min = 0
@@ -282,7 +255,7 @@ function M.start(ack)
 		hud.mp.value = e.mp
 		hud.hp.value = e.hp
 		e.hud = hud
-		CM:Create(uid, c.prefab, hudview, e.px, e.pz)
+		CM:Create(uid, c.prefab, hud.__view, e.px, e.pz)
 		entities[uid] = e
 	end
 	for uid, e in pairs(list) do
@@ -305,10 +278,8 @@ function M.stop()
 		ui.del(e.hud)
 		entities[uid] = nil
 	end
-	ui.del(skill_ui)
-	skill_ui = nil
+	skill.stop()
 	joystick_move.gameObject:SetActive(false)
-	joystick_skill.gameObject:SetActive(false)
 	core.logicupdate(input_process, nil)
 	resources.unload_scene_async("Map.unity");
 end

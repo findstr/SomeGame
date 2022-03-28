@@ -20,5 +20,20 @@ local M = {
 [19] = {ID = 19,HeroID = 10002,Level = 1,Path = "Root/Map/arena01_tower010",},
 [20] = {ID = 20,HeroID = 10002,Level = 1,Path = "Root/Map/arena01_tower011",},
 
+[10000] = nil,
+[10001] = nil,
+[10002] = nil,
+}
+
+M[10000]={
+	[1] = M[1],
+}
+
+M[10001]={
+	[1] = M[2],
+}
+
+M[10002]={
+	[1] = M[20],
 }
 return M

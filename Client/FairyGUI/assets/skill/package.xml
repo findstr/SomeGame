@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <packageDescription id="p84p8jpy">
   <resources>
-    <image id="mmpj0" name="Avatar.PNG" path="/Images/"/>
-    <component id="mmpj5" name="skill.xml" path="/" exported="true"/>
     <component id="ice7q" name="Button1.xml" path="/"/>
     <component id="ice7r" name="Button2.xml" path="/"/>
     <component id="ice7s" name="Button3.xml" path="/"/>
+    <component id="uqdtt" name="skill.xml" path="/" exported="true"/>
+    <image id="uqdtw" name="normal.png" path="/Images/"/>
+    <image id="mwtoy" name="cd.png" path="/Images/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

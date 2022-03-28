@@ -26,6 +26,7 @@ local function genCode(handler)
 		writer.lines[1] = "--This is an automatically generated class by FairyGUI. Please do not modify it."
 		writer:writeln(string.format('function M.%s(vm, view)', classInfo.className))
 		writer:incIndent()
+			writer:writeln('vm.__view = view')
 			local memberCnt = members.Count
 			for j=0,memberCnt-1 do
 				local memberInfo = members[j]

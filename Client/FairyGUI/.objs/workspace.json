@@ -4,9 +4,9 @@
   "libview.iconScale": 0,
   "doc.openedDocs": [
     "ui://ho0js4a3ri35b",
-    "ui://p84p8jpymmpj5",
-    "ui://p84p8jpyice7q",
     "ui://p84p8jpyice7r",
+    "ui://p84p8jpyice7q",
+    "ui://p84p8jpyuqdtt",
     "ui://p84p8jpyice7s",
     "ui://p33xx0kemmpj1",
     "ui://pkidkxpmmmpj1",
@@ -28,16 +28,14 @@
     "ui://ho0js4a3ri35f",
     "ui://ho0js4a3ri35g"
   ],
-  "libview.firstColumnWidth": 374,
-  "test.device": "iPhone Xs",
+  "libview.firstColumnWidth": 391,
+  "test.device": "Xiaomi 9",
   "canvasColor": 10066329,
   "libview.expandedNodes": [
     "p84p8jpy",
-    "/",
-    "p84p8jpy",
-    "/Images/"
+    "/"
   ],
-  "doc.activeDoc": "ui://p84p8jpymmpj5",
+  "doc.activeDoc": "ui://p84p8jpyice7r",
   "libview.twoColumn": false,
   "auxline2": true,
   "showGrid": false,

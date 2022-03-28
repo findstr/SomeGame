@@ -22,13 +22,14 @@ namespace ZX
 					RL.Instance.unload_asset(lr.name);
 				return ;
 			}
-			if (asset != null)
+			if (asset != null) {
 				onExternalLoadSuccess(new NTexture(asset.asset as Texture));
-			else
+			} else {
 				onExternalLoadFailed();
+			}
 		}
 		protected override void LoadExternal() {
-			RL.Instance.load_asset_async(url, typeof(Sprite), load_callback, 0);
+			RL.Instance.load_asset_async(url, typeof(Texture), load_callback, 0);
 		}
 		protected override void FreeExternal(NTexture texture)
 		{
