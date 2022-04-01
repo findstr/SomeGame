@@ -6,8 +6,13 @@
       <relation target="" sidePair="width-width,height-height"/>
     </loader>
     <text id="n1_ice7" name="name" xy="0,43" size="90,29" fontSize="20" color="#cccccc" align="center" vAlign="middle" autoSize="none" singleLine="true" text="你好"/>
-    <image id="n2_mwto" name="cdmask" src="mwtoy" fileName="Images/cd.png" xy="0,0" size="90,90" fillMethod="radial360"/>
-    <text id="n3_mwto" name="cdtime" xy="0,0" size="90,90" fontSize="20" color="#cccccc" align="center" vAlign="middle" autoSize="none" text="9"/>
+    <image id="n2_mwto" name="cdmask" src="mwtoy" fileName="Images/cd.png" xy="0,0" size="90,90" fillMethod="radial360" fillClockwise="false" fillAmount="">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <text id="n3_mwto" name="cdtime" xy="0,0" size="90,90" fontSize="50" align="center" vAlign="middle" autoSize="none" text="">
+      <relation target="" sidePair="width-width,height-height"/>
+    </text>
   </displayList>
   <Button downEffect="scale" downEffectValue=".8"/>
+  <transition name="t0"/>
 </component>
