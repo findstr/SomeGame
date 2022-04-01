@@ -1221,8 +1221,9 @@ GameObject:
   - component: {fileID: 1061931195}
   - component: {fileID: 1061931197}
   - component: {fileID: 1061931193}
-  - component: {fileID: 1061931198}
   - component: {fileID: 6296835435058235362}
+  - component: {fileID: 496676247577095571}
+  - component: {fileID: 8356397466670867464}
   m_Layer: 0
   m_Name: Darius
   m_TagString: Untagged
@@ -1245,7 +1246,7 @@ Transform:
   - {fileID: 8337343308887979880}
   - {fileID: 1679873897297207864}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!54 &1061931195
 Rigidbody:
@@ -1296,23 +1297,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1061931198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2778368832727931573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9eea06e24c4f0a741ac4e5183db16f6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireState: 0
-  HudOffset: {x: -1, y: 2.5, z: 0}
-  FlyOffset: {x: -1, y: 2.5, z: 0}
-  HealColor: {r: 0.055220194, g: 0.9622642, b: 0.004538993, a: 0}
-  HurtColor: {r: 0.8490566, g: 0.07609467, b: 0.07609467, a: 0}
 --- !u!114 &6296835435058235362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1328,6 +1312,35 @@ MonoBehaviour:
   isAway: 0
   debug_pos: {x: 0, y: 0, z: 0}
   position: {x: 0, y: 0, z: 0}
+--- !u!114 &496676247577095571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2778368832727931573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7639cb77e812c4429a0364d50f948b46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FlyOffset: {x: 1, y: 0, z: -2}
+  HealColor: {r: 0.058823533, g: 0.9607844, b: 0.003921569, a: 0}
+  HurtColor: {r: 0.85098046, g: 0.07450981, b: 0.07450981, a: 0}
+--- !u!114 &8356397466670867464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2778368832727931573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eea06e24c4f0a741ac4e5183db16f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HudOffset: {x: 1, y: 2, z: -2}
+  UpdateHudx: 1
 --- !u!1 &2829147735163432475
 GameObject:
   m_ObjectHideFlags: 0

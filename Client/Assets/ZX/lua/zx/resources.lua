@@ -1,21 +1,27 @@
 local core = require "zx.core"
 local strings = require "zx.strings"
-local M = {}
 local session = 0
 local pcall = pcall
 local type = type
 local xpcall = xpcall
 local pairs = pairs
 local tremove = table.remove
+local setmetatable = setmetatable
 local Object = typeof(CS.UnityEngine.Object)
 local LoadAsset = CS.ZX.Core.LoadAsset
 local UnloadAsset = CS.ZX.Core.UnloadAsset
 
-local assets_ref = {}
-local assets = {}
-local requests = {}
-local pool = setmetatable({}, {__mode="kv"})
-
+local M = {}
+local loading = {}
+local weakmt = {__mode = "kv"}
+local propmt = {__mode = "k", __index = function(tbl, k)
+	local v = {}
+	tbl[k] = v
+	return v
+end}
+local pool = setmetatable({}, weakmt)
+local reference = setmetatable({}, propmt)
+local requests = setmetatable({}, propmt)
 local function recycle(tbl)
 	for k, v in pairs(tbl) do
 		tbl[k] = nil
@@ -23,26 +29,30 @@ local function recycle(tbl)
 	pool[#pool + 1] = tbl
 end
 
-function M.load_async(names, cb, ud, T)
+local function load(self, name, T)
+	local assets_ref = reference[self]
+	local n = assets_ref[name] or 0
+	assets_ref[name] = n + 1
+	local abr = LoadAsset(strings[name], T)
+	self[name] = abr
+	return abr
+end
+
+local function load_async(self, names, cb, ud, T)
 	local key
+	local assets = self
+	local assets_ref = reference[self]
+	local reqlist = requests[self]
 	local typ = type(names)
 	if typ == "table" then
-		count = #names
+		local count = #names
 		for i = 1, count do
 			local name = names[i]
-			local n = assets_ref[name] or 0
-			assets_ref[name] = n + 1
-			if not assets[name] then
-				assets[name] = LoadAsset(strings[name], T)
-			end
+			load(self, name, T)		
 		end
 	else
 		key = names
-		local n = assets_ref[key] or 0
-		assets_ref[key] = n + 1
-		if not assets[key] then
-			assets[key] = LoadAsset(strings[key], T)
-		end
+		load(self, key, T)
 	end
 	local req = tremove(pool);
 	if not req then
@@ -56,20 +66,16 @@ function M.load_async(names, cb, ud, T)
 		req.__callback = cb
 		req.__userdata = ud
 	end
-	requests[#requests + 1] = req
+	reqlist[#reqlist + 1] = req
+	loading[self] = true
 end
 
-function M.load(name, T)
-	local n = assets_ref[name] or 0
-	assets_ref[name] = n + 1
-	return LoadAsset(strings[name], T)
-end
-
-function M.unload(name)
+local function unload(self, name)
+	local assets_ref = reference[self]
 	local typ = typeof(name)
 	local ref = assets_ref[name]
 	if not ref then
-		rint("reousrces.unload_asset:", name, " not exist")
+		print("reousrces.unload_asset:", name, " not exist")
 		return
 	end
 	if ref > 1 then
@@ -78,37 +84,78 @@ function M.unload(name)
 	end
 	UnloadAsset(strings[name])
 	assets_ref[name] = nil
-	assets[name] = nil
+	self[name] = nil
 end
 
-M.additive = CS.UnityEngine.SceneManagement.LoadSceneMode.Additive
 
 local LoadSceneAsync = CS.ZX.Core.LoadSceneAsync
 local UnloadSceneAsync = CS.ZX.Core.UnloadSceneAsync
+local mode_type = {
+	["single"] = CS.UnityEngine.SceneManagement.LoadSceneMode.Single,
+	["additive"] = CS.UnityEngine.SceneManagement.LoadSceneMode.Additive,
+}
 
-function M.load_scene_async(name, mode)
-	LoadSceneAsync(strings[name], mode)
+local function load_scene_async(name, mode)
+	LoadSceneAsync(strings[name], mode_type[mode])
 end
 
-function M.unload_scene_async(name)
+local function unload_scene_async(name)
 	UnloadSceneAsync(strings[name])
 end
 
-local function update_cb()
-	for i = 1, #requests do
-		local req = requests[i]
-		requests[i] = nil
-		local key = req.__key
-		if key then
-			req.__callback(assets[key], req.__userdata)
-		else
-			req.__callback(assets, req.__userdata)
-		end
+local function clear(self)
+	local assets = self
+	local ref = reference[self]
+	local req = requests[self]
+	for name, _ in pairs(ref) do
+		UnloadAsset(strings[name])
+		ref[name] = nil
+		assets[name] = nil
+	end
+	for i, req in pairs(req) do
+		req[i] = nil
 		recycle(req)
 	end
 end
 
-core.update(M, update_cb)
+
+local mt = {__index = function(tbl, k)
+	return (load(tbl, k))
+end,
+__gc = function(self)
+	clear(self)
+end}
+
+function M:new()
+	local r = setmetatable({
+		unload = unload,
+		load_async = load_async,
+		load_scene_async = load_scene_async,
+		unload_scene_async = unload_scene_async,
+	}, mt)
+	return r
+end
+
+local function update_cb()
+	for mgr, _ in pairs(loading) do
+		loading[mgr] = nil
+		local req = requests[mgr]
+		local assets = mgr
+		for i = 1, #req do
+			local r = req[i]
+			req[i] = nil
+			local key = r.__key
+			if key then
+				r.__callback(assets[key], r.__userdata)
+			else
+				r.__callback(assets, r.__userdata)
+			end
+			recycle(r)
+		end
+	end
+end
+
+core.fixedupdate(M, update_cb)
 
 
 return M

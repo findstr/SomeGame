@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Pool;
 using UnityEngine.SceneManagement;
-using XLua;
-using LuaAPI = XLua.LuaDLL.Lua;
-using LuaCSFunction = XLua.LuaDLL.lua_CSFunction;
 
 namespace ZX{
 static partial class Core {

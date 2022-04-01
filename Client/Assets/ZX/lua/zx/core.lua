@@ -1,5 +1,6 @@
 local M = {}
-local weakmt = {__mode = "kv"}
+local weakk = {__mode = "k"}
+local weakv = {__mode = "v"}
 local type = type
 local tostring = tostring
 local tremove = table.remove
@@ -18,7 +19,7 @@ M.result = {}
 -------------timer
 
 -------------coroutines
-local task_status = setmetatable({}, weakmt)
+local task_status = setmetatable({}, weakk)
 local task_running = nil
 local cocreate = coroutine.create
 local corunning = coroutine.running
@@ -48,7 +49,7 @@ end
 --coroutine pool will be dynamic size
 --so use the weaktable
 local copool = {}
-setmetatable(copool, weakmt)
+setmetatable(copool, weakv)
 
 local function task_create(f)
 	local co = tremove(copool)
@@ -148,10 +149,10 @@ local update_queue = {}
 local late_queue = {}
 local logic_queue = {}
 
-local fixed_queue_ = setmetatable({}, weakmt)
-local update_queue_ = setmetatable({}, weakmt)
-local late_queue_ = setmetatable({}, weakmt)
-local logic_queue_ = setmetatable({}, weakmt)
+local fixed_queue_ = setmetatable({}, weakk)
+local update_queue_ = setmetatable({}, weakk)
+local late_queue_ = setmetatable({}, weakk)
+local logic_queue_ = setmetatable({}, weakk)
 
 
 function M.fixedupdate(k, func)
@@ -186,15 +187,15 @@ function M.logicupdate(k, func)
 	end
 end
 
-local function update_wrap(list, candidate)
-	return function()
+local function update_wrap(list, candidate, name)
+	return function(delta)
 		local pcall = core_pcall
 		for t, func in pairs(candidate) do
 			candidate[t] = nil
 			list[t] = func
 		end
 		for t, func in pairs(list) do
-			local ok, err = pcall(func, t)
+			local ok, err = pcall(func, t, delta)
 			if not ok then
 				print("xx:", err)
 			end
@@ -202,9 +203,9 @@ local function update_wrap(list, candidate)
 	end
 end
 
-M._fixedupdate = update_wrap(fixed_queue_, fixed_queue)
-M._update = update_wrap(update_queue_, update_queue)
-M._lateupdate = update_wrap(late_queue_, late_queue)
+M._fixedupdate = update_wrap(fixed_queue_, fixed_queue, "fixedupdate")
+M._update = update_wrap(update_queue_, update_queue, "update")
+M._lateupdate = update_wrap(late_queue_, late_queue, "lateupdate")
 
 M._logicupdate = function(delta)
 	local pcall = core_pcall
@@ -221,5 +222,11 @@ M._logicupdate = function(delta)
 	dispatch_wakeup()
 end
 
+-------import from Core.cs
+
+M.setposition = CS.ZX.Core.SetPosition
+M.getposition = CS.ZX.Core.GetPosition
+M.setscale = CS.ZX.Core.SetScale
+M.getscale = CS.ZX.Core.GetScale
 
 return M

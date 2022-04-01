@@ -21,6 +21,7 @@ function M.Button3(vm, view)
     vm.name = view:GetChildAt(1)
     vm.cdmask = view:GetChildAt(2)
     vm.cdtime = view:GetChildAt(3)
+    vm.t0 = view:GetTransitionAt(0)
     return vm
 end
 function M.skill(vm, view)

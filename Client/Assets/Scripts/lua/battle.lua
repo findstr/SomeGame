@@ -70,20 +70,7 @@ function router.battlemove_a(req)
 	end
 end
 
-function router.battleskill_a(req)
-	print("========battleskill_a", req.uid, req.target)
-	local uid, target = req.uid, req.target
-	local c = players[uid]
-	local t = players[target]
-	if uid ~= hostuid then
-		CM:Fire(uid, req.skill, req.target)
-	end
-	local mp, targethp = req.mp, req.targethp
-	local delta_mp = mp - c.mp
-	c.mp = mp
-	c.hud.mp.value = mp
-	CM:SkillEffect(uid, target, req.skill, targethp)
-end
+
 
 function router.battleover_n(req)
 	print("battleover_n", req.winner)
@@ -113,12 +100,13 @@ end
 
 ]]
 local strings = require "zx.strings"
-local resources = require "zx.resources"
+local resources = require "zx.resources":new()
 local ui = require "zx.ui"
 local json = require "zx.json"
 local core = require "zx.core"
 local server = require "server"
 local skill = require "skill"
+local entities = require "entities"
 local router = require "router":new()
 
 local conf_hero = require "conf.Hero"
@@ -127,34 +115,18 @@ local red_road = {"redup", "redmiddle", "reddown"}
 local blue_road = {"blueup", "bluemiddle", "bluedown"}
 
 local pairs = pairs
-local load = resources.load
-local unload = resources.unload
 local CM = CS.UnityEngine.GameObject.Find("Characters"):GetComponent(typeof(CS.CharacterManager))
 
 local M = {}
 local TIME
 local host
-local entities = {}
 local joystick_move
 local depend
-local resource = setmetatable({}, {
-__index = function(t, path)
-	local ar = load(path)
-	t[path] = ar
-	return ar
-end,
- __gc = function(t)
-	 for path, _ in pairs(t) do
-		t[path] = nil
-		unload(path);
-	 end
- end
-})
 
 local function build(e, sidehud)
 	local heroid = e.heroid
 	return {
-		prefab = resource[conf_hero[heroid][1].Prefab],
+		prefab = resources[conf_hero[heroid][1].Prefab],
 		hud = sidehud[e.side],
 		entity = e,
 	}
@@ -179,15 +151,15 @@ local result = core.result
 local move = {uid = uid, px = nil, pz = nil, vx = nil, vz = nil}
 local lastmoving = false
 
-local function move_update(_, delta)
+local function main_update(_, delta)
 	TIME = TIME + delta
 	local dirty = false
-	local moving = joystick_move:Read()
+	local moving = joystick_move:ReadN()
 	if moving or lastmoving == true then
 		local speed = host.speed
 		local x, y = result[1], result[2]
 		print("move_update", speed, x, y)
-		local xx, yy = x * speed, y * speed;
+		local xx, yy = x * speed * delta, y * speed * delta;
 		dirty = CM:LocalMove(hostuid, xx, yy, 0.2)
 		dirty = true
 		lastmoving = moving
@@ -204,13 +176,16 @@ local function move_update(_, delta)
 	end
 end
 
+function router.battlemove_a(req)
+end
+
 function M.start(ack)
 	depend = {}
 	hostuid = server.uid
 	router:attach()
 	CM:Reset()
 	move.uid = hostuid
-	resources.load_scene_async("Map.unity", resources.additive)
+	resources.load_scene_async("Map.unity", "additive")
 	print(json.encode(ack))
 	TIME = ack.roomtime
 	local list = ack.entities
@@ -219,7 +194,6 @@ function M.start(ack)
 	local jmove = joystick.transform:Find("Move")
 	joystick_move = jmove:GetComponent(typeof(CS.Joystick))
 	joystick_move.gameObject:SetActive(true)
-	skill.start(host.skills)
 	local hostside = host.side
 	local sidehud = {
 		[hostside] = "hud.blue",
@@ -261,8 +235,9 @@ function M.start(ack)
 	for uid, e in pairs(list) do
 		CM:Join(uid, e.side)
 	end
+	skill.start(CM, hostuid, host.skills)
 	CM:SetHost(hostuid)
-	core.logicupdate(move_update, move_update)
+	core.logicupdate(M, main_update)
 end
 
 function M.stop()
@@ -270,18 +245,15 @@ function M.stop()
 	CM:Reset()
 	depend = nil
 	host = nil
-	for path, _ in pairs(resource) do
-		resource[path] = nil
-		unload(path)
-	end
 	for uid, e in pairs(entities) do
 		ui.del(e.hud)
 		entities[uid] = nil
 	end
 	skill.stop()
 	joystick_move.gameObject:SetActive(false)
-	core.logicupdate(input_process, nil)
-	resources.unload_scene_async("Map.unity");
+	core.logicupdate(M, nil)
+	resources:clear()
+	resources.load_scene_async("Map.unity");
 end
 
 return M

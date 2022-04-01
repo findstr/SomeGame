@@ -1,13 +1,7 @@
-﻿using FairyGUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using XLua;
-using static FairyGUI.UIPackage;
 
 /*
  * ZX_DEBUG
@@ -119,25 +113,17 @@ public static partial class Core {
 	}
 	///////////////Update Function
 	static public void FixedUpdate() {
-		core_fixedupdate(Time.fixedDeltaTime);
-		expire_list.Clear();
-		Timer.Update((int)(Time.deltaTime * 1000f), expire_list);
-		if (expire_list.Count > 0) {
-		    for (int i = 0; i < expire_list.Count; i++)
-			expire_array.Set(i, expire_list[i]);
-		    core_timerexire(expire_array);
-		}
-		logic_elapse += Time.deltaTime;
 #if ZX_DEBUG
 		debug.frame_time += Time.deltaTime;
 		debug.render_frame_count++;
 #endif
+		logic_elapse += Time.deltaTime;
 		for (int i = 0; i < 10 && logic_elapse >= logic_delta; i++) {
 			float t = Time.realtimeSinceStartup;
 			core_logicupdate(t - logic_last_frame);
 			logic_last_frame = t;
 			logic_elapse -= logic_delta;
-	#if ZX_DEBUG
+#if ZX_DEBUG
 			debug.logic_frame_count++;
 			debug.render_fps = (int)(debug.render_frame_count / debug.frame_time);
 			debug.logic_fps = (int)(debug.logic_frame_count / debug.frame_time);
@@ -148,8 +134,16 @@ public static partial class Core {
 			}
 #endif
 		}
+		core_fixedupdate(Time.fixedDeltaTime);
 	}
 	static public void Update() {
+		expire_list.Clear();
+		Timer.Update((int)(Time.deltaTime * 1000f), expire_list);
+		if (expire_list.Count > 0) {
+		    for (int i = 0; i < expire_list.Count; i++)
+			expire_array.Set(i, expire_list[i]);
+		    core_timerexire(expire_array);
+		}
 		core_update(Time.deltaTime);
 	}
 	static public void LateUpdate() {
