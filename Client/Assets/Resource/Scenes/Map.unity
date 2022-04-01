@@ -250,7 +250,7 @@ GameObject:
   - component: {fileID: 31307168}
   - component: {fileID: 31307167}
   - component: {fileID: 31307170}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock07_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 53112644}
   - component: {fileID: 53112643}
   - component: {fileID: 53112646}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock01_metal_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 80544537}
   - component: {fileID: 80544536}
   - component: {fileID: 80544539}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_midway_wall001_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -544,7 +544,7 @@ GameObject:
   - component: {fileID: 129717798}
   - component: {fileID: 129717797}
   - component: {fileID: 129717800}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock08_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -642,7 +642,7 @@ GameObject:
   - component: {fileID: 136964717}
   - component: {fileID: 136964716}
   - component: {fileID: 136964719}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_home_wall002_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -740,7 +740,7 @@ GameObject:
   - component: {fileID: 191060578}
   - component: {fileID: 191060577}
   - component: {fileID: 191060580}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_outside01_a
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -838,7 +838,7 @@ GameObject:
   - component: {fileID: 214658686}
   - component: {fileID: 214658685}
   - component: {fileID: 214658688}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock03_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -936,7 +936,7 @@ GameObject:
   - component: {fileID: 221895617}
   - component: {fileID: 221895616}
   - component: {fileID: 221895619}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower008
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -1036,7 +1036,7 @@ GameObject:
   - component: {fileID: 229174063}
   - component: {fileID: 229174062}
   - component: {fileID: 229174065}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_bluebuff_crystal01
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -1217,7 +1217,7 @@ GameObject:
   - component: {fileID: 234638593}
   - component: {fileID: 234638592}
   - component: {fileID: 234638595}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_bluebuff003_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -1315,7 +1315,7 @@ GameObject:
   - component: {fileID: 239167905}
   - component: {fileID: 239167904}
   - component: {fileID: 239167907}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_ground_all_metal01_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -1413,7 +1413,7 @@ GameObject:
   - component: {fileID: 242684857}
   - component: {fileID: 242684856}
   - component: {fileID: 242684859}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower016
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -1501,6 +1501,103 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300254, guid: cf86d7bbf26e4f14dbe1adb4942e10f3, type: 3}
+--- !u!1 &257463420
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 257463421}
+  - component: {fileID: 257463424}
+  - component: {fileID: 257463423}
+  - component: {fileID: 257463422}
+  m_Layer: 0
+  m_Name: Cube (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &257463421
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257463420}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.47, y: 0, z: -30.63}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1961633923}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &257463422
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257463420}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &257463423
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257463420}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &257463424
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257463420}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &288392204
 GameObject:
   m_ObjectHideFlags: 0
@@ -1596,7 +1693,7 @@ GameObject:
   - component: {fileID: 300543064}
   - component: {fileID: 300543063}
   - component: {fileID: 300543066}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_bluebuff_plants_all
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -1860,7 +1957,7 @@ GameObject:
   - component: {fileID: 408309455}
   - component: {fileID: 408309454}
   - component: {fileID: 408309457}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_bluebuff002_right_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -1946,6 +2043,103 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300020, guid: cf86d7bbf26e4f14dbe1adb4942e10f3, type: 3}
+--- !u!1 &413455969
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 413455970}
+  - component: {fileID: 413455973}
+  - component: {fileID: 413455972}
+  - component: {fileID: 413455971}
+  m_Layer: 0
+  m_Name: Cube (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &413455970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413455969}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -100, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1961633923}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &413455971
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413455969}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &413455972
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413455969}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &413455973
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413455969}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &424429146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,7 +2152,7 @@ GameObject:
   - component: {fileID: 424429148}
   - component: {fileID: 424429147}
   - component: {fileID: 424429150}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_bluebuff001_right_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -2056,7 +2250,7 @@ GameObject:
   - component: {fileID: 435958784}
   - component: {fileID: 435958783}
   - component: {fileID: 435958786}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_plants_a
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -2154,7 +2348,7 @@ GameObject:
   - component: {fileID: 437758196}
   - component: {fileID: 437758195}
   - component: {fileID: 437758198}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_outside_a
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -2252,7 +2446,7 @@ GameObject:
   - component: {fileID: 441597401}
   - component: {fileID: 441597400}
   - component: {fileID: 441597403}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_ground_04_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -2350,7 +2544,7 @@ GameObject:
   - component: {fileID: 454009377}
   - component: {fileID: 454009376}
   - component: {fileID: 454009379}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock02_metal_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -2448,7 +2642,7 @@ GameObject:
   - component: {fileID: 467814918}
   - component: {fileID: 467814917}
   - component: {fileID: 467814920}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_dragon001
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -2534,6 +2728,103 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300260, guid: cf86d7bbf26e4f14dbe1adb4942e10f3, type: 3}
+--- !u!1 &468701644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 468701645}
+  - component: {fileID: 468701648}
+  - component: {fileID: 468701647}
+  - component: {fileID: 468701646}
+  m_Layer: 0
+  m_Name: Cube (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &468701645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468701644}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -100, y: 0, z: -100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1961633923}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &468701646
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468701644}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &468701647
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468701644}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &468701648
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468701644}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &476413530
 GameObject:
   m_ObjectHideFlags: 0
@@ -2546,7 +2837,7 @@ GameObject:
   - component: {fileID: 476413532}
   - component: {fileID: 476413531}
   - component: {fileID: 476413534}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_bluebuff_straw_all
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -2644,7 +2935,7 @@ GameObject:
   - component: {fileID: 479054337}
   - component: {fileID: 479054336}
   - component: {fileID: 479054339}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff003_up
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -2742,7 +3033,7 @@ GameObject:
   - component: {fileID: 484802913}
   - component: {fileID: 484802912}
   - component: {fileID: 484802915}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_bluebuff003_right_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -2923,7 +3214,7 @@ GameObject:
   - component: {fileID: 513706071}
   - component: {fileID: 513706070}
   - component: {fileID: 513706073}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff005_up_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -3021,7 +3312,7 @@ GameObject:
   - component: {fileID: 530581633}
   - component: {fileID: 530581632}
   - component: {fileID: 530581635}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff005
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -3119,7 +3410,7 @@ GameObject:
   - component: {fileID: 535671758}
   - component: {fileID: 535671757}
   - component: {fileID: 535671760}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_outside
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -3217,7 +3508,7 @@ GameObject:
   - component: {fileID: 545617970}
   - component: {fileID: 545617969}
   - component: {fileID: 545617972}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff001_up
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -3315,7 +3606,7 @@ GameObject:
   - component: {fileID: 556943599}
   - component: {fileID: 556943598}
   - component: {fileID: 556943601}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff_bush_01
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -3413,7 +3704,7 @@ GameObject:
   - component: {fileID: 577604460}
   - component: {fileID: 577604459}
   - component: {fileID: 577604462}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower017
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -3513,7 +3804,7 @@ GameObject:
   - component: {fileID: 607197652}
   - component: {fileID: 607197651}
   - component: {fileID: 607197654}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower012
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -3601,6 +3892,103 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300246, guid: cf86d7bbf26e4f14dbe1adb4942e10f3, type: 3}
+--- !u!1 &611025332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 611025333}
+  - component: {fileID: 611025336}
+  - component: {fileID: 611025335}
+  - component: {fileID: 611025334}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &611025333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611025332}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1961633923}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &611025334
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611025332}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &611025335
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611025332}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &611025336
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611025332}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &614701231
 GameObject:
   m_ObjectHideFlags: 0
@@ -3613,7 +4001,7 @@ GameObject:
   - component: {fileID: 614701233}
   - component: {fileID: 614701232}
   - component: {fileID: 614701235}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_water001
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -3711,7 +4099,7 @@ GameObject:
   - component: {fileID: 668977186}
   - component: {fileID: 668977185}
   - component: {fileID: 668977188}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall02b01_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -3809,7 +4197,7 @@ GameObject:
   - component: {fileID: 678621295}
   - component: {fileID: 678621294}
   - component: {fileID: 678621297}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower015
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -3992,7 +4380,7 @@ GameObject:
   - component: {fileID: 700592782}
   - component: {fileID: 700592781}
   - component: {fileID: 700592784}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock09_metal_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -4256,7 +4644,7 @@ GameObject:
   - component: {fileID: 759312896}
   - component: {fileID: 759312895}
   - component: {fileID: 759312898}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_base002 1
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -4356,7 +4744,7 @@ GameObject:
   - component: {fileID: 777348959}
   - component: {fileID: 777348958}
   - component: {fileID: 777348961}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_ground_02_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -4454,7 +4842,7 @@ GameObject:
   - component: {fileID: 790698343}
   - component: {fileID: 790698342}
   - component: {fileID: 790698345}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock06_metal_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -4552,7 +4940,7 @@ GameObject:
   - component: {fileID: 794897920}
   - component: {fileID: 794897919}
   - component: {fileID: 794897922}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_home_wall001_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -4649,7 +5037,7 @@ GameObject:
   - component: {fileID: 806354313}
   - component: {fileID: 806354312}
   - component: {fileID: 806354311}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: temp_arena01_redbuff001
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -4733,7 +5121,7 @@ GameObject:
   - component: {fileID: 810402011}
   - component: {fileID: 810402010}
   - component: {fileID: 810402013}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower001
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -4833,7 +5221,7 @@ GameObject:
   - component: {fileID: 820838804}
   - component: {fileID: 820838803}
   - component: {fileID: 820838806}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower005
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -4933,7 +5321,7 @@ GameObject:
   - component: {fileID: 825112505}
   - component: {fileID: 825112504}
   - component: {fileID: 825112507}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_outside03_a
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -5031,7 +5419,7 @@ GameObject:
   - component: {fileID: 849662260}
   - component: {fileID: 849662259}
   - component: {fileID: 849662262}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_ground_all_metal02_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -5129,7 +5517,7 @@ GameObject:
   - component: {fileID: 878236005}
   - component: {fileID: 878236004}
   - component: {fileID: 878236007}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff_bush_02
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -5227,7 +5615,7 @@ GameObject:
   - component: {fileID: 878699430}
   - component: {fileID: 878699429}
   - component: {fileID: 878699432}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_plants03
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -5325,7 +5713,7 @@ GameObject:
   - component: {fileID: 895250508}
   - component: {fileID: 895250507}
   - component: {fileID: 895250510}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower010
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -5425,7 +5813,7 @@ GameObject:
   - component: {fileID: 902654881}
   - component: {fileID: 902654880}
   - component: {fileID: 902654883}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock01_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -5523,7 +5911,7 @@ GameObject:
   - component: {fileID: 910564032}
   - component: {fileID: 910564031}
   - component: {fileID: 910564034}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall01b_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -5621,7 +6009,7 @@ GameObject:
   - component: {fileID: 910980407}
   - component: {fileID: 910980406}
   - component: {fileID: 910980409}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff006_up
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -5719,7 +6107,7 @@ GameObject:
   - component: {fileID: 962536257}
   - component: {fileID: 962536256}
   - component: {fileID: 962536259}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_midway_dragon001_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -5817,7 +6205,7 @@ GameObject:
   - component: {fileID: 989235786}
   - component: {fileID: 989235785}
   - component: {fileID: 989235788}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower009
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -5971,7 +6359,7 @@ GameObject:
   - component: {fileID: 1027699874}
   - component: {fileID: 1027699873}
   - component: {fileID: 1027699876}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall01a_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -6069,7 +6457,7 @@ GameObject:
   - component: {fileID: 1051726200}
   - component: {fileID: 1051726199}
   - component: {fileID: 1051726202}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_base002
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -6169,7 +6557,7 @@ GameObject:
   - component: {fileID: 1075403832}
   - component: {fileID: 1075403831}
   - component: {fileID: 1075403834}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_plants02_a
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -6267,7 +6655,7 @@ GameObject:
   - component: {fileID: 1085805134}
   - component: {fileID: 1085805133}
   - component: {fileID: 1085805136}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff_bush_newlayout_02
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -6365,7 +6753,7 @@ GameObject:
   - component: {fileID: 1092915116}
   - component: {fileID: 1092915115}
   - component: {fileID: 1092915118}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff004
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -6463,7 +6851,7 @@ GameObject:
   - component: {fileID: 1101675228}
   - component: {fileID: 1101675227}
   - component: {fileID: 1101675230}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_building02_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -6561,7 +6949,7 @@ GameObject:
   - component: {fileID: 1121891208}
   - component: {fileID: 1121891207}
   - component: {fileID: 1121891210}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_plants
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -6742,7 +7130,7 @@ GameObject:
   - component: {fileID: 1171687114}
   - component: {fileID: 1171687113}
   - component: {fileID: 1171687116}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock04_metal_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -6840,7 +7228,7 @@ GameObject:
   - component: {fileID: 1184417665}
   - component: {fileID: 1184417664}
   - component: {fileID: 1184417667}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_dragon002
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -6938,7 +7326,7 @@ GameObject:
   - component: {fileID: 1190227844}
   - component: {fileID: 1190227843}
   - component: {fileID: 1190227846}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock09_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -7036,7 +7424,7 @@ GameObject:
   - component: {fileID: 1204991537}
   - component: {fileID: 1204991536}
   - component: {fileID: 1204991539}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall02b_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -7134,7 +7522,7 @@ GameObject:
   - component: {fileID: 1227791901}
   - component: {fileID: 1227791900}
   - component: {fileID: 1227791903}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock06_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -7232,7 +7620,7 @@ GameObject:
   - component: {fileID: 1258967337}
   - component: {fileID: 1258967336}
   - component: {fileID: 1258967339}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock08_metal_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -7330,7 +7718,7 @@ GameObject:
   - component: {fileID: 1271458402}
   - component: {fileID: 1271458401}
   - component: {fileID: 1271458404}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff004_up_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -7428,7 +7816,7 @@ GameObject:
   - component: {fileID: 1291008112}
   - component: {fileID: 1291008111}
   - component: {fileID: 1291008114}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower002
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -7528,7 +7916,7 @@ GameObject:
   - component: {fileID: 1302671374}
   - component: {fileID: 1302671373}
   - component: {fileID: 1302671376}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower004
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -7711,7 +8099,7 @@ GameObject:
   - component: {fileID: 1334836153}
   - component: {fileID: 1334836152}
   - component: {fileID: 1334836155}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_midway_bush001
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -7892,7 +8280,7 @@ GameObject:
   - component: {fileID: 1339688204}
   - component: {fileID: 1339688203}
   - component: {fileID: 1339688206}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_outside02_a
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -7990,7 +8378,7 @@ GameObject:
   - component: {fileID: 1378398228}
   - component: {fileID: 1378398227}
   - component: {fileID: 1378398230}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_home_dragon001a
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -8088,7 +8476,7 @@ GameObject:
   - component: {fileID: 1392917007}
   - component: {fileID: 1392917006}
   - component: {fileID: 1392917009}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_outside02
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -8186,7 +8574,7 @@ GameObject:
   - component: {fileID: 1401026069}
   - component: {fileID: 1401026068}
   - component: {fileID: 1401026071}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock03_metal_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -8284,7 +8672,7 @@ GameObject:
   - component: {fileID: 1425044705}
   - component: {fileID: 1425044704}
   - component: {fileID: 1425044707}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff002_up
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -8382,7 +8770,7 @@ GameObject:
   - component: {fileID: 1430693656}
   - component: {fileID: 1430693655}
   - component: {fileID: 1430693658}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_bluebuff002_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -8480,7 +8868,7 @@ GameObject:
   - component: {fileID: 1432702558}
   - component: {fileID: 1432702557}
   - component: {fileID: 1432702560}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall01b01_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -8578,7 +8966,7 @@ GameObject:
   - component: {fileID: 1442329392}
   - component: {fileID: 1442329391}
   - component: {fileID: 1442329394}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff002
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -8676,7 +9064,7 @@ GameObject:
   - component: {fileID: 1446565077}
   - component: {fileID: 1446565076}
   - component: {fileID: 1446565079}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_outside03
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -8774,7 +9162,7 @@ GameObject:
   - component: {fileID: 1463166925}
   - component: {fileID: 1463166924}
   - component: {fileID: 1463166927}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_bluebuff001_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -8872,7 +9260,7 @@ GameObject:
   - component: {fileID: 1477764902}
   - component: {fileID: 1477764901}
   - component: {fileID: 1477764904}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall02a_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -8970,7 +9358,7 @@ GameObject:
   - component: {fileID: 1480978952}
   - component: {fileID: 1480978951}
   - component: {fileID: 1480978954}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_plants01
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -9068,7 +9456,7 @@ GameObject:
   - component: {fileID: 1495619404}
   - component: {fileID: 1495619403}
   - component: {fileID: 1495619406}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff_bush_newlayout_dark
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -9166,7 +9554,7 @@ GameObject:
   - component: {fileID: 1496463029}
   - component: {fileID: 1496463028}
   - component: {fileID: 1496463031}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall003
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -9347,7 +9735,7 @@ GameObject:
   - component: {fileID: 1512005920}
   - component: {fileID: 1512005919}
   - component: {fileID: 1512005922}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_bluebuff_bush001_a
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -9445,7 +9833,7 @@ GameObject:
   - component: {fileID: 1530173040}
   - component: {fileID: 1530173039}
   - component: {fileID: 1530173042}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_home_dragon002c
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -9626,7 +10014,7 @@ GameObject:
   - component: {fileID: 1563451824}
   - component: {fileID: 1563451823}
   - component: {fileID: 1563451826}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_midway_wall002_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -9890,7 +10278,7 @@ GameObject:
   - component: {fileID: 1601045563}
   - component: {fileID: 1601045562}
   - component: {fileID: 1601045565}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_plants01_a
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -9988,7 +10376,7 @@ GameObject:
   - component: {fileID: 1608594684}
   - component: {fileID: 1608594683}
   - component: {fileID: 1608594686}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower001 1
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -10171,7 +10559,7 @@ GameObject:
   - component: {fileID: 1616182739}
   - component: {fileID: 1616182738}
   - component: {fileID: 1616182741}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower003
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -10271,7 +10659,7 @@ GameObject:
   - component: {fileID: 1635237741}
   - component: {fileID: 1635237740}
   - component: {fileID: 1635237743}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock05_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -10369,7 +10757,7 @@ GameObject:
   - component: {fileID: 1668577045}
   - component: {fileID: 1668577044}
   - component: {fileID: 1668577047}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock02_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -10467,7 +10855,7 @@ GameObject:
   - component: {fileID: 1674370270}
   - component: {fileID: 1674370269}
   - component: {fileID: 1674370272}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff003
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -10553,6 +10941,103 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300106, guid: cf86d7bbf26e4f14dbe1adb4942e10f3, type: 3}
+--- !u!1 &1677765008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1677765009}
+  - component: {fileID: 1677765012}
+  - component: {fileID: 1677765011}
+  - component: {fileID: 1677765010}
+  m_Layer: 0
+  m_Name: Cube (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1677765009
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677765008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1961633923}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1677765010
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677765008}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1677765011
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677765008}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1677765012
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677765008}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1678413661
 GameObject:
   m_ObjectHideFlags: 0
@@ -10565,7 +11050,7 @@ GameObject:
   - component: {fileID: 1678413663}
   - component: {fileID: 1678413662}
   - component: {fileID: 1678413665}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_towerdock04_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -10663,7 +11148,7 @@ GameObject:
   - component: {fileID: 1691621177}
   - component: {fileID: 1691621176}
   - component: {fileID: 1691621179}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_redbuff006
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -10761,7 +11246,7 @@ GameObject:
   - component: {fileID: 1701480159}
   - component: {fileID: 1701480158}
   - component: {fileID: 1701480161}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_plants02
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -10859,7 +11344,7 @@ GameObject:
   - component: {fileID: 1740839574}
   - component: {fileID: 1740839573}
   - component: {fileID: 1740839576}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_plants03_a
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -10957,7 +11442,7 @@ GameObject:
   - component: {fileID: 1756608199}
   - component: {fileID: 1756608198}
   - component: {fileID: 1756608201}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower011
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -11057,7 +11542,7 @@ GameObject:
   - component: {fileID: 1775095318}
   - component: {fileID: 1775095317}
   - component: {fileID: 1775095320}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall02a01_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -11155,7 +11640,7 @@ GameObject:
   - component: {fileID: 1785809720}
   - component: {fileID: 1785809719}
   - component: {fileID: 1785809722}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_background_skybox01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11419,7 +11904,7 @@ GameObject:
   - component: {fileID: 1818444571}
   - component: {fileID: 1818444570}
   - component: {fileID: 1818444573}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall01a01_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -11600,7 +12085,7 @@ GameObject:
   - component: {fileID: 1834789175}
   - component: {fileID: 1834789174}
   - component: {fileID: 1834789177}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_wall_outside01
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -11698,7 +12183,7 @@ GameObject:
   - component: {fileID: 1838961892}
   - component: {fileID: 1838961891}
   - component: {fileID: 1838961894}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower006
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -11881,7 +12366,7 @@ GameObject:
   - component: {fileID: 1862816097}
   - component: {fileID: 1862816096}
   - component: {fileID: 1862816099}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_ground_01_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -11979,7 +12464,7 @@ GameObject:
   - component: {fileID: 1887363858}
   - component: {fileID: 1887363857}
   - component: {fileID: 1887363860}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower013
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -12079,7 +12564,7 @@ GameObject:
   - component: {fileID: 1910416491}
   - component: {fileID: 1910416490}
   - component: {fileID: 1910416493}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_ground_03_newlayout
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -12279,8 +12764,73 @@ Transform:
   - {fileID: 993576980}
   - {fileID: 2146423295}
   m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1961633922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1961633923}
+  - component: {fileID: 1961633924}
+  m_Layer: 0
+  m_Name: PathFinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1961633923
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961633922}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 611025333}
+  - {fileID: 1677765009}
+  - {fileID: 468701645}
+  - {fileID: 413455970}
+  - {fileID: 257463421}
+  m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1961633924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961633922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35260d24c864477097e8e27187d1c57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSize: 1
+  ObstacleLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  grid_range: {x: 0, y: 0}
+  goal: {x: 0, y: 0}
+  close_idx: 1
+  around:
+  - {x: -1, y: -1, z: 15}
+  - {x: 0, y: -1, z: 10}
+  - {x: 1, y: -1, z: 15}
+  - {x: -1, y: 0, z: 10}
+  - {x: 1, y: 0, z: 10}
+  - {x: -1, y: 1, z: 15}
+  - {x: 0, y: 1, z: 10}
+  - {x: 1, y: 1, z: 15}
 --- !u!1 &2026076880
 GameObject:
   m_ObjectHideFlags: 0
@@ -12376,7 +12926,7 @@ GameObject:
   - component: {fileID: 2030335945}
   - component: {fileID: 2030335944}
   - component: {fileID: 2030335947}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower014
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -12476,7 +13026,7 @@ GameObject:
   - component: {fileID: 2070304393}
   - component: {fileID: 2070304392}
   - component: {fileID: 2070304395}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_home_dragon002a
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -12574,7 +13124,7 @@ GameObject:
   - component: {fileID: 2074354924}
   - component: {fileID: 2074354923}
   - component: {fileID: 2074354926}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_road_building01_lod
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
@@ -12672,7 +13222,7 @@ GameObject:
   - component: {fileID: 2091744171}
   - component: {fileID: 2091744170}
   - component: {fileID: 2091744173}
-  m_Layer: 11
+  m_Layer: 3
   m_Name: arena01_tower007
   m_TagString: NavMesh
   m_Icon: {fileID: 0}
