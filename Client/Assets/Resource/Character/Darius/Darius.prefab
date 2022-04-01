@@ -1221,9 +1221,9 @@ GameObject:
   - component: {fileID: 1061931195}
   - component: {fileID: 1061931197}
   - component: {fileID: 1061931193}
-  - component: {fileID: 6296835435058235362}
   - component: {fileID: 496676247577095571}
   - component: {fileID: 8356397466670867464}
+  - component: {fileID: 6296835435058235362}
   m_Layer: 0
   m_Name: Darius
   m_TagString: Untagged
@@ -1297,21 +1297,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6296835435058235362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2778368832727931573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc1a42c4d9957a3478bf1addab6e39ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isAway: 0
-  debug_pos: {x: 0, y: 0, z: 0}
-  position: {x: 0, y: 0, z: 0}
 --- !u!114 &496676247577095571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1339,8 +1324,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eea06e24c4f0a741ac4e5183db16f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ReachThreshold: 0.1
   HudOffset: {x: 1, y: 2, z: -2}
-  UpdateHudx: 1
+--- !u!114 &6296835435058235362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2778368832727931573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc1a42c4d9957a3478bf1addab6e39ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAway: 0
+  IsMaster: 1
 --- !u!1 &2829147735163432475
 GameObject:
   m_ObjectHideFlags: 0

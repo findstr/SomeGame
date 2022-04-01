@@ -70,7 +70,7 @@ public class CharacterManager : MonoBehaviour
 	public void SetHost(uint uid) {
 		if (!players.TryGetValue(uid, out Player p))
 			return ;
-		p.movement.SetMode(Movement.Mode.LOCAL);
+		p.dr.IsMaster = false;
 		follow.target = p.movement.gameObject;
 		if (p.team == Team.BLUE)
 			follow.transform.rotation = Quaternion.Euler(cam.transform.eulerAngles.x, 180, cam.transform.eulerAngles.z);
@@ -79,15 +79,16 @@ public class CharacterManager : MonoBehaviour
 	public void RemoteSync(uint uid, float sx, float sz)
 	{
 		var p = players[uid];
-		ZX.Core.result.Set(1, p.movement.transform.position.x);
-		ZX.Core.result.Set(2, p.movement.transform.position.z);
 		var pos = new Vector2(p.movement.transform.position.x, p.movement.transform.position.z);
+		ZX.Core.result.Set(1, pos.x);
+		ZX.Core.result.Set(2, pos.y);
 		p.dr.MoveTo(pos.x, pos.y, sx, sz);
 	}
 
-	public void RemoteMove(uint uid, float x, float z, float sx, float sz)
+	public void RemoteMove(uint uid, float sx, float sz)
 	{
-		players[uid]?.dr.MoveTo(x, z, sx, sz);
+		if (players.TryGetValue(uid, out Player p))
+			p.dr.MoveTo(p.movement.transform.position.x, p.movement.transform.position.z, sx, sz);
 	}
 
 	public bool LocalMove(uint uid, float sx, float sz, float threshold)

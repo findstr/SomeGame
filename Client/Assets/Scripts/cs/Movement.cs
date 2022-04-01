@@ -8,18 +8,16 @@ public class Movement: MonoBehaviour
 		REMOTE = 1,
 	};
 	public GObject hud;
-	private DeadReckoning dr;
 	private Skill skill;
 	private Camera cam;
-	private Mode mode = Mode.REMOTE;
+	private Vector3 velocity;
 	private Animator animator;
 	private Quaternion orientation;
+	public float ReachThreshold = 0.1f;
         public Vector3 HudOffset;
-	public bool UpdateHudx = true;
 
 	private void Awake()
 	{
-		dr = GetComponent<DeadReckoning>();
 		skill = GetComponent<Skill>();
 		animator = GetComponent<Animator>();
 		orientation = transform.rotation;
@@ -29,10 +27,6 @@ public class Movement: MonoBehaviour
 		this.cam = cam;
 		this.hud = hud;
                 GRoot.inst.AddChild(hud);
-	}
-	public void SetMode(Mode m) 
-	{
-		this.mode = m;
 	}
 	public float Dist(Movement c) 
 	{
@@ -45,13 +39,28 @@ public class Movement: MonoBehaviour
 	{
 		if (Mathf.Abs(x) < Mathf.Epsilon && Mathf.Abs(z) < Mathf.Epsilon || skill.IsFiring) {
 			animator.SetInteger("Run", 0);
+			velocity = Vector3.zero;
 		} else {
 			animator.SetInteger("Run", 1);
-			var dir = new Vector3(x, 0, z);
-			transform.position += dir;
+			velocity = new Vector3(x, 0, z);
+			LookDir(velocity);
+		}
+	}
+
+	public void MoveTo(float x, float z)
+	{
+		var target = new Vector3(x, 0, z);
+		var dir = target - transform.position;
+		if (dir.sqrMagnitude < ReachThreshold) {
+			animator.SetInteger("Run", 0);
+			return ;
+		} else {
+			animator.SetInteger("Run", 1);
+			transform.position = target;
 			LookDir(dir);
 		}
 	}
+
 	float angleSpeed = 360.0f * 2.0f;
 	float rotateTime = 0.0f;
 	public void LookDir(Vector3 dir)
@@ -83,5 +92,6 @@ public class Movement: MonoBehaviour
 	{
 		UpdateDirection();
 		UpdateHud();
+		transform.position += velocity * Time.deltaTime;
 	}
 }

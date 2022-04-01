@@ -158,14 +158,18 @@ local function main_update(_, delta)
 	if moving or lastmoving == true then
 		local speed = host.speed
 		local x, y = result[1], result[2]
-		print("move_update", speed, x, y)
-		local xx, yy = x * speed * delta, y * speed * delta;
+		local xx, yy = x * speed, y * speed;
 		dirty = CM:LocalMove(hostuid, xx, yy, 0.2)
-		dirty = true
+		if not moving then
+			dirty = true
+		end
 		lastmoving = moving
 	end
 	sync_delta = sync_delta - delta
 	if dirty or sync_delta < 0.0001 then
+		local speed = host.speed
+		local x, y = result[1], result[2]
+		local xx, yy = x * speed, y * speed;
 		CM:RemoteSync(hostuid, xx, yy)
 		move.px = result[1]
 		move.pz = result[2]
